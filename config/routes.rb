@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  root 'pages#show', page: 'home'
+  controller :pages, action: :show do
+    root page: 'home'
+    %w(composer_nights tech_meetups contact).each do |page|
+      get page.gsub('_', ''), as: page, page: page
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
