@@ -84,6 +84,7 @@ nav.top
     list-style: disc
   li
     margin: 0.6em 0
+    line-height: 120%
   h2
     font-size: 1.4em
 
@@ -150,11 +151,15 @@ nav.top
     font-size: 90%
     line-height: 120%
 
-body.home .hero
-  background-image: image-url('rmnp.jpeg')
+body.home
+  .hero
+    background-image: image-url('rmnp.jpeg')
 
-body.composer_nights .hero
-  background-image: image-url('soap-rainbow.jpeg')
+body.composer_nights,
+body.composer_nights_sign_up
+  .hero
+    background-image: image-url('soap-rainbow.jpeg')
 
-body.tech_meetups .hero
-  background-image: image-url('lcd.jpeg')
+body.tech_meetups
+  .hero
+    background-image: image-url('lcd.jpeg')
