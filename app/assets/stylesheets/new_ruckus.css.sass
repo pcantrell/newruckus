@@ -1,3 +1,8 @@
+$link-color: #a63d56
+$heading-color: #3e57a7
+$link-active-color: mix($link-color, #FFFFFF)
+$heading-active-color: mix($heading-color, #FFFFFF)
+
 .clr
   clear: both
 
@@ -8,11 +13,11 @@ body
     family: 'ProximaNova-400'
     size: 118%
 
-a, a:link, a:visited, a:hover
-  color: #a63d56
+a, a:link, a:visited
+  color: $link-color
 
-a:hover, a:focus
-  color: #d39fac
+a:hover, a:active, a:focus
+  color: $link-active-color
 
 b
   font-family: 'ProximaNova-700'
@@ -30,16 +35,16 @@ nav.top
     text-align: left
     float: left
     a, a:link, a:visited
-      color: #3e57a7
-    a:hover, a:focus
-      color: #a0acd4
+      color: $heading-color
+    a:hover, a:active, a:focus
+      color: $heading-active-color
   .page
     display: inline-block
     margin-left: 2em
 
 .hero
   text-align: center
-  padding: 5em 5%
+  padding: 4.2em 5%
   background:
     size: cover
     position: 0 25%
@@ -66,11 +71,11 @@ nav.top
     text-shadow: 0 1px rgba(0, 0, 0, 0.33), -1px 0 rgba(0, 0, 0, 0.25), 1px 0 rgba(0, 0, 0, 0.25), 0 -1px rgba(0, 0, 0, 0.25)
     a, a:link, a:visited
       color: white
-    a:focus, a:hover
+    a:hover, a:active, a:focus
       border-bottom: 1px solid rgba(255, 255, 255, 0.3)
 
 .content
-  padding: 3em 8%
+  margin: 3em 8%
   p
     margin: 1em 0
     line-height: 160%
@@ -87,7 +92,7 @@ nav.top
     font-family: 'MuseoSans-500'
     letter-spacing: 0.1ex
     text-transform: uppercase
-    color: #3e57a7
+    color: $heading-color
     margin: 1.6em 0 1em 0
 
 .columns
@@ -102,11 +107,35 @@ nav.top
 .more
   text-align: right
   padding-right: 1em
+  a:after
+    content: '  ➤'
+
+.mongo
+  margin: 4em auto
+  text-align: center
+  a, button
+    display: inline-block
+    padding: 1em 1.6em
+    font-size: 120%
+    color: white
+    background: $link-color
+    border-radius: 1.5em
+    &:hover
+      color: white
+      background: mix($link-color, #000000, 90%)
+    &:active, &:focus
+      color: white
+      background: $link-active-color
+    &:before
+      content: '  '
+    &:after
+      content: '  ➤'
+      color: mix($link-color, #ffffff, 10%)
 
 .sidebar
   float: right
   width: 300px
-  margin: 3em 8% 1em 2em
+  margin: 0 8% 1em 2.5em
   text-align: center
   line-height: 140%
   h2
