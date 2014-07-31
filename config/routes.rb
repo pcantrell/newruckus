@@ -2,8 +2,10 @@ Rails.application.routes.draw do
 
   controller :pages, action: :show do
     root page: 'home'
-    %w(composer_nights tech_meetups contact).each do |page|
-      get page.gsub('_', ''), as: page, page: page
+    %w(composer_nights composer_nights/sign_up tech_meetups contact).each do |page|
+      path = page.gsub('_', '')
+      name = page.gsub('/', '_')
+      get path, as: name, page: name
     end
   end
 
