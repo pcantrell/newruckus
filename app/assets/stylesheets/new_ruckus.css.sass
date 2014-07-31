@@ -1,3 +1,11 @@
+$browsers: ('', -webkit-, -moz-, -o-, -ms-)
+
+@mixin responsive($width)
+  @media all and (max-width: $width)
+    @content
+
+
+
 $link-color: #a63d56
 $heading-color: #3e57a7
 $link-active-color: mix($link-color, #FFFFFF)
@@ -12,6 +20,12 @@ body
   font:
     family: 'ProximaNova-400'
     size: 118%
+  @include responsive(700px)
+    font-size: 112%
+  @include responsive(600px)
+    font-size: 106%
+  @include responsive(400px)
+    font-size: 100%
 
 a, a:link, a:visited
   color: $link-color
@@ -29,7 +43,7 @@ nav.top
   font-size: 86%
   letter-spacing: 0.3ex
   text-align: right
-  line-height: 1.8em
+  line-height: 180%
   .home
     display: block
     text-align: left
@@ -42,9 +56,22 @@ nav.top
     display: inline-block
     margin-left: 2em
 
+  @include responsive(800px)
+    font-size: 80%
+  @include responsive(750px)
+    letter-spacing: 0.2ex
+  @include responsive(700px)
+    line-height: 120%
+    .page
+      display: block
+
 .hero
   text-align: center
   padding: 4.2em 5%
+  @include responsive(700px)
+    padding: 3.6em 5%
+  @include responsive(600px)
+    padding: 3.2em 5%
   background:
     size: cover
     position: 0 25%
@@ -61,15 +88,30 @@ nav.top
     margin: 1ex 0
   h1
     font-size: 3em
+    @include responsive(800px)
+      font-size: 2.75em
+    @include responsive(700px)
+      font-size: 2.5em
+    @include responsive(600px)
+      font-size: 2em
   h2
     font-size: 2.5em
+    @include responsive(700px)
+      font-size: 2em
+    @include responsive(600px)
+      font-size: 1.5em
   .subtitle
     color: white
-    font-size: 121%
-    line-height: 2em
+    font-size: 120%
+    @include responsive(700px)
+      font-size: 110%
+    @include responsive(600px)
+      font-size: 100%
+    line-height: 160%
     letter-spacing: 1px
     text-shadow: 0 1px rgba(0, 0, 0, 0.33), -1px 0 rgba(0, 0, 0, 0.25), 1px 0 rgba(0, 0, 0, 0.25), 0 -1px rgba(0, 0, 0, 0.25)
     a, a:link, a:visited
+      white-space: nowrap
       color: white
     a:hover, a:active, a:focus
       border-bottom: 1px solid rgba(255, 255, 255, 0.3)
@@ -102,6 +144,10 @@ nav.top
     float: left
     margin-right: 4%
     margin-bottom: 1em
+    @include responsive(600px)
+      width: inherit
+      float: none
+      margin-right: 0
   .column:last-child
     margin-right: 0
 
@@ -113,6 +159,10 @@ nav.top
 
 .mongo
   margin: 4em auto
+  @include responsive(700px)
+    margin: 3em auto
+  @include responsive(600px)
+    margin: 2.5em auto
   text-align: center
   a, button
     display: inline-block
@@ -137,6 +187,10 @@ nav.top
   float: right
   width: 300px
   margin: 0 8% 1em 2.5em
+  @include responsive(700px)
+    float: none
+    width: inherit
+    margin: 1em 5%
   text-align: center
   line-height: 140%
   h2
