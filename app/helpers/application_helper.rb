@@ -3,7 +3,7 @@ module ApplicationHelper
     @hero_count ||= 0
     @hero_count += 1
     content_tag(
-      :div,
+      :header,
       capture(&block),
       class: 'hero',
       'data-stellar-background-ratio' => 0.5,

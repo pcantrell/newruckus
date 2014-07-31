@@ -14,13 +14,8 @@ a, a:link, a:visited, a:hover
 a:hover, a:focus
   color: #d39fac
 
-p
-  margin: 0.8em 0
-  line-height: 1.8em
-
 b
-  font:
-    family: 'ProximaNova-700'
+  font-family: 'ProximaNova-700'
 
 nav.top
   font-family: 'MuseoSans-100'
@@ -49,33 +44,51 @@ nav.top
     size: cover
     position: 0 25%
     attachment: fixed
-  h1
+    image: image-url('speckles.jpeg')
+  h1, h2
     display: inline-block
-    font:
-      family: 'MuseoSans-500'
-      size: 3em
+    font-family: 'MuseoSans-500'
     letter-spacing: 0.07em
     text-transform: uppercase
     color: white
     background: rgba(0, 0, 0, 0.4)
     padding: 0.8ex 1ex
     margin: 1ex 0
+  h1
+    font-size: 3em
+  h2
+    font-size: 2.5em
   .subtitle
     color: white
     font-size: 121%
     line-height: 2em
     letter-spacing: 1px
     text-shadow: 0 1px rgba(0, 0, 0, 0.33), -1px 0 rgba(0, 0, 0, 0.25), 1px 0 rgba(0, 0, 0, 0.25), 0 -1px rgba(0, 0, 0, 0.25)
-
-h2
-  font-family: 'MuseoSans-500'
-  letter-spacing: 0.1ex
-  text-transform: uppercase
-  font-size: 1.4em
-  color: #3e57a7
+    a, a:link, a:visited
+      color: white
+    a:focus, a:hover
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3)
 
 .content
   padding: 3em 8%
+  p
+    margin: 1em 0
+    line-height: 160%
+  ul
+    margin-left: 2em
+    list-style: disc
+  li
+    margin: 0.6em 0
+  h2
+    font-size: 1.4em
+
+.content, .sidebar
+  h2
+    font-family: 'MuseoSans-500'
+    letter-spacing: 0.1ex
+    text-transform: uppercase
+    color: #3e57a7
+    margin: 1.6em 0 1em 0
 
 .columns
   .column
@@ -90,6 +103,29 @@ h2
   text-align: right
   padding-right: 1em
 
-body.home
-  .hero
-    background-image: image-url('water-square.jpeg')
+.sidebar
+  float: right
+  width: 300px
+  margin: 3em 8% 1em 2em
+  text-align: center
+  line-height: 140%
+  h2
+    font-size: 92%
+  h2, p, ul
+    margin: 0.8em 0
+  a, .date, .performer
+    font-family: 'ProximaNova-700'
+  .block
+    margin-bottom: 1.6em
+  .mini
+    font-size: 90%
+    line-height: 120%
+
+body.home .hero
+  background-image: image-url('rmnp.jpeg')
+
+body.composer_nights .hero
+  background-image: image-url('soap-rainbow.jpeg')
+
+body.tech_meetups .hero
+  background-image: image-url('lcd.jpeg')

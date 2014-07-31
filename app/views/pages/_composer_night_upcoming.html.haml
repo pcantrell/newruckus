@@ -1,0 +1,42 @@
+.block
+  %h2 Next event
+  %p.date
+    Monday, August&nbsp;11
+    %br
+    7:00pm
+  %p
+    Featuring the music of:
+    %ul
+      %li.performer Karel Suchy
+      %li.performer Flosky
+      %li.performer Reed Wilson
+      %li.performer Thomas Johanson
+    - if true
+      .mini
+        Have some music to share?
+        %br
+        There is still <a href="/composernights/signup">one spot left</a>!
+
+.block
+  %p
+    = link_to 'Studio Z', 'http://www.studiozstpaul.com'
+    %br
+    275 E 4th Street, St.&nbsp;Paul
+
+  %a.map{href: 'https://www.google.com/maps/place/275+E+4th+St,+St+Paul,+MN+55101/@44.9491619,-93.085531,15z/data=!4m2!3m1!1s0x87f7d55ad3492ae9:0x6762c138c916072'}
+    = image_tag image_path('z-map-600.png'), width: 300, height: 270, alt: 'Map'
+
+.block
+  %h2 Future Composer Nights
+  %ul
+    %li August 11 (Mon)
+    %li September 16 (Tue)
+    %li October 14 (Tue)
+    %li November 10 (Mon)
+    %li December 16 (Tue)
+
+.block
+  = link_to 'Get on the mailing list', contact_path
+  to find out when more are scheduled!
+
+
