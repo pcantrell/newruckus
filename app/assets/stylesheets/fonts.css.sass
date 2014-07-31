@@ -1,0 +1,38 @@
+@mixin font($name, $weight, $style)
+  $filename: $name + '-' + $weight + '-' + $style
+  @if $style == 'normal'
+    $filename: $name + '-' + $weight
+
+  @font-face
+    font:
+      family: $name + '-' + $weight
+      style: $style
+      weight: $weight
+    src: font-url($filename + '.eot')
+    src: font-url($filename + '.eot?#iefix') format('embedded-opentype'), font-url($filename + '.woff') format('woff'), font-url($filename + '.ttf') format('truetype')
+
+@include font(MuseoSans, 100, normal)
+@include font(MuseoSans, 300, normal)
+@include font(MuseoSans, 500, normal)
+@include font(MuseoSans, 500, italic)
+
+
+
+@mixin font-tmp($name, $weight, $style)
+  $filename: $name + '-' + $weight + '-' + $style
+  @if $style == 'normal'
+    $filename: $name + '-' + $weight
+
+  @font-face
+    font:
+      family: $name + '-' + $weight
+      style: $style
+      weight: $weight
+    src: font-url($filename + '.woff') format('woff')
+
+@include font-tmp(ProximaNova, 400, normal)
+@include font-tmp(ProximaNova, 600, normal)
+@include font-tmp(ProximaNova, 700, normal)
+@include font-tmp(ProximaNova, 400, italic)
+@include font-tmp(ProximaNova, 600, italic)
+@include font-tmp(ProximaNova, 700, italic)

@@ -23,16 +23,17 @@
     = csrf_meta_tags
   
   %body{class: body_classes.join(' ')}
-    %nav
-      .main= link_to 'The New Ruckus', root_url
-      .nav=  link_to 'Composer Nights', composer_nights_url
-      .nav=  link_to 'Tech Meetups', tech_meetups_url
-      .nav=  link_to 'Contact', contact_url
+    %nav.top
+      %ul
+        %li.home= link_to 'The New Ruckus', root_url
+        %li.page= link_to 'Composer Nights', composer_nights_url
+        %li.page= link_to 'Tech Meetups', tech_meetups_url
+        %li.page= link_to 'Contact', contact_url
     
     %article
       = yield
     
-    %nav
+    %nav.bottom
       -# Mailing list
       -# Twitter
       -# FB

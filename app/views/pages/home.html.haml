@@ -1,20 +1,21 @@
 %section
-  .hero
+  = hero do
     %h1.title The New Ruckus
     .subtitle
       A <b>mutual support</b> organization for
+      %br
       the <b>people who invent new music</b>
   .content
     %p
       We are <b>composers, improvisers, sound artists, and songwriters.</b> Our mission is to help each other achieve a sense of <b>purpose and satisfaction</b> in our musical lives, by providing moral support and practical help in <b>creating our work</b>, <b>getting it heard</b>, and <b>making personal connections</b> through it.
 
 %section
-  .hero
+  = hero do
     %h1.title What We Do
   .content
     .columns
       .column
-        %h2 Composer Nights
+        %h2= link_to 'Composer Nights', composer_nights_path
         %p
           %i Formerly known as the <b>Tuesday Salon</b>
         %p
@@ -25,7 +26,7 @@
         .more
           = link_to 'More ➤', composer_nights_path
       .column
-        %h2 Music Tech Meetups
+        %h2= link_to 'Music Tech Meetups', tech_meetups_url
         %p
           Use a computer for audio production? Notation? Sound generation? Just need a web site?
         %p
@@ -34,7 +35,8 @@
           A partnership with
           <a href="http://www.slamacademy.com/">Slam Academy</a>.
         .more
-          = link_to 'More ➤', composer_nights_path
+          = link_to 'More ➤', tech_meetups_url
+    .clr
     %p
       We specifically focus on <b>non-selective</b> activities that benefit the <b>whole composer community</b>: nothing we do is judged, juried, curated or auditioned. Our programs are either open to all, or first come first served. If we do it for anyone, we do it for <b>everyone</b>.
     %p
