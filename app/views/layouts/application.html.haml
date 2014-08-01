@@ -3,7 +3,11 @@
   %head
     %meta(charset='utf-8')
 
-    %title The New Ruckus
+    %title
+      The New Ruckus
+      - unless (title = yield(:title)).blank?
+        –
+        = title
     %link(rel="canonical" href="http://newruckus.org/")
     
     %meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
@@ -18,7 +22,11 @@
     %meta(name="description" content="A mutual support organization for the people who invent new music: composers, improvisers, sound artists and songwriters.")
     %link(rel="shortcut icon" type="image/x-icon" href="/favicon.ico")
 
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    /[if lt IE 9]
+      = stylesheet_link_tag 'ie', media: 'all', 'data-turbolinks-track' => true
+      = javascript_include_tag 'html5shiv'
+    
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   
@@ -27,7 +35,7 @@
       %ul
         %li.home= link_to 'The New Ruckus',  root_url
         %li.page= link_to 'Composer Nights', composer_nights_url
-        %li.page= link_to 'Tech Meetups',    tech_meetups_url
+        %li.page= link_to 'Tech Meetups',    music_tech_url
         %li.page= link_to 'Contact',         contact_url
     
     = yield

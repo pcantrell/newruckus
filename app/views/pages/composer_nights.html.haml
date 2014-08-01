@@ -1,3 +1,7 @@
+- content_for :title do
+  Composer Nights
+
+
 = hero do
   %h1.title Composer Nights
   .subtitle
@@ -9,10 +13,10 @@
 .mongo
   = link_to 'Sign Up', '/composernights/signup'
 
-%aside.sidebar
-  = render 'composer_night_upcoming'
-
 .content
+  %aside.sidebar
+    = render 'composer_night_upcoming'
+
   %p
     New Ruckus Composer Nights are <b>for people who invent original music</b>. If you created it, we want to hear it — whether it’s a grand premiere, a work in progress, a risky test run or a polished old favorite!
   %p
