@@ -12,6 +12,7 @@ gem 'haml-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
+gem 'jquery-cdn', '2.1.1'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'

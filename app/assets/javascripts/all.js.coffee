@@ -1,5 +1,5 @@
 $ ->
-  unless (navigator.userAgent.match(/(iPad|iPhone|iPod)/g))
+  unless (navigator.userAgent.match(/(iPad|iPhone|iPod|Android)/g))
 
     $window = $(window)
     $document = $(document)
