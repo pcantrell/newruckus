@@ -4,7 +4,8 @@ $ ->
     $window = $(window)
     $document = $(document)
 
-    ease = (x) -> (1 - Math.cos(x * Math.PI)) / 2
+    easeIn    = (x) -> -Math.cos(Math.PI / 2 * (x + 1))
+    easeInOut = (x) -> (1 - Math.cos(x * Math.PI)) / 2
     zeroToOne = (x) -> Math.max(0, Math.min(1, x))
 
     offsetMin = 180
@@ -19,7 +20,7 @@ $ ->
         $hero.css('background-position', "0 #{-Math.round(offset)}px")
 
         pad = padMin + (padMax - padMin) *
-          ease(
+          (if index == 0 then easeIn else easeInOut)(
             zeroToOne(
               1 - $document.scrollTop() / 240 + index * 0.5))
         padVal = "#{pad}em"
