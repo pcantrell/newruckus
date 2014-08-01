@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   controller :pages, action: :show do
     root page: 'home'
-    %w(composer_nights composer_nights/sign_up tech_meetups contact).each do |page|
+    %w(composer_nights composer_nights/sign_up music_tech contact).each do |page|
       path = page.gsub('_', '')
       name = page.gsub('/', '_')
       get path, as: name, page: name

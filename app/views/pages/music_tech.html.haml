@@ -1,0 +1,29 @@
+- content_for :title do
+  Music Tech Meetups
+
+
+= hero do
+  %h1.title Music Tech Meetups
+  .subtitle
+    A partnership between
+    %b= link_to 'Slam Academy', 'http://slamacademy.com/'
+    and
+    %b= link_to 'The New Ruckus', root_url
+
+.content
+  %aside.sidebar
+    = render 'music_tech_upcoming'
+
+  %p
+    Use a computer for creating music? You’re not alone!
+  %p
+    Whether you’re interested in notation, recording, mixing, synthesis, self-publishing, or getting yourself a web site, other people are in the same boat. Come meet them!
+  %p
+    The New Ruckus sponsors Music Tech Meetups to bring people together, help each other out, and make some friends in the process. These events are <b>free</b>, and <b>open to everyone</b>.
+  %p
+    Bring questions. Bring answers. Bring your equipment if it's portable.
+  
+  %h2 But wait! There’s more!
+
+  %p
+    One of the instructors from <a href="http://slamacademy.com/"><b>Slam Academy</b></a> will be present at the meetup, adding their <b>expert help</b> to the mix. Yes, there are people in this world who actually have some idea what goes on inside these maddening machines — and they’ll be there. You should be too.
