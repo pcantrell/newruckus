@@ -10,6 +10,7 @@ $link-color: #a63d56
 $heading-color: #3e57a7
 $link-active-color: mix($link-color, #FFFFFF)
 $heading-active-color: mix($heading-color, #FFFFFF)
+$footer-bg-color: #3d1121
 
 .clr
   clear: both
@@ -38,12 +39,21 @@ b
 
 nav.top
   font-family: 'MuseoSans-100'
-  padding: 1.2em 5%
+  padding: 0.6em 5%
   text-transform: uppercase
   font-size: 86%
   letter-spacing: 0.3ex
   text-align: right
   line-height: 180%
+  li
+    padding: 0.6em 1em
+    &.popup-shown
+      background: $footer-bg-color
+      color: white
+      a
+        color: $link-active-color
+      border-top-left-radius: 1ex
+      border-top-right-radius: 1ex
   .home
     display: block
     text-align: left
@@ -55,6 +65,27 @@ nav.top
   .page
     display: inline-block
     margin-left: 2em
+  .popup
+    padding: 1ex
+    padding-bottom: 1em
+    background: $footer-bg-color
+    color: white
+    border-radius: 1ex
+    border-top-right-radius: 0
+    font-family: 'ProximaNova-400'
+    text-transform: none
+    letter-spacing: 0
+    line-height: 100%
+    text-align: right
+    box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
+    h1
+      font-family: 'ProximaNova-700'
+      margin-bottom: 1em
+      font-size: 110%
+    input
+      display: block
+      float: right
+      clear: right
 
   @include responsive(800px)
     font-size: 80%
@@ -213,6 +244,40 @@ nav.top
     img
       width: 100%
       max-width: 300px
+
+
+.page-footer
+  background: $footer-bg-color
+  color: white
+  padding: 2em 12%
+  h1, h2
+    font-family: 'ProximaNova-700'
+    margin: 1em 0
+  h1
+    font-size: 110%
+
+form
+  margin: 1em
+  .note
+    font-size: 60%
+    opacity: 0.8
+    margin: 0.2em 0
+  input
+    font-size: 100%
+    margin: 0.6em 0
+    padding: 1ex 1em
+    border: none
+    border-radius: 1ex
+    &[type='submit']
+      background: $link-color
+      &:active
+        background: $link-active-color
+      color: white
+
+.popup
+  position: absolute
+
+//------------ Page-specific styling ------------
 
 body.home
   .hero

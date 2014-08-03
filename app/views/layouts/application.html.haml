@@ -34,14 +34,19 @@
   %body{class: body_classes.join(' ')}
     %nav.top
       %ul
-        %li.home= link_to 'The New Ruckus',  root_url
-        %li.page= link_to 'Composer Nights', composer_nights_url
-        %li.page= link_to 'Music Tech',      music_tech_url
-        %li.page= link_to 'Contact',         contact_url
+        %li.home= link_to 'The New Ruckus', root_url
+        -#%li.page= link_to 'Composer Nights', composer_nights_url
+        -#%li.page= link_to 'Music Tech',      music_tech_url
+        %li.page#mailing_list_popup_nav_item
+          = link_to 'Mailing List', 'http://eepurl.com/OdGZb', 'data-show-popup' => 'mailing_list_popup', 'data-popup-header' => 'mailing_list_popup_nav_item'
+        %aside.popup#mailing_list_popup
+          = render 'shared/mailing_list_signup'
+        %li.page= link_to 'Contact', contact_url
     
     = yield
     
-    %footer.bottom
-      -# Mailing list
+    %footer.page-footer
+      = render 'shared/mailing_list_signup'
+
       -# Twitter
       -# FB
