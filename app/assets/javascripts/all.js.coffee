@@ -4,7 +4,7 @@ $ ->
     $window = $(window)
     $document = $(document)
 
-    easeIn    = (x) -> -Math.cos(Math.PI / 2 * (x + 1))
+    easeIn    = (x) -> Math.pow(-Math.cos(Math.PI / 2 * (x + 1)), 2.5)
     easeInOut = (x) -> (1 - Math.cos(x * Math.PI)) / 2
     zeroToOne = (x) -> Math.max(0, Math.min(1, x))
 
