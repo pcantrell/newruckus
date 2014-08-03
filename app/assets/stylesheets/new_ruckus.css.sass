@@ -47,11 +47,8 @@ nav.top
   line-height: 180%
   li
     padding: 0.6em 1em
-    &.popup-shown
+    &.popup-header-active
       background: $footer-bg-color
-      color: white
-      a
-        color: $link-active-color
       border-top-left-radius: 1ex
       border-top-right-radius: 1ex
   .home
@@ -64,7 +61,12 @@ nav.top
       color: $heading-active-color
   .page
     display: inline-block
-    margin-left: 2em
+    margin-left: 2%
+  .popup, .popup-header-active
+    background: $footer-bg-color
+    color: white
+    a
+      color: $link-active-color
   .popup
     padding: 1ex
     padding-bottom: 1em
@@ -86,6 +88,20 @@ nav.top
       display: block
       float: right
       clear: right
+    li
+      display: block
+      margin: 0
+      padding: 1em
+      a
+        font:
+          family: 'MuseoSans-500'
+          size: 120%
+        text-transform: uppercase
+        display: block
+        margin-bottom: 0.6em
+        padding: 0
+      p
+        margin: 0
 
   @include responsive(800px)
     font-size: 80%
@@ -94,7 +110,8 @@ nav.top
   @include responsive(700px)
     line-height: 120%
     .page
-      display: block
+      float: right
+      clear: right
 
 .hero
   text-align: center
@@ -268,6 +285,9 @@ form
     padding: 1ex 1em
     border: none
     border-radius: 1ex
+    font-family: 'ProximaNova-400'
+    &[type='email']
+      width: 30ex
     &[type='submit']
       background: $link-color
       &:active
