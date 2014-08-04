@@ -3,7 +3,7 @@ isPopupVisible = ($button) ->
 
 positionCurPopup = ->
   $popup  = document.curPopup?.$popup
-  $header = document.curPopup.$header
+  $header = document.curPopup?.$header
   if $header?.length > 0
     headerOffset = $header.offset()
     $popup.offset(
