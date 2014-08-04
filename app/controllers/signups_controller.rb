@@ -5,14 +5,14 @@ class SignupsController < ApplicationController
 
   def create
     @signup = signup = Signup.new(signup_params)
-    if signup.valid?
+    if signup.save
       mail = Mail.new do
         from     signup.email
         to       'paul@innig.net'
         subject  "Composer Night signup: #{signup.name}"
         body(
-          signup.each_pair.map do |k,v|
-            "#{k.upcase}: #{v}"
+          %w(name email comments phone guidelines).map do |k|
+            "#{k.upcase}: #{signup[k]}"
           end.join("\n\n")
         )
       end
@@ -34,13 +34,6 @@ private
 
   def signup_params
     params.require(:signup).permit(:name, :email, :comments, :phone, :guidelines)
-  end
-
-  class Signup < OpenStruct
-    include ActiveModel::Validations
-
-    validates_presence_of :name, :email
-    validates :email, email: true, allow_blank: true
   end
 
 end
