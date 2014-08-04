@@ -1,0 +1,98 @@
+.sharrre
+  white-space: nowrap
+  font:
+    size: 11px
+    weight: normal
+  .bubble
+    float: left
+    margin:
+      top: 2px
+      right: 4px
+    padding: 0 5px
+    border:
+      style: solid
+      color: rgba(0, 0, 0, 0)
+      width: 17px 10px 3px 3px
+      image: image-url('social-buttons-flat-bubble.png') 34 20 6 6 repeat
+    .count
+      margin: -17px -3px -3px -3px
+      height: 20px
+      line-height: 20px
+    &.count-0
+      display: none
+  .buttons
+    float: left
+    height: 8px
+    border-radius: 6px
+    .button
+      float: left
+      height: 21px
+      margin: -7px 0
+      border:
+        left: 1px solid rgba(255, 255, 255, 0.3)
+        right: 1px solid rgba(0, 0, 0, 0.15)
+        bottom: 1px solid rgba(0, 0, 0, 0)
+      padding: 0 9px 0 8px
+      line-height: 21px
+      &:first-child
+        margin-left: -7px
+        border:
+          left: none
+          top-left-radius: 6px
+          bottom-left-radius: 6px
+      &:last-child
+        margin-right: -7px
+        border:
+          right: none
+          top-right-radius: 6px
+          bottom-right-radius: 6px
+      
+      &.facebook
+        padding-right: 10px   // extra space for g+ logo
+      
+      &:before
+        content: ''
+        background:
+          size: 100%
+          repeat: no-repeat
+        position: relative
+        display: block
+        float: left
+        opacity: 0.8
+      &.twitter:before
+        width: 17px
+        height: 15px
+        margin-bottom: -14px
+        top: 4px
+        margin-right: 5px
+      &.facebook:before
+        width: 17px
+        height: 15px
+        margin-bottom: -14px
+        top: 2px
+        margin-right: 5px
+      &.googleplus:before
+        width: 11px
+        height: 18px
+        margin-bottom: -17px
+        top: 4px
+        left: -9px
+        margin-right: -2px
+
+@mixin sharrre-color($schemename, $fg, $bg)
+  .sharrre
+    .bubble
+      .count
+        color: rgba($fg, 0.45)
+    .buttons
+      border: 8px solid $bg
+      background: $bg
+      a, a:visited
+        color: $fg
+      .button
+        &:active
+          background-color: mix($fg, $bg)
+        @each $network in ('twitter', 'facebook', 'googleplus')
+          &.#{$network}:before
+            background-image: url(/assets/social-buttons-flat-#{$schemename}-#{$network}.png)
+

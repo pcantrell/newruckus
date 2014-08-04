@@ -4,6 +4,7 @@ $browsers: ('', -webkit-, -moz-, -o-, -ms-)
   @media all and (max-width: $width)
     @content
 
+@import 'sharrre'
 
 
 $link-color: #a63d56
@@ -43,25 +44,35 @@ nav.top
   text-transform: uppercase
   font-size: 86%
   letter-spacing: 0.3ex
-  text-align: right
   line-height: 180%
   li
+    display: inline-block
+    vertical-align: middle
     padding: 0.6em 1em
     &.popup-header-active
       background: $footer-bg-color
       border-top-left-radius: 1ex
       border-top-right-radius: 1ex
+    &.social
+      margin-left: 0
+      padding-left: 4px
+      padding-right: 0
+      a:hover, a:active
+        opacity: 0.5
+  .spacer
+    display: inline-block
+    width: 1px
+    margin-left: -1px
   .home
-    display: block
-    text-align: left
     float: left
     a, a:link, a:visited
       color: $heading-color
     a:hover, a:active, a:focus
       color: $heading-active-color
-  .page
-    display: inline-block
-    margin-left: 2%
+  .pages
+    float: right
+    vertical-align: middle
+    margin-left: 1em
   .popup, .popup-header-active
     background: $footer-bg-color
     color: white
@@ -272,6 +283,11 @@ nav.top
     margin: 1em 0
   h1
     font-size: 110%
+  .social
+    float: right
+    margin-top: 1em
+    @include sharrre-color('white', white, mix($footer-bg-color, white, 80))
+
 
 form
   margin: 1em
