@@ -4,8 +4,26 @@ class SignupsController < ApplicationController
   end
 
   def create
-    @signup = Signup.new(signup_params)
-    if @signup.valid?
+    @signup = signup = Signup.new(signup_params)
+    if signup.valid?
+      mail = Mail.new do
+        from     signup.email
+        to       'paul@innig.net'
+        subject  "Composer Night signup: #{signup.name}"
+        body(
+          signup.each_pair.map do |k,v|
+            "#{k.upcase}: #{v}"
+          end.join("\n\n")
+        )
+      end
+      if Rails.env.production?
+        mail.deliver!
+      else
+        puts
+        puts mail
+        puts
+      end
+
       render :success
     else
       render :show
