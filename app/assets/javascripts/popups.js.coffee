@@ -40,8 +40,6 @@ togglePopup = ($button) ->
   showPopup $button, !isPopupVisible($button)
 
 $(document).on 'page:change', ->
-  $('.popup').hide()
-
   for button in $('[data-show-popup]')
     $(button).click (e) ->
       e.preventDefault()
