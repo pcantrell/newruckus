@@ -2,11 +2,16 @@ Rails.application.routes.draw do
 
   controller :pages, action: :show do
     root page: 'home'
-    %w(composer_nights composer_nights/sign_up music_tech contact).each do |page|
+    %w(composer_nights music_tech contact).each do |page|
       path = page.gsub('_', '')
       name = page.gsub('/', '_')
       get path, as: name, page: name
     end
+  end
+
+  controller :signups, path: 'composernights/signup' do
+    get  action: 'show', as: 'composer_night_sign_up'
+    post action: 'create'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

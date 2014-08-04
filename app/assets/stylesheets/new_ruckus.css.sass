@@ -289,27 +289,85 @@ nav.top
     margin-top: 1em
     @include sharrre-color('white', white, mix($footer-bg-color, white, 80))
 
-
 form
-  margin: 1em
-  .note
-    font-size: 60%
-    opacity: 0.8
-    margin: 0.2em 0
-  input
+  input, textarea
     font-size: 100%
     margin: 0.6em 0
-    padding: 1ex 1em
-    border: none
+    padding: 1ex 1.2ex
     border-radius: 1ex
     font-family: 'ProximaNova-400'
-    &[type='email']
-      width: 30ex
+    &:focus
+      outline: none !important
+      box-shadow: 0 0 1ex $heading-active-color
+  input
     &[type='submit']
+      border: none
       background: $link-color
       &:active
         background: $link-active-color
       color: white
+
+  &.formtastic
+    max-width: 24em
+    margin: 3em auto
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea
+      display: block
+      width: 99%
+      border: 1px solid rgba(0, 0, 0, 0.25)
+      background: #fbfbf9
+      &:focus
+        background: white
+    textarea
+      height: 4em
+    input[type="checkbox"]
+      margin-right: 1ex
+      display: inline-block
+      vertical-align: middle
+      width: 1em
+      height: 1em
+    input[type="submit"]
+      padding: 1em 1.6em
+      font-size: 110%
+      border-radius: 1.5em
+    li
+      list-style: none
+      &.action
+        text-align: center
+      &.stringish, &.text
+        margin: 3em 0
+        @include responsive(700px)
+          margin: 2em 0
+      &.error
+        input, textarea
+          border: 2px solid #C22
+          background: #fff4f4
+    label
+      font-size: 110%
+    abbr
+      color: rgba(0, 0, 1, 0.4)
+      border: none
+      margin-left: 0.5ex
+    .inline-hint
+      font-size: 80%
+      margin: 0
+    .inline-error
+      margin: 0
+      color: #b44
+      font-family: 'ProximaNova-700'
+
+  &.mailing-list
+    margin: 1em
+    .note
+      font-size: 60%
+      opacity: 0.8
+      margin: 0.2em 0
+    input
+      border: 1px solid $footer-bg-color
+      &[type='email']
+        width: 30ex
 
 .popup
   position: absolute
@@ -321,7 +379,7 @@ body.home
     background-image: image-url('rmnp.jpeg')
 
 body.composer_nights,
-body.composer_nights_sign_up
+body.signups
   .hero
     background-image: image-url('soap-rainbow.jpeg')
 
