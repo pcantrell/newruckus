@@ -24,7 +24,7 @@ module NewRuckus
 
     require 'middleware/force_host_name'
     if Rails.env.production?
-      config.middleware.insert_before Rack::Lock, ForceHostName, 'newruckus.org'
+      # config.middleware.insert_before Rack::Lock, ForceHostName, 'newruckus.org'
       config.middleware.use ExceptionNotifier,
         sender_address: %{"notifier" <notifier@newruckus.org>},
         exception_recipients: %w{paul@innig.net},
