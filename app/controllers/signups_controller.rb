@@ -17,6 +17,7 @@ class SignupsController < ApplicationController
         )
       end
       if Rails.env.production?
+        mail.delivery_method.settings[:enable_starttls_auto] = false
         mail.deliver!
       else
         puts

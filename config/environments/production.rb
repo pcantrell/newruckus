@@ -71,7 +71,7 @@ Rails.application.configure do
   
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    domain: 'newruckus.org',
+    domain: 'innig.net',
     enable_starttls_auto: false
   }
 
