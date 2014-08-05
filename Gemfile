@@ -11,9 +11,6 @@ gem 'formtastic', ">= 2.3.0.rc2"
 gem 'mail'
 gem 'valid_email'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
-
 gem 'jquery-cdn', '2.1.1'
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -24,10 +21,13 @@ gem 'spring',        group: :development
 
 gem 'bcrypt', '~> 3.1.7'
 
-platform :ruby do
-  gem 'pg'
-  gem 'unicorn'
+group :development, :test do
+  gem 'silent-postgres'
+  gem 'unicorn', platform: :ruby
 end
+
+gem 'pg', platform: :ruby
+gem 'dalli'
 
 platform :jruby do
   gem 'activerecord-jdbcpostgresql-adapter'
@@ -35,4 +35,9 @@ end
 
 group :development, :test do
   gem 'minitest-spec-rails'
+end
+
+group :production do
+  gem 'exception_notification', git: 'git://github.com/pcantrell/exception_notification'
+  gem 'therubyracer'
 end

@@ -21,5 +21,16 @@ module NewRuckus
     # config.i18n.default_locale = :de
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    require 'middleware/force_host_name'
+    if Rails.env.production?
+      config.middleware.insert_before Rack::Lock, ForceHostName, 'newruckus.org'
+      config.middleware.use ExceptionNotifier,
+        sender_address: %{"notifier" <notifier@newruckus.org>},
+        exception_recipients: %w{paul@innig.net},
+        ignore_if: lambda { |e| e.message =~ /^Couldn't find Page with ID=/ },
+        ignore_crawlers: %w{Googlebot bingbot Baiduspider Wotbox YoudaoBot msnbot WBSearchBot Ezooms Aboundex AhrefsBot MJ12bot NextGenSearchBot heritrix 80legs CCBot Ocelli YandexBot intelium_bot ip-web-crawler},
+        ignore_exceptions: []  # for now; we'll see how bad it gets
+    end
   end
 end
