@@ -1,11 +1,11 @@
 module ApplicationHelper
-  def hero(&block)
+  def hero(compaction: true, &block)
     @hero_count ||= 0
     @hero_count += 1
     content_tag(
       :header,
       capture(&block),
-      class: 'hero',
+      class: 'hero ' + (compaction ? 'compaction' : ''),
       'data-stellar-background-ratio' => 0.5,
       'data-stellar-vertical-offset' => @hero_count * 300)
   end
