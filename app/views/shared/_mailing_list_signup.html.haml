@@ -1,6 +1,7 @@
 %form.mailing-list{action: "//newruckus.us2.list-manage.com/subscribe/post?u=a9c460563163a39349a209835&amp;id=0df09dc73b", method: 'post', name: "mc-embedded-subscribe-form", novalidate: "", target: "_blank"}
   - email_id = "email_#{(rand * 10**10).round}"
-  %h1 Get on our mailing list!
+  - if header
+    %h1 Get on our mailing list!
   %label{for: email_id} Email address
   .note Don’t worry! We’ll keep it private!
   %input.email{id: email_id, name: "EMAIL", placeholder: "email address", required: "", type: "email", value: ""}/

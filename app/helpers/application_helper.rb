@@ -22,4 +22,14 @@ module ApplicationHelper
         height: social_icon_size
     end
   end
+
+  def mailing_list_link(link_text, header: true, &block)
+    @mailing_list_popup_count ||= 0
+    @mailing_list_popup_count += 1
+    popup_id = "mailing_list_popup_#{@mailing_list_popup_count}"
+    link_to(link_text, 'http://eepurl.com/OdGZb', 'data-show-popup' => popup_id) +
+      content_tag(:aside, class: 'popup', id: popup_id) do
+        render 'shared/mailing_list_signup', header: header
+      end
+  end
 end

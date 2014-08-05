@@ -54,10 +54,7 @@
               %p Swap notes on making music using computers.
 
           
-          %li#mailing_list_popup_nav_item
-            = link_to 'Mailing List', 'http://eepurl.com/OdGZb', 'data-show-popup' => 'mailing_list_popup', 'data-popup-header' => 'mailing_list_popup_nav_item'
-          %aside.popup#mailing_list_popup
-            = render 'shared/mailing_list_signup'
+          %li= mailing_list_link 'Mailing List'
           
           %li= link_to 'Contact', contact_url
 
@@ -73,4 +70,4 @@
         = social_link :twitter,  "https://twitter.com/NewRuckusMN"
         -# .sharrre(data-text='The New Ruckus – A support organization for the people who invent new music' data-title='The New Ruckus' data-url='http://newruckus.org')
       
-      = render 'shared/mailing_list_signup'
+      = render 'shared/mailing_list_signup', header: true

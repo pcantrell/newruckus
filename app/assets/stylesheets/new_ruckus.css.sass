@@ -49,10 +49,6 @@ nav.top
     display: inline-block
     vertical-align: middle
     padding: 0.6em 1em
-    &.popup-header-active
-      background: $footer-bg-color
-      border-top-left-radius: 1ex
-      border-top-right-radius: 1ex
     &.social
       margin-left: 0
       padding-left: 4px
@@ -73,47 +69,6 @@ nav.top
     float: right
     vertical-align: middle
     margin-left: 1em
-  .popup, .popup-header-active
-    background: $footer-bg-color
-    color: white
-    a
-      color: $link-active-color
-  .popup
-    display: none
-    padding: 1ex
-    padding-bottom: 1em
-    background: $footer-bg-color
-    color: white
-    border-radius: 1ex
-    border-top-right-radius: 0
-    font-family: 'ProximaNova-400'
-    text-transform: none
-    letter-spacing: 0
-    line-height: 100%
-    text-align: right
-    box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
-    h1
-      font-family: 'ProximaNova-700'
-      margin-bottom: 1em
-      font-size: 110%
-    input
-      display: block
-      float: right
-      clear: right
-    li
-      display: block
-      margin: 0
-      padding: 1em
-      a
-        font:
-          family: 'MuseoSans-500'
-          size: 120%
-        text-transform: uppercase
-        display: block
-        margin-bottom: 0.6em
-        padding: 0
-      p
-        margin: 0
 
   @include responsive(800px)
     font-size: 80%
@@ -371,6 +326,52 @@ form
 
 .popup
   position: absolute
+  display: none
+  padding: 1ex
+  padding-bottom: 1em
+  background: $footer-bg-color
+  color: white
+  border-radius: 1ex
+  border-top-right-radius: 0
+  font-family: 'ProximaNova-400'
+  text-transform: none
+  letter-spacing: 0
+  line-height: 100%
+  text-align: right
+  box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
+  h1
+    font-family: 'ProximaNova-700'
+    margin-bottom: 1em
+    font-size: 110%
+  input
+    display: block
+    float: right
+    clear: right
+  li
+    display: block
+    margin: 0
+    padding: 1em
+    a
+      font:
+        family: 'MuseoSans-500'
+        size: 120%
+      text-transform: uppercase
+      display: block
+      margin-bottom: 0.6em
+      padding: 0
+    p
+      margin: 0
+
+.popup, .popup-header-active
+  background: $footer-bg-color
+  color: white
+  a
+    color: $link-active-color
+
+.popup-header-active
+  background: $footer-bg-color
+  border-top-left-radius: 1ex
+  border-top-right-radius: 1ex
 
 //------------ Page-specific styling ------------
 

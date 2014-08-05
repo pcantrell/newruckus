@@ -15,7 +15,10 @@ showPopup = ($button, show) ->
 
   $button.data('popup-header-active', show)
   $popup = $('#' + $button.data('show-popup'))
-  $header = $('#' + $button.data('popup-header'))
+  $header = if $button.data('popup-header')
+    $('#' + $button.data('popup-header'))
+  else
+    $popup.parent()
 
   if !show && document.curPopup?.$button[0] == $button[0]
     delete document.curPopup
@@ -34,7 +37,19 @@ showPopup = ($button, show) ->
   else
     $popup.slideUp(200, updateHeaderState)
 
-  positionCurPopup() if show
+  if show
+    positionCurPopup()
+
+    focus = ->
+      $input = $popup.find('input')
+      if $input.length > 0
+        $input[0].focus()
+
+    minScroll = Math.max(0, $popup.offset().top + 260 - $(window).height())
+    if $(document).scrollTop() < minScroll
+      $('html, body').animate(scrollTop: minScroll, focus)
+    else
+      focus()
 
 togglePopup = ($button) ->
   showPopup $button, !isPopupVisible($button)
@@ -46,3 +61,5 @@ $(document).on 'page:change', ->
       togglePopup($(e.target))
 
 $(window).resize positionCurPopup
+$(window).scroll ->
+    setTimeout positionCurPopup, 1

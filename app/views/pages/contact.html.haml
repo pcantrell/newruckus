@@ -1,0 +1,15 @@
+- content_for :title do
+  Contact Us
+
+
+= hero do
+  %h1.title Contact Us
+
+.content
+  %h2 Questions?
+
+  %p
+    Ask us!
+    &nbsp;→&nbsp;
+    %b= link_to 'the@newruckus.org', 'mailto:the@newruckus.org', style: 'font-size: 120%'
+
