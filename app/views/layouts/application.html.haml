@@ -36,27 +36,27 @@
     %nav.top
       %ul
         .home
-          %li= link_to 'The New Ruckus', root_url
+          %li= link_to 'The New Ruckus', root_path
           %li.social
             .spacer(style="height: #{social_icon_size}px")
         
         .pages
           %li#activities_popup_nav_item
-            = link_to 'Activities', composer_nights_url, 'data-show-popup' => 'activities_popup', 'data-popup-header' => 'activities_popup_nav_item'
+            = link_to 'Activities', composer_nights_path, 'data-show-popup' => 'activities_popup', 'data-popup-header' => 'activities_popup_nav_item'
           %aside.popup#activities_popup
             %li
-              = link_to 'Composer Nights', composer_nights_url
+              = link_to 'Composer Nights', composer_nights_path
               %p A space for sharing new music.
               %p Come to share, come to ask, come to listen.
 
             %li
-              = link_to 'Music Tech Meetups', music_tech_url
+              = link_to 'Music Tech Meetups', music_tech_path
               %p Swap notes on making music using computers.
 
           
           %li= mailing_list_link 'Mailing List'
           
-          %li= link_to 'Contact', contact_url
+          %li= link_to 'Contact', contact_path
 
           %li.social= social_link :facebook, "https://www.facebook.com/TheNewRuckus"
           %li.social= social_link :twitter,  "https://twitter.com/NewRuckusMN"
@@ -69,5 +69,15 @@
         = social_link :facebook, "https://www.facebook.com/TheNewRuckus"
         = social_link :twitter,  "https://twitter.com/NewRuckusMN"
         -# .sharrre(data-text='The New Ruckus – A support organization for the people who invent new music' data-title='The New Ruckus' data-url='http://newruckus.org')
-      
-      = render 'shared/mailing_list_signup', header: true
+
+      .block= render 'shared/mailing_list_signup', header: true
+      .block
+        %ul.sitemap
+          %li
+            %b= link_to 'The New Ruckus', root_path
+          %li
+            = link_to 'Composer Nights', composer_nights_path
+            %ul
+              %li= link_to 'Sign Up', composer_night_sign_up_path 
+          %li= link_to 'Music Tech Meetups', music_tech_path
+          %li= link_to 'Contact Us', contact_path

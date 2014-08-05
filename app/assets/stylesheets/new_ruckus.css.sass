@@ -234,15 +234,32 @@ nav.top
   background: $footer-bg-color
   color: white
   padding: 2em 12%
+  a, a:visited
+    color: white
+  a:focus, a:hover, a:active
+    color: $link-active-color
   h1, h2
     font-family: 'ProximaNova-700'
     margin: 1em 0
   h1
     font-size: 110%
+  .block
+    display: inline-block
+    vertical-align: top
+    margin-right: 8%
+    &:last-child
+      margin-right: 0
   .social
     float: right
     margin-top: 1em
     @include sharrre-color('white', white, mix($footer-bg-color, white, 80))
+  .sitemap
+    margin-top: 1em
+    font-size: 80%
+    li
+      margin: 0.6em 0
+      li
+        margin-left: 1.2em
 
 form
   input, textarea
