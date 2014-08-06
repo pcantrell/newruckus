@@ -1,9 +1,18 @@
 isPopupVisible = ($button) ->
-  $button.data('popup-header-active')
+  $button.hasClass('popup-button-active')
+
+resolvePopup = ($button) ->
+  $popup = $('#' + $button.data('show-popup'))
+  $header = if $button.data('popup-header')
+    $('#' + $button.data('popup-header'))
+  else
+    $popup.parent()
+  [$popup, $header]
+
+curPopupButton = -> $('.popup-button-active')
 
 positionCurPopup = ->
-  $popup  = document.curPopup?.$popup
-  $header = document.curPopup?.$header
+  [$popup, $header] = resolvePopup(curPopupButton())
   if $header?.length > 0
     headerOffset = $header.offset()
     $popup.offset(
@@ -12,23 +21,12 @@ positionCurPopup = ->
 
 showPopup = ($button, show) ->
   return unless $button
-
-  $button.data('popup-header-active', show)
-  $popup = $('#' + $button.data('show-popup'))
-  $header = if $button.data('popup-header')
-    $('#' + $button.data('popup-header'))
-  else
-    $popup.parent()
-
-  if !show && document.curPopup?.$button[0] == $button[0]
-    delete document.curPopup
+  [$popup, $header] = resolvePopup($button)
 
   if show
-    showPopup(document.curPopup?.$button, false)
-    document.curPopup =
-      $popup:  $popup,
-      $button: $button,
-      $header: $header
+    showPopup(curPopupButton(), false)
+  
+  $button.toggleClass('popup-button-active', show)
 
   updateHeaderState = -> $header.toggleClass('popup-header-active', show)
   action = if(show)
@@ -54,11 +52,10 @@ showPopup = ($button, show) ->
 togglePopup = ($button) ->
   showPopup $button, !isPopupVisible($button)
 
-$(document).on 'page:change', ->
-  for button in $('[data-show-popup]')
-    $(button).click (e) ->
-      e.preventDefault()
-      togglePopup($(e.target))
+$ ->
+  $(document).on 'click', '[data-show-popup]', (e) ->
+    e.preventDefault()
+    togglePopup($(e.target))
 
 $(window).resize positionCurPopup
 $(window).scroll ->
