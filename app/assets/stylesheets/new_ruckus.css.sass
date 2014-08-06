@@ -7,6 +7,9 @@ $browsers: ('', -webkit-, -moz-, -o-, -ms-)
 @import 'sharrre'
 
 
+$font-face-regular: 'ProximaNova-400'
+$font-face-heavy: 'ProximaNova-700'
+
 $link-color: #a63d56
 $heading-color: #3e57a7
 $link-active-color: mix($link-color, #FFFFFF)
@@ -24,7 +27,7 @@ body
   background: #fefefc
   color: #2f1e29
   font:
-    family: 'ProximaNova-400'
+    family: $font-face-regular
     size: 118%
   @include responsive(700px)
     font-size: 112%
@@ -40,7 +43,7 @@ a:hover, a:active, a:focus
   color: $link-active-color
 
 b
-  font-family: 'ProximaNova-700'
+  font-family: $font-face-heavy
 
 $social-icon-size: 32px
 .social-icon
@@ -251,7 +254,7 @@ nav.top
   li
     margin: 0
   a, .date, .performer
-    font-family: 'ProximaNova-700'
+    font-family: $font-face-heavy
   .block
     margin-bottom: 1.6em
   .mini
@@ -273,7 +276,7 @@ nav.top
   a:focus, a:hover, a:active
     color: $link-active-color
   h1, h2
-    font-family: 'ProximaNova-700'
+    font-family: $font-face-heavy
     margin: 1em 0
   h1
     font-size: 110%
@@ -302,7 +305,7 @@ form
     margin: 0.6em 0
     padding: 1ex 1.2ex
     border-radius: 1ex
-    font-family: 'ProximaNova-400'
+    font-family: $font-face-regular
     &:focus
       outline: none !important
       box-shadow: 0 0 1ex $heading-active-color
@@ -363,7 +366,7 @@ form
     .inline-error
       margin: 0
       color: #b44
-      font-family: 'ProximaNova-700'
+      font-family: $font-face-heavy
 
   &.mailing-list
     .note
@@ -385,14 +388,14 @@ form
   color: white
   border-radius: 1ex
   border-top-right-radius: 0
-  font-family: 'ProximaNova-400'
+  font-family: '$font-face-regular'
   text-transform: none
   letter-spacing: 0
   line-height: 100%
   text-align: right
   box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
   h1
-    font-family: 'ProximaNova-700'
+    font-family: $font-face-heavy
     margin-bottom: 1em
     font-size: 110%
   input
