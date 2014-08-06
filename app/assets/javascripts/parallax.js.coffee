@@ -1,14 +1,16 @@
 $ ->
-  unless (navigator.userAgent.match(/(iPad|iPhone|iPod|Android)/g))
+  $window = $(window)
+  $document = $(document)
 
-    $window = $(window)
-    $document = $(document)
-
+  if (navigator.userAgent.match(/(iPad|iPhone|iPod|Android)/g))
+    $('.hero').css('background-attachment', 'scroll')
+    $('.hero').css('background-position', 'top left')
+  else
     easeIn    = (x) -> Math.pow(-Math.cos(Math.PI / 2 * (x + 1)), 2.5)
     easeInOut = (x) -> (1 - Math.cos(x * Math.PI)) / 2
     zeroToOne = (x) -> Math.max(0, Math.min(1, x))
 
-    offsetMin = 180
+    offsetMin = 60
     padMin = 1
     padMax = 8.2
 

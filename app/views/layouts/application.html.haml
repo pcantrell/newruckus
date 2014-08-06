@@ -38,7 +38,7 @@
         .home
           %li= link_to 'The New Ruckus', root_path
           %li.social
-            .spacer(style="height: #{social_icon_size}px")
+            .spacer
         
         .pages
           %li#activities_popup_nav_item
@@ -58,8 +58,9 @@
           
           %li= link_to 'Contact', contact_path
 
-          %li.social= social_link :facebook, "https://www.facebook.com/TheNewRuckus"
-          %li.social= social_link :twitter,  "https://twitter.com/NewRuckusMN"
+          .nowrap
+            %li.social= social_link :facebook, "https://www.facebook.com/TheNewRuckus"
+            %li.social= social_link :twitter,  "https://twitter.com/NewRuckusMN"
       .clr
 
     = yield

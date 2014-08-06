@@ -70,3 +70,6 @@ hr {
 input, select {
     vertical-align:middle;
 }
+input[type='submit'] {
+    -webkit-appearance: none;
+}
