@@ -1,0 +1,30 @@
+(function(d) {
+    var config = {
+            kitId: 'ocw5bqy',
+            scriptTimeout: 3000
+        },
+        doc = d.documentElement,
+        typekitInactive = function() {
+            doc.className = doc.className.replace(
+                /\bwf-loading\b/g, ""
+            ) + " wf-inactive";
+        },
+        inactiveTimeout = setTimeout(typekitInactive, 3000);
+    
+    doc.className += " wf-loading";
+
+    var loadTypekit = function() {
+        <%= NewRuckus::Application.assets.find_asset('typekit-guts').source %>
+
+        try {
+            Typekit.load(config)
+        } catch(e) {
+            typekitInactive();
+            if(console && console.log)
+                console.log(e);
+        }
+        clearTimeout(inactiveTimeout);
+    };
+    setTimeout(loadTypekit, 0);
+
+})(document);

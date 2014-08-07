@@ -12,4 +12,12 @@
 //
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//
+//= require typekit
+//= require forms
+//= require parallax
+//= require popups
+
+// Unused for now:
+//   innig-sharrre.js
+//   jquery.sharrre-1.3.4
