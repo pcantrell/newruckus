@@ -16,20 +16,34 @@
     
     doc.className += " wf-loading";
 
-    var tk = d.createElement("script");
-    tk.src = '//use.typekit.net/' + config.kitId + '.js';
-    tk.async = true;
-    tk.onload = tk.onreadystatechange = function() {
-        var state = this.readyState;
-        if(loaded || state && state != "complete" && state != "loaded")
-            return;
-        loaded = true;
+    // var tk = d.createElement("script");
+    // tk.src = '//use.typekit.net/' + config.kitId + '.js';
+    // tk.async = true;
+    // tk.onload = tk.onreadystatechange = function() {
+        // var state = this.readyState;
+        // if(loaded || state && state != "complete" && state != "loaded")
+        //     return;
+        // loaded = true;
+        // clearTimeout(timeout);
+        // try {
+        //     Typekit.load(config)
+        // } catch(e) { }
+    // };
+
+    var loadTypekit = function() {
+        //= require 'typekit-guts'
+
         clearTimeout(timeout);
         try {
             Typekit.load(config)
-        } catch(e) { }
+        } catch(e) {
+            if(console && console.log)
+                console.log(e);
+        }
     };
 
-    var firstScript = d.getElementsByTagName("script")[0];
-    firstScript.parentNode.insertBefore(tk, firstScript);
+    setTimeout(loadTypekit, 0);
+
+    // var firstScript = d.getElementsByTagName("script")[0];
+    // firstScript.parentNode.insertBefore(tk, firstScript);
 })(document);
