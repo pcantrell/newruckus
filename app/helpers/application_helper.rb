@@ -2,7 +2,8 @@ module ApplicationHelper
   def hero(compaction: true, &block)
     content_tag(
       :header,
-      capture(&block),
+      capture(&block) +
+        content_tag(:div, '', class: 'page-loading'),
       class: 'hero ' + (compaction ? 'compaction' : ''))
   end
 
