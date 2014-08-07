@@ -14,7 +14,7 @@
     doc.className += " wf-loading";
 
     var loadTypekit = function() {
-        <%= NewRuckus::Application.assets.find_asset('typekit-guts').source %>
+        <%= assets.find_asset('typekit-guts').source %>
 
         try {
             Typekit.load(config)
