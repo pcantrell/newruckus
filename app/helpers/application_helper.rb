@@ -8,9 +8,7 @@ module ApplicationHelper
   end
 
   def social_link(network, url)
-    link_to url do
-      image_tag "social-link-#{network}.png", alt: network.to_s.capitalize, class: 'social-icon'
-    end
+    link_to network.to_s.capitalize, url, class: "social-icon #{network}"
   end
 
   def mailing_list_link(link_text, header: true, &block)

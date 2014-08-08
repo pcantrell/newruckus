@@ -55,8 +55,15 @@ b
 
 $social-icon-size: 32px
 .social-icon
+  display: inline-block
   width:  $social-icon-size
   height: $social-icon-size
+  color: transparent !important
+  overflow: hidden
+  background-size: 100%
+  @each $network in (facebook twitter)
+    &.#{$network}
+      background-image: asset-data-url('social-link-#{$network}.png')
 
 nav.top
   z-index: 1
@@ -134,7 +141,7 @@ nav.top
     size: 100% auto
     position: 0 -240px
     attachment: fixed
-    image: image-url('speckles.jpeg')
+    image: image-url('lightning.jpeg')
     color: #364a5a
   h1, h2
     display: inline-block
