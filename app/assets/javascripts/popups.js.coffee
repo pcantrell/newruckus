@@ -17,7 +17,7 @@ positionCurPopup = ->
     headerOffset = $header.offset()
     $popup.offset(
       left: Math.max(0, headerOffset.left + $header.outerWidth() - $popup.outerWidth()),
-      top:              headerOffset.top  + $header.outerHeight())
+      top:              headerOffset.top  + $header.outerHeight() - 1)
 
 showPopup = ($button, show) ->
   return unless $button
