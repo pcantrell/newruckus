@@ -7,6 +7,6 @@ class ComposerNight < ActiveRecord::Base
   validates :slots, numericality: { only_integer: true, greater_than: 0 }
 
   def title
-    start_time.strftime('%Y-%m-%d')
+    start_time.strftime('%Y-%-m-%d')
   end
 end

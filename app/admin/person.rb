@@ -1,4 +1,6 @@
 ActiveAdmin.register Person do
+  actions :all, except: [:show]
+
   permit_params Person.attribute_names - %w(created_at updated_at)
 
   index do
@@ -15,10 +17,10 @@ ActiveAdmin.register Person do
   filter :address
 
   form do |f|
-    f.inputs "Admin Details" do
-      f.input :name, as: :string
-      f.input :email, as: :string
-      f.input :url, as: :string
+    f.inputs do
+      f.input :name
+      f.input :email
+      f.input :url
       f.input :bio
     end
     f.actions

@@ -3,3 +3,10 @@ en:
     validations:
       email:
         invalid: 'not a valid email'
+
+  date:
+    formats:
+      long: "%Y–%–m–%d"
+  time:
+    formats:
+      long: "%Y–%-m–%-d %l:%M%P"
