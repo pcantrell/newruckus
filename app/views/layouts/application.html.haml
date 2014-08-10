@@ -73,6 +73,11 @@
             %li.social= social_link :facebook, "https://www.facebook.com/TheNewRuckus"
       .clr
 
+    - if notice
+      .flash.notice= notice
+    - if alert
+      .flash.alert= alert
+
     = yield
     
     %footer.page-footer

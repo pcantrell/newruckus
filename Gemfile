@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.4'
 
 gem 'pg', platform: :ruby
@@ -14,15 +13,18 @@ gem 'formtastic', ">= 2.3.0.rc2"
 gem 'mail'
 gem 'valid_email'
 gem 'dalli'
+gem 'jbuilder', '~> 2.0'
 
 gem 'jquery-cdn', '2.1.1'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
 
-gem 'spring', group: :development
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'devise', '>= 3.2.0'
 
 gem 'bcrypt', '~> 3.1.7'
+
+gem 'spring', group: :development
 
 group :development, :test do
   gem 'silent-postgres'
