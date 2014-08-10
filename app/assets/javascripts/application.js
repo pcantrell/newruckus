@@ -12,6 +12,7 @@
 //
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.autogrow-textarea
 //
 //= require typekit
 //= require forms

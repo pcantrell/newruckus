@@ -13,3 +13,5 @@ $(document).on 'page:update', ->
 
   # $('form').on 'ajax:aborted:required', (e, fields) ->
   #   $(fields[0]).focus()
+
+  $('textarea').autogrow()
