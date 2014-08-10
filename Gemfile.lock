@@ -53,6 +53,11 @@ GEM
     dalli (2.7.2)
     erubis (2.7.0)
     execjs (2.2.1)
+    factory_girl (4.1.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.1.0)
+      factory_girl (~> 4.1.0)
+      railties (>= 3.0.0)
     formtastic (2.3.0.rc3)
       actionpack (>= 3.0)
     haml (4.0.5)
@@ -161,6 +166,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dalli
   exception_notification!
+  factory_girl_rails
   formtastic (>= 2.3.0.rc2)
   haml-rails
   jbuilder (~> 2.0)

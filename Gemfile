@@ -27,10 +27,8 @@ gem 'bcrypt', '~> 3.1.7'
 group :development, :test do
   gem 'silent-postgres'
   gem 'unicorn', platform: :ruby
-end
-
-group :development, :test do
   gem 'minitest-spec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :production do
