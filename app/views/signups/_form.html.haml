@@ -1,7 +1,9 @@
 = semantic_form_for @signup, as: 'signup', url: composer_night_sign_up_path, html: { id: 'sign_up_form' } do |f|
-  = f.input :name, required: false, as: :string
-  = f.input :email, required: false, as: :email, hint: 'Double check it!'
+  = f.fields_for :presenter do |p|
+    = p.input :name, required: false, as: :string
+    = p.input :email, required: false, as: :email, hint: 'Double check it!'
   = f.input :comments, required: false, label: 'Comments or questions', as: :text, hint: 'Any particular date you have your eye on?'
-  = f.input :phone, required: false, as: :phone, label: 'Cell phone', hint: 'Optional, but good for us to have in case of last-minute contingency. We WILL NOT share it outside The New Ruckus.'
-  = f.input :guidelines, as: :boolean, label: 'I have read the guidelines above.'
+  = f.fields_for :presenter do |p|
+    = p.input :phone, required: false, as: :phone, label: 'Cell phone', hint: 'Optional, but good for us to have in case of last-minute contingency. We <b>will not</b> share it outside The New Ruckus.'.html_safe
+  = f.input :read_guidelines, as: :boolean, label: 'I have read the guidelines above.'
   = f.action :submit, label: 'Sign me up!'

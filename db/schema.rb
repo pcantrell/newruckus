@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20140810035838) do
     t.text     "name"
     t.text     "name_for_searching"
     t.text     "email"
+    t.text     "phone"
     t.text     "url"
     t.text     "bio"
     t.datetime "created_at"

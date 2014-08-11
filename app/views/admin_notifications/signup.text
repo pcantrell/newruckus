@@ -1,0 +1,11 @@
+NAME:  <%= @signup.presenter.name %>
+EMAIL: <%= @signup.presenter.email %>
+PHONE: <%= @signup.presenter.phone %>
+
+<% @changed_attrs.each do |k,v| %>
+*** <%= k.capitalize %> changed from: <%= v %>
+<% end %>
+
+<%= @signup.comments %>
+
+READ GUIDELINES: <%= @signup.read_guidelines %>

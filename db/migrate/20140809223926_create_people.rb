@@ -4,6 +4,7 @@ class CreatePeople < ActiveRecord::Migration
       t.text :name
       t.text :name_for_searching
       t.text :email
+      t.text :phone
       t.text :url
       t.text :bio
 
