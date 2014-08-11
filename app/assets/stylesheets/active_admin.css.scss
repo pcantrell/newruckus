@@ -6,10 +6,10 @@
 @import "active_admin/base";
 
 body {
-    font: {
-        face: 'Helvetica Neue';
-        size: 100%;
-    }
+  font: {
+    face: 'Helvetica Neue';
+    size: 15px;
+  }
 }
 
 form input[type=text],
@@ -19,8 +19,21 @@ form input[type=number],
 form input[type=url],
 form input[type=tel],
 form textarea {
-    font: {
+  font: {
+    size: 100%;
+  }
+}
 
-        size: 100%;
+#sidebar {
+  font-size: 80%;
+}
+
+.signup {
+  .notes {
+    font-size: 75%;
+    color: #888;
+    &.internal {
+      font-style: italic;
     }
+  }
 }
