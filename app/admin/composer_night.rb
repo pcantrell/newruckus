@@ -1,6 +1,4 @@
 ActiveAdmin.register ComposerNight do
-  actions :all, except: [:show]
-
   permit_params ComposerNight.attribute_names - %w(created_at updated_at name_for_searching)
 
   config.sort_order = "start_time_desc"

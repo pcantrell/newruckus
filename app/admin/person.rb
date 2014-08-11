@@ -1,6 +1,4 @@
 ActiveAdmin.register Person do
-  actions :all, except: [:show]
-
   permit_params Person.attribute_names - %w(created_at updated_at)
 
   index do

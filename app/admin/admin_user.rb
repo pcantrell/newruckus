@@ -1,6 +1,4 @@
 ActiveAdmin.register AdminUser do
-  actions :all, except: [:show]
-
   permit_params :email, :password, :password_confirmation
 
   index do
