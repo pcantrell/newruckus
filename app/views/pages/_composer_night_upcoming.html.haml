@@ -11,9 +11,8 @@
     - if event.presenters.any?
       Featuring the music of:
       %ul
-      - event.signups.order(:created_at).each do |signup|
+      - event.presenters.each do |presenter|
         %li.presenter
-          - presenter = signup.presenter
           = link_to_if presenter.url?, presenter.name, presenter.url
     - unless event.full?
       %p.mini
