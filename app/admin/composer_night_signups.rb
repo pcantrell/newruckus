@@ -8,7 +8,7 @@ ActiveAdmin.register ComposerNightSignup do
   index do
     selectable_column
     id_column
-    column :person
+    column :presenter
     column :composer_night
     column :created_at
     actions

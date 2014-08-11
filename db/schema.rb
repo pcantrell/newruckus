@@ -48,9 +48,11 @@ ActiveRecord::Schema.define(version: 20140810035838) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "composer_night_signups", force: true do |t|
-    t.integer  "person_id"
+    t.boolean  "active",            default: true
+    t.integer  "presenter_id"
     t.integer  "composer_night_id"
     t.text     "comments"
+    t.text     "internal_notes"
     t.text     "title"
     t.text     "performers"
     t.text     "approx_length"
@@ -62,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140810035838) do
 
   add_index "composer_night_signups", ["composer_night_id"], name: "index_composer_night_signups_on_composer_night_id", using: :btree
   add_index "composer_night_signups", ["created_at"], name: "index_composer_night_signups_on_created_at", using: :btree
-  add_index "composer_night_signups", ["person_id"], name: "index_composer_night_signups_on_person_id", using: :btree
+  add_index "composer_night_signups", ["presenter_id"], name: "index_composer_night_signups_on_presenter_id", using: :btree
 
   create_table "composer_nights", force: true do |t|
     t.datetime "start_time"

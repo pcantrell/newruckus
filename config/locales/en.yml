@@ -6,7 +6,7 @@ en:
 
   date:
     formats:
-      long: "%Y–%–m–%d"
+      long: "%Y–%m–%d"
   time:
     formats:
-      long: "%Y–%-m–%-d %l:%M%P"
+      long: "%Y–%m–%d %l:%M%P (%a)"
