@@ -5,7 +5,7 @@ class ComposerNight < ActiveRecord::Base
 
   validates :start_time, presence: true
   validates :location, presence: true
-  validates :slots, numericality: { only_integer: true, greater_than: 0 }
+  validates :slots, numericality: { only_integer: true, greater_than_or_equal: 0 }
 
   scope :upcoming, -> { where('start_time >= ?', 90.minutes.ago).order(:start_time) }
 
