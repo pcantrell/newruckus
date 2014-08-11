@@ -29,17 +29,18 @@
 
 .block
   %h2 Future Composer Nights
-  %ul
+  %table.upcoming
     - ComposerNight.upcoming.includes(:signups).each do |future_event|
-      %li
-        = future_event.start_time.strftime('%B %d (%a)')
-        - case future_event.slots_open
-        - when 2
-          .spot-count 2 spots left
-        - when 1
-          .spot-count 1 spot left!
-        - when 0
-          .spot-count FULL
+      %tr
+        - note = case future_event.slots_open
+          - when 2 then '2 spots left'
+          - when 1 then '1 spot left!'
+          - when 0 then 'FULL'
+
+        %td.date{colspan: note ? 1 : 2, class: ('no-note' unless note)}
+          = future_event.start_time.strftime('%B %d (%a)')
+        - if note
+          %td.note= note
 
 .block
   - unless ComposerNight.upcoming.empty?
