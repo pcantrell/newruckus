@@ -50,11 +50,13 @@ namespace :app do
             name: row['Name'])
         end
 
-        ComposerNightSignup.create!(
+        signup = ComposerNightSignup.create!(
           presenter:      person,
           composer_night: composer_night,
           comments:       row['Comments or questions'],
           internal_notes: row['Notes'])
+        signup.created_at = row['Submitted On']
+        signup.save!
       end
     end
   end
