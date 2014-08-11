@@ -14,7 +14,7 @@ class ComposerNight < ActiveRecord::Base
   end
 
   def title
-    start_time.strftime('%Y-%-m-%d')
+    start_time.strftime('CN %Y–%m–%d %B')
   end
 
   def slots_open

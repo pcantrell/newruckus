@@ -1,5 +1,5 @@
 ActiveAdmin.register Person do
-  permit_params Person.attribute_names - %w(created_at updated_at)
+  permit_params Person.attribute_names - %w(id created_at updated_at)
 
   index do
     selectable_column

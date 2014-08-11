@@ -13,8 +13,10 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel 'Composer Night Queue' do
+          queue = ComposerNightSignup.queue.includes(:presenter)
+          
           ul do
-            ComposerNightSignup.queue.includes(:presenter).each do |signup|
+            queue.each do |signup|
               li(class: 'signup') do
                 span link_to(signup.presenter.name, edit_admin_composer_night_signup_path(signup))
                 span signup.comments, class: 'notes'
@@ -22,8 +24,16 @@ ActiveAdmin.register_page "Dashboard" do
               end
             end
           end
+          
+          para "Queue emails:"
+          blockquote style: "font-size: 85%; font-style: normal; line-height: 100%; white-space: pre-line" do
+            queue.each do |s|
+              text_node "#{s.presenter.name.inspect} <#{s.presenter.email}>,\n"
+            end
+          end
         end
       end
+
       column do
         panel 'Upcoming Composer Nights' do
           ComposerNight.upcoming.each do |event|
