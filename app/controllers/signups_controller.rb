@@ -17,7 +17,7 @@ class SignupsController < ApplicationController
       signup.presenter = presenter
 
       changed_attrs = []
-      %i(name phone).map do |attr|
+      %w(name phone).map do |attr|
         old_val = @signup.presenter.send("#{attr}_was")
         if @signup.presenter.send("#{attr}_changed?") && !old_val.blank?
           changed_attrs << [attr, old_val]
@@ -25,7 +25,7 @@ class SignupsController < ApplicationController
       end
 
       if presenter.save && signup.save
-        AdminNotifications.signup(signup, changed_attrs).deliver
+        AdminNotifications.signup(signup, Hash[changed_attrs]).deliver
         render :success
       else
         render :show
