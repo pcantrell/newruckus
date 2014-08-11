@@ -30,8 +30,21 @@
 .block
   %h2 Future Composer Nights
   %ul
-    - ComposerNight.upcoming.each do |future_event|
-      %li= future_event.start_time.strftime('%B %d (%a)')
+    - ComposerNight.upcoming.includes(:signups).each do |future_event|
+      %li
+        = future_event.start_time.strftime('%B %d (%a)')
+        - case future_event.slots_open
+        - when 2
+          .spot-count 2 spots left
+        - when 1
+          .spot-count 1 spot left!
+        - when 0
+          .spot-count FULL
+
+.block
+  - unless ComposerNight.upcoming.empty?
+    Want one of those dates?
+    = link_to 'Sign up!', composer_night_sign_up_path
 
 .block
   = mailing_list_link 'Get on the mailing list', header: false
