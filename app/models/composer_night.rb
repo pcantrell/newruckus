@@ -16,4 +16,12 @@ class ComposerNight < ActiveRecord::Base
   def title
     start_time.strftime('%Y-%-m-%d')
   end
+
+  def slots_open
+    [slots - presenters.count, 0].max
+  end
+
+  def full?
+    slots_open == 0
+  end
 end

@@ -1,0 +1,10 @@
+.block.location
+  = link_to_if location.url?, location.name, location.url
+  - if location.address?
+    .address
+      - location.address.split("\n").each do |part|
+        .part= part
+
+  - if location.map_url? && location.map_image_path?
+    %a.map{href: location.map_url}
+      = image_tag image_path(location.map_image_path), alt: 'Map'

@@ -53,6 +53,10 @@ a:hover, a:active, a:focus
 b
   font-weight: $body-weight-heavy
 
+.ampm
+  font-variant: small-caps
+  margin-left: 0.25ex
+
 $social-icon-size: 32px
 .social-icon
   display: inline-block
@@ -273,20 +277,30 @@ nav.top
   line-height: 140%
   h2
     font-size: 92%
-  h2, p, ul
+  h2, p
     margin: 0.8em 0
   ul
+    margin: 0.6em 0
     list-style: none
   li
     margin: 0
-  a, .date, .performer
+    list-style: none
+  a, .date, .presenter
     font-weight: $body-weight-heavy
   .block
     margin-bottom: 1.6em
+    .address
+      font-size: 92%
+      .part
+        display: inline-block
+        margin: 0 0.5ex
+        white-space: nowrap
   .mini
-    font-size: 90%
+    font-size: 80%
     line-height: 120%
   .map
+    display: block
+    margin-top: 0.6em
     img
       width: 100%
       max-width: 300px

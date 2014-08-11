@@ -80,7 +80,8 @@ ActiveRecord::Schema.define(version: 20140810035838) do
     t.text     "name"
     t.text     "url"
     t.text     "address"
-    t.string   "map_image_path"
+    t.text     "map_url"
+    t.text     "map_image_path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
