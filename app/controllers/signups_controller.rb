@@ -1,8 +1,13 @@
 class SignupsController < ApplicationController
 
   def show
-    @signup = Signup.new
-    @signup.presenter = Person.new
+    if params[:token]
+      @signup = Signup.find_by(access_token: params[:token])
+    else
+      @signup = Signup.new
+      @signup.presenter = Person.new
+      render 'new'
+    end
   end
 
   def create
@@ -27,9 +32,9 @@ class SignupsController < ApplicationController
 
       if presenter.save && signup.save
         AdminNotifications.signup(signup, Hash[changed_attrs]).deliver
-        render :success
+        redirect_to signup_path(token: signup.access_token, new: 1)
       else
-        render :show
+        render :new
       end
     end
   end

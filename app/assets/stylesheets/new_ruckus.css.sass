@@ -1,4 +1,4 @@
-$browsers: ('', -webkit-, -moz-, -o-, -ms-)
+$browsers: ('', -webkit-, -moz-, -o-, -ms-, -kthml-)
 
 @mixin responsive($width)
   @media all and (max-width: $width)
@@ -369,8 +369,10 @@ form
       color: white
 
   &.formtastic
-    max-width: 24em
-    margin: 3em auto
+    fieldset
+      max-width: 24em
+      &.featured
+        margin: 3em auto
     input[type="text"],
     input[type="email"],
     input[type="tel"],
@@ -478,6 +480,7 @@ form
   border-top-left-radius: 1ex
   border-top-right-radius: 1ex
 
+
 //------------ Page-specific styling ------------
 
 body.home
@@ -489,9 +492,58 @@ body.signups
   .hero
     background-image: image-url('soap-rainbow.jpeg')
 
+body.signups
+  form
+    .date-preferences
+      display: table
+    .date-preference
+      display: table-row
+      .date, .statuses, .status-messages
+        display: table-cell
+        vertical-align: middle
+        padding: 0.8em 0.6em
+      .date
+        text-align: right
+        line-height: 120%
+      .date, .statuses
+        white-space: nowrap
+      .status
+        input
+          display: none
+        display: inline-block
+        @each $browser in $browsers
+          #{$browser}user-select: none
+        text-transform: uppercase
+        font:
+          size: 75%
+          weight: $body-weight-heavy
+        margin: 0
+        padding: 0.4em 1em
+        cursor: pointer
+        background: #eee
+        border-left: 1px solid $body-background-color
+        &:first-child
+          border-top-left-radius: 2em
+          border-bottom-left-radius: 2em
+          border-left: none
+        &:last-child
+          border-top-right-radius: 2em
+          border-bottom-right-radius: 2em
+        &.active
+          color: white
+          &.yes
+            background: #3da649
+          &.maybe
+            background: #858997
+          &.no
+            background: #a6443d
+      .status-message
+        display: none
+
 body.music_tech
   .hero
     background-image: image-url('lcd.jpeg')
+
 
 //------------ Loading animation ------------
 

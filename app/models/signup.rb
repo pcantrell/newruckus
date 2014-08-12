@@ -11,8 +11,12 @@ class Signup < ActiveRecord::Base
   scope :queue,  -> { active.where(composer_night_id: nil).order(:created_at) }
 
   def preference_for(composer_night)
-    preferences.where(composer_night: composer_night)
+    preferences.find_or_initialize_by(composer_night: composer_night)
   end
 
   attr_accessor :read_guidelines
+
+  before_save do
+    self.access_token ||= SecureRandom.urlsafe_base64(18)
+  end
 end

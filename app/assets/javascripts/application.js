@@ -19,6 +19,8 @@
 //= require forms
 //= require parallax
 //= require popups
+//
+//= require signup
 
 // Unused for now:
 //   innig-sharrre.js

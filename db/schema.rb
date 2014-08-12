@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812051830) do
+ActiveRecord::Schema.define(version: 20140812054835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,8 +105,10 @@ ActiveRecord::Schema.define(version: 20140812051830) do
     t.text     "special_needs"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "access_token"
   end
 
+  add_index "signups", ["access_token"], name: "index_signups_on_access_token", unique: true, using: :btree
   add_index "signups", ["composer_night_id"], name: "index_signups_on_composer_night_id", using: :btree
   add_index "signups", ["created_at"], name: "index_signups_on_created_at", using: :btree
   add_index "signups", ["presenter_id"], name: "index_signups_on_presenter_id", using: :btree

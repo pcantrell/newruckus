@@ -7,4 +7,8 @@ class SignupPreference < ActiveRecord::Base
   validates :signup, presence: true
   validates :composer_night, presence: true
   validates :status, presence: true, inclusion: { in: STATUSES }
+
+  before_validation do
+    self.status ||= 'maybe'
+  end
 end
