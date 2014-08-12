@@ -1,0 +1,11 @@
+- show_info ||= false
+
+%li.signup
+  = link_to signup.presenter.name, edit_admin_composer_night_signup_path(signup)
+  .notes=          signup.comments
+  .notes.internal= signup.internal_notes
+  - if show_info
+    .info-checklist
+      - %w(title performers approx_length description special_needs).each do |attr|
+        .info{class: signup.send("#{attr}?") ? 'present' : 'absent'}
+          = attr.humanize

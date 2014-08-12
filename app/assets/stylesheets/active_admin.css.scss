@@ -30,10 +30,30 @@ form textarea {
 
 .signup {
   .notes {
+    display: inline;
     font-size: 75%;
     color: #888;
     &.internal {
       font-style: italic;
+    }
+  }
+  .info {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    text-transform: uppercase;
+    font-size: 75%;
+    font-weight: 600;
+    &.present {
+      color: #595;
+      &:before {
+        content: '✓';
+      }
+    }
+    &.absent {
+      color: #855;
+      &:before {
+        content: '✕';
+      }
     }
   }
 }

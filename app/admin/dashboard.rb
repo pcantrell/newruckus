@@ -3,25 +3,14 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
-      end
-    end
-
     columns do
-      column do
+      column min_width: '60%' do
         panel 'Composer Night Queue' do
           queue = ComposerNightSignup.queue.includes(:presenter)
           
           ul do
             queue.each do |signup|
-              li(class: 'signup') do
-                span link_to(signup.presenter.name, edit_admin_composer_night_signup_path(signup))
-                span signup.comments, class: 'notes'
-                span signup.internal_notes, class: 'notes internal'
-              end
+              render 'admin/signup_list_item', signup: signup
             end
           end
           
@@ -34,7 +23,7 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
 
-      column do
+      column max_width: '33%' do
         panel 'Upcoming Composer Nights' do
           ComposerNight.upcoming.each do |event|
             para do
@@ -45,9 +34,7 @@ ActiveAdmin.register_page "Dashboard" do
 
             ul do
               event.signups.includes(:presenter).each do |signup|
-                li do
-                  link_to signup.presenter.name, edit_admin_composer_night_signup_path(signup)
-                end
+                render 'admin/signup_list_item', signup: signup
               end
             end
           end

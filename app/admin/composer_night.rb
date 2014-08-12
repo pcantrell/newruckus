@@ -14,6 +14,18 @@ ActiveAdmin.register ComposerNight do
     actions
   end
 
+  show do
+    default_main_content
+
+    panel 'Signed up' do
+      ul do
+        composer_night.signups.includes(:presenter).each do |signup|
+          render 'admin/signup_list_item', signup: signup, show_info: true
+        end
+      end
+    end
+  end
+
   form do |f|
     f.inputs do
       f.input :location
