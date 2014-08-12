@@ -56,7 +56,7 @@ namespace :app do
   task import: :environment do
     ComposerNight.transaction do
       each_signup_from_csv do |row, person, composer_night|
-        signup = ComposerNightSignup.create!(
+        signup = Signup.create!(
           presenter:      person,
           composer_night: composer_night,
           comments:       row['Comments or questions'],
@@ -70,7 +70,7 @@ namespace :app do
   task fix_dates: :environment do
     ComposerNight.transaction do
       each_signup_from_csv do |row, person, composer_night|
-        signup = ComposerNightSignup.find_by(
+        signup = Signup.find_by(
           presenter:      person,
           composer_night: composer_night)
         signup.created_at = row['Submitted On']

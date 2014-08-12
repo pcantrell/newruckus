@@ -12,9 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
-  controller :signups, path: 'composernights/signup' do
-    get  action: 'show', as: 'composer_night_sign_up'
-    post action: 'create'
+  scope path: 'composernights' do
+    resource :signup
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

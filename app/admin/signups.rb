@@ -1,5 +1,5 @@
-ActiveAdmin.register ComposerNightSignup do
-  editable_attrs = ComposerNightSignup.attribute_names - %w(id created_at updated_at)
+ActiveAdmin.register Signup do
+  editable_attrs = Signup.attribute_names - %w(id created_at updated_at)
   permit_params editable_attrs
 
   menu label: 'Signups'

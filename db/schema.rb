@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810035838) do
+ActiveRecord::Schema.define(version: 20140812051830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,25 +47,6 @@ ActiveRecord::Schema.define(version: 20140810035838) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "composer_night_signups", force: true do |t|
-    t.boolean  "active",            default: true
-    t.integer  "presenter_id"
-    t.integer  "composer_night_id"
-    t.text     "comments"
-    t.text     "internal_notes"
-    t.text     "title"
-    t.text     "performers"
-    t.text     "approx_length"
-    t.text     "description"
-    t.text     "special_needs"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "composer_night_signups", ["composer_night_id"], name: "index_composer_night_signups_on_composer_night_id", using: :btree
-  add_index "composer_night_signups", ["created_at"], name: "index_composer_night_signups_on_created_at", using: :btree
-  add_index "composer_night_signups", ["presenter_id"], name: "index_composer_night_signups_on_presenter_id", using: :btree
-
   create_table "composer_nights", force: true do |t|
     t.datetime "start_time"
     t.integer  "location_id"
@@ -99,5 +80,35 @@ ActiveRecord::Schema.define(version: 20140810035838) do
 
   add_index "people", ["email"], name: "index_people_on_email", using: :btree
   add_index "people", ["name_for_searching"], name: "index_people_on_name_for_searching", using: :btree
+
+  create_table "signup_preferences", force: true do |t|
+    t.integer  "signup_id",         null: false
+    t.integer  "composer_night_id", null: false
+    t.string   "status",            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "signup_preferences", ["composer_night_id"], name: "index_signup_preferences_on_composer_night_id", using: :btree
+  add_index "signup_preferences", ["signup_id"], name: "index_signup_preferences_on_signup_id", using: :btree
+
+  create_table "signups", force: true do |t|
+    t.boolean  "active",            default: true
+    t.integer  "presenter_id"
+    t.integer  "composer_night_id"
+    t.text     "comments"
+    t.text     "internal_notes"
+    t.text     "title"
+    t.text     "performers"
+    t.text     "approx_length"
+    t.text     "description"
+    t.text     "special_needs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "signups", ["composer_night_id"], name: "index_signups_on_composer_night_id", using: :btree
+  add_index "signups", ["created_at"], name: "index_signups_on_created_at", using: :btree
+  add_index "signups", ["presenter_id"], name: "index_signups_on_presenter_id", using: :btree
 
 end

@@ -18,6 +18,7 @@ ActiveAdmin.register Person do
     f.inputs do
       f.input :name
       f.input :email
+      f.input :phone
       f.input :url
       f.input :bio
     end

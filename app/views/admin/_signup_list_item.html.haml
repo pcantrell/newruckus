@@ -1,7 +1,7 @@
 - show_info ||= false
 
 %li.signup
-  = link_to signup.presenter.name, edit_admin_composer_night_signup_path(signup)
+  = link_to signup.presenter.name, edit_admin_signup_path(signup)
   .notes=          signup.comments
   .notes.internal= signup.internal_notes
   - if show_info

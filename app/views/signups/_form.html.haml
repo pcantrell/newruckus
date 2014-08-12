@@ -1,4 +1,4 @@
-= semantic_form_for @signup, as: 'signup', url: composer_night_sign_up_path, html: { id: 'sign_up_form' } do |f|
+= semantic_form_for @signup, as: 'signup', url: signup_path, html: { id: 'sign_up_form' } do |f|
   = f.fields_for :presenter do |p|
     = p.input :name, required: false, as: :string
     = p.input :email, required: false, as: :email, hint: 'Double check it!'

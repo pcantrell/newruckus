@@ -19,11 +19,11 @@
         Have some music to share?
         %br
         - if event.slots_open == 1
-          There is still <a href="#{composer_night_sign_up_path}">one spot left</a>!
+          There is still <a href="#{signup_path}">one spot left</a>!
         - elsif event.presenters.empty?
-          Be bold! <a href="#{composer_night_sign_up_path}">Sign up</a>!
+          Be bold! <a href="#{signup_path}">Sign up</a>!
         - else
-          There are still <a href="#{composer_night_sign_up_path}">#{event.slots_open} spots left</a>!
+          There are still <a href="#{signup_path}">#{event.slots_open} spots left</a>!
 
   = render 'shared/location', location: Location.first
 
@@ -45,7 +45,7 @@
 .block
   - unless ComposerNight.upcoming.empty?
     Want one of those dates?
-    = link_to 'Sign up!', composer_night_sign_up_path
+    = link_to 'Sign up!', signup_path
 
 .block
   = mailing_list_link 'Get on the mailing list', header: false

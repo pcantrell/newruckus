@@ -1,11 +1,12 @@
 class SignupsController < ApplicationController
+
   def show
-    @signup = ComposerNightSignup.new
+    @signup = Signup.new
     @signup.presenter = Person.new
   end
 
   def create
-    ComposerNightSignup.transaction do
+    Signup.transaction do
       presenter_params = params[:signup][:presenter_attributes]
       presenter = Person.find_or_initialize_by(email: (presenter_params[:email] || '').downcase)
       %i(name phone).each do |attr|
@@ -13,7 +14,7 @@ class SignupsController < ApplicationController
         presenter.send "#{attr}=", val unless val.blank?
       end
 
-      @signup = signup = ComposerNightSignup.new(signup_params)
+      @signup = signup = Signup.new(signup_params)
       signup.presenter = presenter
 
       changed_attrs = []
@@ -31,6 +32,14 @@ class SignupsController < ApplicationController
         render :show
       end
     end
+  end
+
+  def edit
+    #TODO: check access token
+  end
+
+  def update
+    raise 'not implemented'
   end
 
 private
