@@ -18,4 +18,22 @@ module ApplicationHelper
         render 'shared/mailing_list_signup', header: header
       end
   end
+
+  GREETINGS = [
+      "Greetings",
+      "Ahoy",
+      "Howdy",
+      "Well met",
+      "G’day",
+      "Hi there",
+      "Hiya",
+      "Namaste",
+      "Aloha",
+      "Cheerio",
+      "Ciao",
+  ].freeze
+
+  def random_greeting
+    GREETINGS.sample
+  end
 end

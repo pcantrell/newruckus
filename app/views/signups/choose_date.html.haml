@@ -1,0 +1,49 @@
+- content_for :title do
+  Composer Nights – Date selection
+
+.content
+  - if params[:new]
+    %h2 Hooray!
+    %p
+      %b You’re now in the Composer Night queue!
+    %p
+      If you’re not already on our mailing list, you will receive a confirmation email from Mailchimp. Please <b>click that confirmation link</b>, or you won’t get any announcements.
+    %p
+      (We will not share your contact information outside The New Ruckus.)
+  - else
+    %p
+      #{random_greeting}, <b>#{@signup.presenter.name}</b>.
+      You’re in line for a Composer Night!
+
+  = semantic_form_for @signup, url: signup_path do |f|
+
+    %h2 Date Choices
+
+    %p
+      You don’t have to choose a date right away. Take as long as you want!
+    %p
+      We just ask that if you don’t think you’ll want any of the dates listed below, please mark them “no” so that we can offer them to other people.
+
+    .date-preferences
+      = f.fields_for :preferences do |p|
+        - ComposerNight.upcoming.includes(:signups).each do |event|
+          - unless event.full?
+            - pref = @signup.preference_for(event)
+            = p.fields_for event.id.to_s, pref do |q|
+              .date-preference
+                .date= event.start_time.strftime('<b>%b</b> %d (%a)<br>%l:%M<span class="ampm">%P</span>').html_safe
+                
+                .statuses<>
+                  - SignupPreference::STATUSES.each do |status|
+                    = q.label "status_#{status}", class: "status #{status}" do
+                      = q.radio_button :status, status
+                      = status
+                
+                .status-messages
+                  .status-message.yes   I’ll take it if it’s available!
+                  .status-message.maybe Give me some time to see if this date works.
+                  .status-message.no    Go ahead and offer this date to the others who are after me in line.
+  
+    = f.input :comments, hint: 'Any questions or concerns?'
+
+    = f.submit 'Save Changes'

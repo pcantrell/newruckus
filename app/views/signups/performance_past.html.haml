@@ -1,0 +1,12 @@
+- content_for :title do
+  Composer Nights – Your performance
+
+.content
+  %p
+    #{random_greeting}, #{@signup.presenter.name}.
+    Thanks for sharing your music at Composer Night!
+  %p
+    %b Good for another round?
+    Now that your performance is done, you can get right back in line!
+
+  .mongo= link_to 'Sign Up', signup_path

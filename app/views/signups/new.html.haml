@@ -54,7 +54,7 @@
       = f.fields_for :presenter do |p|
         = p.input :name, required: false, as: :string
         = p.input :email, required: false, as: :email, hint: 'Double check it!'
-      = f.input :comments, required: false, label: 'Comments or questions', as: :text, hint: 'Any particular date you have your eye on?'
+      = f.input :comments, required: false, label: 'Comments or questions', as: :text
       = f.fields_for :presenter do |p|
         = p.input :phone, required: false, as: :phone, label: 'Cell phone', hint: 'Optional, but good for us to have in case of last-minute contingency. We <b>will not</b> share it outside The New Ruckus.'.html_safe
       = f.input :read_guidelines, as: :boolean, label: 'I have read the guidelines above.'

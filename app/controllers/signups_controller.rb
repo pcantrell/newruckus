@@ -2,7 +2,14 @@ class SignupsController < ApplicationController
 
   def show
     if params[:token]
-      @signup = Signup.find_by(access_token: params[:token])
+      @signup = Signup.find_by!(access_token: params[:token])
+      if !@signup.composer_night
+        render 'choose_date'
+      elsif !@signup.composer_night.past?
+        render 'program_info'
+      else
+        render 'performance_past'
+      end
     else
       @signup = Signup.new
       @signup.presenter = Person.new
@@ -46,6 +53,11 @@ class SignupsController < ApplicationController
   def update
     raise 'not implemented'
   end
+
+  def event_time(format)
+    @signup.composer_night.start_time.strftime(format)
+  end
+  helper_method :event_time
 
 private
 

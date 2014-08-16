@@ -24,4 +24,8 @@ class ComposerNight < ActiveRecord::Base
   def full?
     slots_open == 0
   end
+
+  def past?
+    start_time < 60.minutes.ago
+  end
 end

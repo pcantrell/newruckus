@@ -1,0 +1,35 @@
+- content_for :title do
+  Composer Nights – Program info for your performance
+
+.content
+  %p
+    #{random_greeting}, #{@signup.presenter.name}!
+    You’re scheduled for the Composer Night on
+    <b>#{event_time '%A, %B %d'}</b>.
+  %p
+    The performance starts at
+    <b>#{event_time '%l:%M'}<span class="ampm">#{event_time '%P'}</span></b>.
+    You should be there at least 15 minutes early — or more like 30 if you have complex setup needs.
+  %p
+    If you’re driving, please leave a little extra time for parking. It can be a bear.
+
+  = semantic_form_for @signup, url: signup_path do |f|
+
+    %h2 About you
+
+    %p
+      Share as much as you have right now. You can always add and update it later.
+
+    = f.fields_for :presenter do |p|
+      = p.input :name, hint: 'As you would like it to appear on the program and in publicity materials'
+      = p.input :url, label: 'URL of your web site', required: false, placeholder: 'http://'
+      = p.input :bio, hint: 'Just a few sentences for our publicity materials'
+
+    %h2 About your performance
+
+    = f.input :title, label: 'Title of your piece(s)'
+    = f.input :performers, label: 'Performers and instruments'
+    = f.input :approx_length, label: 'Approximate length'
+    = f.input :description, label: 'Description of the piece', hint: 'Just a sentence or two for our publicity materials'
+    = f.input :special_needs, hint: 'Piano? Sound system? Projector? Something else?'
+    = f.input :comments, hint: 'Anything else we should know?'
