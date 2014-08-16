@@ -7,8 +7,8 @@ class Signup < ActiveRecord::Base
 
   validates :presenter, presence: true
 
-  scope :active, -> { where(active: true) }
-  scope :queue,  -> { active.where(composer_night_id: nil).order(:created_at) }
+  scope :active,   -> { where(active: true) }
+  scope :in_queue, -> { active.where(composer_night_id: nil).order(:created_at) }
 
   def preference_for(composer_night)
     preferences.find_or_initialize_by(composer_night: composer_night)

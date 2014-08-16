@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column min_width: '60%' do
         panel 'Composer Night Queue' do
-          queue = Signup.queue.includes(:presenter)
+          queue = Signup.in_queue.includes(:presenter)
           
           ul do
             queue.each do |signup|

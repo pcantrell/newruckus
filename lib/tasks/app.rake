@@ -78,4 +78,10 @@ namespace :app do
       end
     end
   end
+
+  task generate_access_tokens: :environment do
+    Signup.transaction do
+      Signup.in_queue.each { |s| s.save! }
+    end
+  end
 end

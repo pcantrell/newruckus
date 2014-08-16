@@ -26,6 +26,13 @@ class SignupsController < ApplicationController
         presenter.send "#{attr}=", val unless val.blank?
       end
 
+      existing = presenter.signups.in_queue.first
+      if existing
+        render 'already_in_queue'
+        # TODO: send email
+        return
+      end
+
       @signup = signup = Signup.new(signup_params)
       signup.presenter = presenter
 
