@@ -2,5 +2,14 @@
   Composer Nights – Your performance
 
 .content
+  %h2 Already in line
   %p
-    TODO: message here
+    #{random_greeting}, #{presenter_params[:name]}.
+  %p
+    You’re <b>already in line</b> to perform!
+  %p
+    Would you like to see — or change — the details? Press the big ol’ button:
+  .mongo= link_to 'Send Editing Link', edit_link_for_signup_path(email: presenter_params[:email]), method: :post
+  %p
+    …and we’ll send you an email with a secure link to edit your info.
+

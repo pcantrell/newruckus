@@ -1,8 +1,8 @@
 class SignupsController < ApplicationController
 
   def show
-    if params[:token]
-      @signup = Signup.find_by!(access_token: params[:token])
+    if params[:id]
+      @signup = Signup.find_by!(access_token: params[:id])
       if !@signup.composer_night
         render 'choose_date'
       elsif !@signup.composer_night.past?
@@ -19,18 +19,16 @@ class SignupsController < ApplicationController
 
   def create
     Signup.transaction do
-      presenter_params = params[:signup][:presenter_attributes]
       presenter = Person.find_or_initialize_by(email: (presenter_params[:email] || '').downcase)
-      %i(name phone).each do |attr|
-        val = presenter_params[attr]
-        presenter.send "#{attr}=", val unless val.blank?
-      end
-
       existing = presenter.signups.in_queue.first
       if existing
         render 'already_in_queue'
-        # TODO: send email
         return
+      end
+
+      %i(name phone).each do |attr|
+        val = presenter_params[attr]
+        presenter.send "#{attr}=", val unless val.blank?
       end
 
       @signup = signup = Signup.new(signup_params)
@@ -53,6 +51,10 @@ class SignupsController < ApplicationController
     end
   end
 
+  def send_edit_link
+    render :edit_link_sent
+  end
+
   def edit
     #TODO: check access token
   end
@@ -69,11 +71,12 @@ class SignupsController < ApplicationController
 private
 
   def signup_params
-    params.require(:signup).permit(:comments, :guidelines)
+    @signup_params ||= params.require(:signup).permit(:comments, :guidelines)
   end
 
   def presenter_params
-    params[:signup].require(:presenter_attributes).permit(:email, :name, :phone)
+    @presenter_params ||= params[:signup].require(:presenter_attributes).permit(:email, :name, :phone)
   end
+  helper_method :presenter_params
 
 end
