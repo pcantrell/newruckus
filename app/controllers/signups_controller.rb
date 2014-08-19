@@ -1,20 +1,11 @@
 class SignupsController < ApplicationController
 
-  def show
-    if params[:id]
-      @signup = Signup.find_by!(access_token: params[:id])
-      if !@signup.composer_night
-        render 'choose_date'
-      elsif !@signup.composer_night.past?
-        render 'program_info'
-      else
-        render 'performance_past'
-      end
-    else
-      @signup = Signup.new
-      @signup.presenter = Person.new
-      render 'new'
-    end
+  before_filter :find_signup_by_token, only: [:edit, :update]
+
+  def new
+    @signup = Signup.new
+    @signup.presenter = Person.new
+    render 'new'
   end
 
   def create
@@ -44,7 +35,7 @@ class SignupsController < ApplicationController
 
       if presenter.save && signup.save
         AdminNotifications.signup(signup, Hash[changed_attrs]).deliver
-        redirect_to signup_path(token: signup.access_token, new: 1)
+        redirect_to edit_signup_path(token: signup.access_token, new: 1)
       else
         render :new
       end
@@ -56,19 +47,24 @@ class SignupsController < ApplicationController
   end
 
   def edit
-    #TODO: check access token
+    if !@signup.composer_night
+      render 'choose_date'
+    elsif !@signup.composer_night.past?
+      render 'program_info'
+    else
+      render 'performance_past'
+    end
   end
 
   def update
     raise 'not implemented'
   end
 
-  def event_time(format)
-    @signup.composer_night.start_time.strftime(format)
-  end
-  helper_method :event_time
-
 private
+
+  def find_signup_by_token
+    @signup = Signup.find_by!(access_token: params[:token])
+  end
 
   def signup_params
     @signup_params ||= params.require(:signup).permit(:comments, :guidelines)

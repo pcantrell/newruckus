@@ -15,7 +15,7 @@
       #{random_greeting}, <b>#{@signup.presenter.name}</b>.
       You’re in line for a Composer Night!
 
-  = semantic_form_for @signup, url: signup_path do |f|
+  = semantic_form_for_signup do |f|
 
     %h2 Date Choices
 

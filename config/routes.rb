@@ -12,10 +12,12 @@ Rails.application.routes.draw do
     end
   end
 
-  scope path: 'composernights' do
-    resource :signup do
-      post :send_edit_link, on: :collection, as: :edit_link_for
-    end
+  scope 'composernights/signup', controller: :signups do
+    get   '/', action: :new, as: :signup
+    post  '/', action: :create
+    post  :send_edit_link, as: :signup_edit_link
+    get   '/:token', action: :edit, as: :edit_signup
+    patch '/:token', action: :update
   end
-  
+
 end

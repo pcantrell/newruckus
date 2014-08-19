@@ -9,7 +9,7 @@
     You’re <b>already in line</b> to perform!
   %p
     Would you like to see — or change — the details? Press the big ol’ button:
-  .mongo= link_to 'Send Editing Link', edit_link_for_signup_path(email: presenter_params[:email]), method: :post
+  .mongo= link_to 'Send Editing Link', signup_edit_link_path(email: presenter_params[:email]), method: :post
   %p
     …and we’ll send you an email with a secure link to edit your info.
 
