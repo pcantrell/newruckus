@@ -7,8 +7,26 @@ class Signup < ActiveRecord::Base
 
   validates :presenter, presence: true
 
-  scope :active,   -> { where(active: true) }
-  scope :in_queue, -> { active.where(composer_night_id: nil).order(:created_at) }
+  scope :active,      -> { where(active: true) }
+  scope :upcoming,    -> { active.where(composer_night: ComposerNight.upcoming) }
+  scope :unscheduled, -> { active.where(composer_night: nil).order(:created_at) }
+  scope :in_queue,    -> { active.where(composer_night: ComposerNight.upcoming + [nil]).order(:created_at) }
+
+  def scheduled?
+    composer_night_id?
+  end
+
+  def unscheduled?
+    !scheduled?
+  end
+
+  def upcoming?
+    composer_night.upcoming?
+  end
+
+  def past?
+    composer_night.past?
+  end
 
   def preference_for(composer_night)
     preferences.find_or_initialize_by(composer_night: composer_night)

@@ -1,0 +1,16 @@
+%p
+  Hooray! You’re in line to perform at a New Ruckus Composer Night!
+%p
+  Please keep us up to date on when you’re available to present a piece:
+
+%p.callout
+  %b= link_to 'Choose available dates', edit_signup_url(token: @signup.access_token)
+
+%p
+  (If you’re not ready to present anything, please let us know which dates you <i>don’t</i> want, so that we can offer them to others.)
+%p
+  Thanks for signing up!
+%p
+  Cheers,
+%p
+  Your Friendly Neighborhood Ruckusbot

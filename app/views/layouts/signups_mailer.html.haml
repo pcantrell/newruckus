@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
+    :sass
+      .callout
+        margin: 1.2em 4%
+        font-size: 110%
+      
+      .signup-info
+        margin: 1.2em 4%
+        .attr
+        .value
+          margin: 0.4em 0 1.2em 2%
+          font-style: italic
+          white-space: pre-line
+
+      .ps
+        margin-top: 2em
+        .mark
+          float: left
+          margin-right: 1ex
+        .content
+          overflow: hidden
+  %body
+    = yield
+
+    .ps
+      .mark P.S.
+      .content
+        Yes, you <i>can</i> reply to this email! Although this message was sent by our humble scheduling robot, a real human being is at the other end of this email address. Have any questions? Concerns? Greetings? Musician jokes? Hit reply, and Paul Cantrell, the artistic director of The New Ruckus — will get back to you!

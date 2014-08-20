@@ -1,0 +1,73 @@
+- event = @signup.composer_night
+- location = event.location
+%p
+  You are are scheduled to perform at a New Ruckus Composer Night:
+
+%p.callout
+  %b= event.start_time.strftime('%A, %B %d')
+  –
+  %b= event.start_time.strftime('%l:%M%P')
+%p.callout
+  = link_to_if location.url?, location.name, location.url
+  - location.address.split("\n").each do |line|
+    %br
+    = line
+
+%p
+  Please show up around
+  %b= (event.start_time - 15.minutes).strftime('%l:%M%P')
+  — or more like
+  %b= (event.start_time - 30.minutes).strftime('%l:%M%P')
+  if you have complex setup needs.
+
+- unless @info_provided.empty?
+  %p
+    Here’s the performance info we have:
+  .signup-info.provided
+    - @info_provided.each do |attr, value|
+      .attr
+        #{attr}:
+      .value<= value.strip
+
+- unless @required_info_missing.empty?
+  - time_until = event.start_time - Time.now
+  %p
+    %b
+      We
+      - if time_until < 10.days
+        still
+      need the following information from you:
+  .signup-info.missing
+    - @required_info_missing.each do |attr, value|
+      .attr= attr
+  %p
+    Please
+    %b= link_to 'let us know', edit_signup_url(token: @signup.access_token)
+    - if time_until < 2.days
+      ASAP!
+    - else
+      - if time_until < 7.days
+        soon!
+      - else
+        at your convenience.
+    (You can provide some info now, and add to or change it later.)
+
+- unless @optional_info_missing.empty?
+  %p
+    Also, it’s optional, but if you would like some free publicity on the New Ruckus and Studio Z web sites,
+    = link_to 'you can provide:', edit_signup_url(token: @signup.access_token)
+  .signup-info.missing
+    - @optional_info_missing.each do |attr, value|
+      .attr= attr
+%p
+  To add to or change any of the above:
+
+%p.callout
+  %b= link_to 'Edit your performance info', edit_signup_url(token: @signup.access_token)
+
+%p
+  We look forward to hearing your music!
+%p
+  Cheers,
+%p
+  Your Friendly Neighborhood Ruckusbot

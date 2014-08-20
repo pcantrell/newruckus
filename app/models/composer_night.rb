@@ -28,4 +28,8 @@ class ComposerNight < ActiveRecord::Base
   def past?
     start_time < 60.minutes.ago
   end
+
+  def upcoming?
+    !past?
+  end
 end

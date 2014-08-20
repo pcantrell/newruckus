@@ -24,7 +24,10 @@ gem 'devise', '>= 3.2.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'spring', group: :development
+group :development do
+  gem 'spring'
+  gem 'letter_opener'
+end
 
 group :development, :test do
   gem 'unicorn', platform: :ruby
