@@ -14,11 +14,15 @@ class ComposerNight < ActiveRecord::Base
   end
 
   def title
-    start_time.strftime('CN %Y–%m–%d %B')
+    start_time.strftime('CN %Y–%m–%d')
+  end
+
+  def short_title
+    start_time.strftime('%b')
   end
 
   def slots_open
-    [slots - signups.count, 0].max
+    @slots_open ||= [slots - signups.count, 0].max
   end
 
   def full?

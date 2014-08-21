@@ -1,15 +1,50 @@
 ActiveAdmin.register_page "Dashboard" do
 
-  menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
+  menu priority: 1, label: 'Dashboard'
 
-  content title: proc{ I18n.t("active_admin.dashboard") } do
+  content title: 'Dashboard' do
+    queue = Signup.in_queue.includes(:presenter)
+    upcoming = ComposerNight.upcoming.includes(:signups)
+
+    panel 'Scheduling' do
+      table class: 'schedule' do
+
+        tr class: 'dates' do
+          th
+          upcoming.each do |event|
+            th event.short_title
+          end
+          th 'Notes', width: '100%'
+        end
+
+        queue.each do |signup|
+          tr class: 'presenter' do
+            th link_to(signup.presenter.name, edit_admin_signup_path(signup))
+            upcoming.each do |event|
+              pref = signup.preference_for(event)
+              td pref.status[0].upcase,
+                class: [
+                  'status',
+                  pref.status,
+                  (signup.composer_night_id == event.id ? 'scheduled' : 'unscheduled'),
+                  ('full' if event.full?)
+                ].join(' ')
+            end
+            td class: 'notes' do
+              div signup.comments, class: 'presenter'
+              div signup.internal_notes, class: 'internal'
+            end
+          end
+        end
+
+      end
+    end
+
     columns do
       column min_width: '60%' do
         panel 'Composer Night Queue' do
-          queue = Signup.in_queue.includes(:presenter)
-          
-          ul do
-            queue.each do |signup|
+          ul class: 'signups-summary' do
+            queue.unscheduled.each do |signup|
               render 'admin/signup_list_item', signup: signup
             end
           end

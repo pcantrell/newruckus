@@ -28,14 +28,27 @@ form textarea {
   font-size: 80%;
 }
 
+.signups-summary {
+  padding: 0;
+  margin: 0;
+  line-height: 100%;
+  list-style: none;
+  .signup {
+    max-height: 3em;
+    overflow: hidden;
+  }
+}
 .signup {
+  margin: 0.4em 0;
+  padding: 0;
   .notes {
+    color: #888;
     display: inline;
     font-size: 75%;
-    color: #888;
     &.internal {
       font-style: italic;
     }
+
   }
   .info {
     display: inline-block;
@@ -61,4 +74,74 @@ form textarea {
 .inline-hint {
   display: inline-block;
   margin-left: 1em;
+}
+
+.schedule {
+  th {
+    white-space: nowrap;
+    max-height: 1em;
+  }
+  th, td {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.2em 0.4em;
+    vertical-align: middle;
+  }
+  .dates th {
+    text-align: center;
+  }
+  .presenter {
+    th {
+      text-align: right;
+    }
+    td {
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      &.status {
+        font: {
+          size: 95%;
+          weight: bold;
+        }
+      }
+      @mixin status($status, $bg) {
+        &.#{$status} {
+          &.scheduled {
+            color: white;
+            background: $bg;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 2;
+          }
+          &.unscheduled {
+            color: rgba(0, 0, 0, 0.6);
+            background: rgba($bg, 0.3);
+          }
+        }
+      }
+      @include status(unknown, #ccc);
+      @include status(maybe,   #ccc);
+      @include status(no,      #a6443d);
+      @include status(yes,     #3da649);
+      &.unscheduled.full {
+        background: #ddd !important;
+      }
+      &.unknown {
+        color: transparent !important;
+      }
+
+      &.notes {
+        text-align: left;
+        font-size: 85%;
+        line-height: 100%;
+        .presenter {
+          max-height: 1.8em;
+          overflow: hidden;
+        }
+        .internal {
+          margin-top: 0.2em;
+          font-style: italic;
+        }
+      }
+    }
+  }
 }
