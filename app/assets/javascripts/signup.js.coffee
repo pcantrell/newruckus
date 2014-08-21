@@ -1,6 +1,5 @@
 $ ->
-  $(document).on 'change', 'body.signups .date-preference input', (e) ->
-    $input = $(e.target)
+  showDatePreference = ($input) ->
     $group = $input.parents('.date-preference')
     
     $group.find('.status-message').hide()
@@ -9,3 +8,11 @@ $ ->
     status = $input.val()
     $group.find(".status-message.#{status}").show()
     $input.parents('.status').addClass('active')
+
+  $(document).on 'page:change', ->
+    for input in $('.status input:checked')
+      showDatePreference $(input)
+    null
+
+  $(document).on 'change', 'body.signups .date-preference input', (e) ->
+    showDatePreference $(e.target)

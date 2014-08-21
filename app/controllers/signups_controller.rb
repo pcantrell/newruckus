@@ -1,6 +1,7 @@
 class SignupsController < ApplicationController
 
-  before_filter :find_signup_by_token, only: [:edit, :update]
+  before_action :find_signup_by_token, only: [:edit, :update]
+  around_action :wrap_in_transaction
 
   def new
     @signup = Signup.new
@@ -9,35 +10,33 @@ class SignupsController < ApplicationController
   end
 
   def create
-    Signup.transaction do
-      presenter = Person.find_or_initialize_by(email: (presenter_params[:email] || '').downcase)
-      existing = presenter.signups.in_queue.first
-      if existing
-        render 'already_in_queue'
-        return
+    presenter = Person.find_or_initialize_by(email: (presenter_params[:email] || '').downcase)
+    existing = presenter.signups.in_queue.first
+    if existing
+      render 'already_in_queue'
+      return
+    end
+
+    presenter.name  = presenter_params[:name]  || presenter.name
+    presenter.phone = presenter_params[:phone] || presenter.phone
+
+    @signup = signup = Signup.new(signup_params)
+    signup.presenter = presenter
+
+    changed_attrs = []
+    %w(name phone).map do |attr|
+      old_val = @signup.presenter.send("#{attr}_was")
+      if @signup.presenter.send("#{attr}_changed?") && !old_val.blank?
+        changed_attrs << [attr, old_val]
       end
+    end
 
-      presenter.name  = presenter_params[:name]  || presenter.name
-      presenter.phone = presenter_params[:phone] || presenter.phone
-
-      @signup = signup = Signup.new(signup_params)
-      signup.presenter = presenter
-
-      changed_attrs = []
-      %w(name phone).map do |attr|
-        old_val = @signup.presenter.send("#{attr}_was")
-        if @signup.presenter.send("#{attr}_changed?") && !old_val.blank?
-          changed_attrs << [attr, old_val]
-        end
-      end
-
-      if presenter.save && signup.save
-        AdminNotifications.signup(signup, Hash[changed_attrs]).deliver
-        SignupsMailer.edit_link(signup).deliver
-        redirect_to edit_signup_path(token: signup.access_token, new: 1)
-      else
-        render :new
-      end
+    if presenter.save && signup.save
+      AdminNotifications.signup(signup, Hash[changed_attrs]).deliver
+      SignupsMailer.edit_link(signup).deliver
+      redirect_to edit_signup_path(token: signup.access_token, new: 1)
+    else
+      render :new
     end
   end
 
@@ -51,6 +50,10 @@ class SignupsController < ApplicationController
 
   def edit
     if @signup.unscheduled?
+      @signup_prefs = ComposerNight.upcoming.reject(&:full?).map do |event|
+        @signup.preference_for(event)
+      end
+
       render 'choose_date'
     elsif @signup.upcoming?
       render 'program_info'
@@ -60,11 +63,9 @@ class SignupsController < ApplicationController
   end
 
   def update
-    Signup.transaction do
-      @signup.update(signup_params)
-      @signup.presenter.update(presenter_params)
-      edit
-    end
+    @signup.update(signup_params)
+    @signup.presenter.update(presenter_params)
+    edit
   end
 
 private
@@ -74,12 +75,23 @@ private
   end
 
   def signup_params
-    @signup_params ||= params.require(:signup).permit(:comments, :guidelines, :title, :performers, :approx_length, :description, :special_needs)
+    @signup_params ||=
+      params.require(:signup).permit(
+        :comments, :guidelines, :title, :performers, :approx_length, :description, :special_needs,
+        preferences_attributes: [:id, :status])
   end
 
   def presenter_params
-    @presenter_params ||= params[:signup].require(:presenter_attributes).permit(:email, :name, :phone, :url, :bio)
+    @presenter_params ||= if params[:signup][:presenter_attributes]
+      params[:signup].require(:presenter_attributes).permit(:email, :name, :phone, :url, :bio)
+    else
+      {}
+    end
   end
   helper_method :presenter_params
+
+  def wrap_in_transaction(&block)
+    Signup.transaction(&block)
+  end
 
 end

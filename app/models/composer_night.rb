@@ -18,7 +18,7 @@ class ComposerNight < ActiveRecord::Base
   end
 
   def slots_open
-    [slots - presenters.count, 0].max
+    [slots - signups.count, 0].max
   end
 
   def full?

@@ -89,7 +89,9 @@ ActiveRecord::Schema.define(version: 20140812054835) do
     t.datetime "updated_at"
   end
 
+  add_index "signup_preferences", ["composer_night_id", "signup_id"], name: "index_signup_preferences_on_composer_night_id_and_signup_id", unique: true, using: :btree
   add_index "signup_preferences", ["composer_night_id"], name: "index_signup_preferences_on_composer_night_id", using: :btree
+  add_index "signup_preferences", ["signup_id", "composer_night_id"], name: "index_signup_preferences_on_signup_id_and_composer_night_id", unique: true, using: :btree
   add_index "signup_preferences", ["signup_id"], name: "index_signup_preferences_on_signup_id", using: :btree
 
   create_table "signups", force: true do |t|

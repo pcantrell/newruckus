@@ -25,25 +25,21 @@
       We just ask that if you don’t think you’ll want any of the dates listed below, please mark them “no” so that we can offer them to other people.
 
     .date-preferences
-      = f.fields_for :preferences do |p|
-        - ComposerNight.upcoming.includes(:signups).each do |event|
-          - unless event.full?
-            - pref = @signup.preference_for(event)
-            = p.fields_for event.id.to_s, pref do |q|
-              .date-preference
-                .date= event.start_time.strftime('<b>%b</b> %d (%a)<br>%l:%M<span class="ampm">%P</span>').html_safe
-                
-                .statuses<>
-                  - SignupPreference::STATUSES.each do |status|
-                    = q.label "status_#{status}", class: "status #{status}" do
-                      = q.radio_button :status, status
-                      = status
-                
-                .status-messages
-                  .status-message.yes   I’ll take it if it’s available!
-                  .status-message.maybe Give me some time to see if this date works.
-                  .status-message.no    Go ahead and offer this date to the others who are after me in line.
+      = f.semantic_fields_for :preferences, @signup_prefs do |pref|
+        .date-preference
+          .date= pref.object.composer_night.start_time.strftime('<b>%b</b> %d (%a)<br>%l:%M<span class="ampm">%P</span>').html_safe
+          
+          .statuses<>
+            - SignupPreference::VISIBLE_STATUSES.each do |status|
+              = pref.label "status_#{status}", class: "status #{status}" do
+                = pref.radio_button :status, status
+                = status
+          
+          .status-messages
+            .status-message.yes   I’ll take it if it’s available!
+            .status-message.maybe Give me some time to figure out if this date works.
+            .status-message.no    Go ahead and offer this date to the others who are after me in line.
   
-    = f.input :comments, hint: 'Any questions or concerns?'
+    = f.input :comments, hint: 'Any more nuanced preferences? Questions or concerns?'
 
     = f.submit 'Save Changes'

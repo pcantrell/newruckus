@@ -1,5 +1,6 @@
 class SignupPreference < ActiveRecord::Base
-  STATUSES = %w(no maybe yes).freeze
+  VISIBLE_STATUSES = %w(no maybe yes).freeze
+  STATUSES = (VISIBLE_STATUSES + ['unknown']).freeze
 
   belongs_to :signup
   belongs_to :composer_night
@@ -9,6 +10,6 @@ class SignupPreference < ActiveRecord::Base
   validates :status, presence: true, inclusion: { in: STATUSES }
 
   before_validation do
-    self.status ||= 'maybe'
+    self.status ||= 'unknown'
   end
 end
