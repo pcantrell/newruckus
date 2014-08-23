@@ -24,6 +24,8 @@ gem 'devise', '>= 3.2.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'delayed_job_active_record'
+
 group :development do
   gem 'spring'
   gem 'letter_opener'

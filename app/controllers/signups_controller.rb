@@ -32,8 +32,8 @@ class SignupsController < ApplicationController
     end
 
     if presenter.save && signup.save
-      AdminNotifications.signup(signup, Hash[changed_attrs]).deliver
-      SignupsMailer.edit_link(signup).deliver
+      AdminNotifications.delay.signup(signup, Hash[changed_attrs])
+      SignupsMailer.delay.edit_link(signup)
       redirect_to edit_signup_path(token: signup.access_token, new: 1)
     else
       render :new
@@ -44,7 +44,7 @@ class SignupsController < ApplicationController
     presenter = Person.find_by!(email: params[:email])
     signup = presenter.signups.in_queue.first
 
-    SignupsMailer.edit_link(signup).deliver
+    SignupsMailer.delay.edit_link(signup)
     render :edit_link_sent
   end
 
