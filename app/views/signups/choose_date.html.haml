@@ -9,9 +9,9 @@
 
     - unless @signup.presenter.mailing_list_subscription_offered
       %p
-        If you’re not already on our mailing list, you will receive a confirmation email from Mailchimp. Please <b>click that confirmation link</b>, or you won’t get any announcements.
+        If you’re not already on our mailing list, you will receive a “Please Confirm Subscription” email. Please <b>click the confirmation link</b> in that email, or you won’t get any announcements about when Composer Nights are happening!
       %p
-        (We will not share your contact information outside The New Ruckus.)
+        (We <b>will not</b> share your contact information outside The New Ruckus.)
   
   - else
     %p
@@ -27,7 +27,7 @@
     %p
       You don’t have to choose a date right away. Take as long as you want!
     %p
-      We just ask that if you don’t think you’ll want any of the dates listed below, please mark them “no” so that we can offer them to other people.
+      Just one request: if there are dates below you’re pretty sure you won’t want, please mark them “no” now so that we can offer them to other people.
 
     .date-preferences
       = f.semantic_fields_for :preferences, @signup_prefs do |pref|
@@ -45,6 +45,6 @@
             .status-message.maybe Give me some time to figure out if this date works.
             .status-message.no    Go ahead and offer this date to the others who are after me in line.
   
-    = f.input :comments, hint: 'Any more nuanced preferences? Questions or concerns?'
+    = f.input :comments, hint: 'Any special instructions? Questions or concerns?'
 
     = f.submit 'Save Changes'
