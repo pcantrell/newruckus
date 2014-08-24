@@ -1,4 +1,12 @@
 SubscribeToMailingList = Struct.new(:person) do
+  def enqueue(job)
+    job.run_at = 20.seconds.from_now
+  end
+
+  def display_name
+    "#{self.class}<#{person.email}>"
+  end
+
   def perform
     Person.transaction do
       if !person.email?
