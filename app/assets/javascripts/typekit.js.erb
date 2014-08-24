@@ -25,6 +25,10 @@
         }
         clearTimeout(inactiveTimeout);
     };
-    setTimeout(loadTypekit, 0);
+    
+    if(document.typekitDisabled)
+        typekitInactive();
+    else
+        setTimeout(loadTypekit, 0);
 
 })(document);
