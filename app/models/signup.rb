@@ -14,6 +14,8 @@ class Signup < ActiveRecord::Base
 
   before_save :populate_access_token
 
+  after_create :subscribe_presenter_to_mailing_list
+
   def scheduled?
     composer_night_id?
   end
@@ -35,6 +37,10 @@ class Signup < ActiveRecord::Base
   end
 
   attr_accessor :read_guidelines
+
+  def subscribe_presenter_to_mailing_list
+    Delayed::Job.enqueue SubscribeToMailingList.new(presenter)
+  end
 
 private
 
