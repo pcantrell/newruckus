@@ -6,10 +6,13 @@
     %h2 Hooray!
     %p
       %b You’re now in the Composer Night queue!
-    %p
-      If you’re not already on our mailing list, you will receive a confirmation email from Mailchimp. Please <b>click that confirmation link</b>, or you won’t get any announcements.
-    %p
-      (We will not share your contact information outside The New Ruckus.)
+
+    - unless @signup.presenter.mailing_list_subscription_offered
+      %p
+        If you’re not already on our mailing list, you will receive a confirmation email from Mailchimp. Please <b>click that confirmation link</b>, or you won’t get any announcements.
+      %p
+        (We will not share your contact information outside The New Ruckus.)
+  
   - else
     %p
       #{random_greeting}, <b>#{@signup.presenter.name}</b>.
@@ -19,6 +22,8 @@
 
     %h2 Date Choices
 
+    %p
+      When would you like to share your music?
     %p
       You don’t have to choose a date right away. Take as long as you want!
     %p
