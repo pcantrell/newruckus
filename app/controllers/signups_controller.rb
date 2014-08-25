@@ -34,8 +34,10 @@ class SignupsController < ApplicationController
     if presenter.save && signup.save
       AdminNotifications.delay.signup(signup, Hash[changed_attrs])
       SignupsMailer.delay.edit_link(signup)
+      flash[:success] = "Composer Night signup created"
       redirect_to edit_signup_path(token: signup.access_token, new: 1)
     else
+      flash[:error] = "Unable to create Composer Night signup. Please correct the errors below."
       render :new
     end
   end
@@ -63,8 +65,16 @@ class SignupsController < ApplicationController
   end
 
   def update
-    @signup.update(signup_params)
-    @signup.presenter.update(presenter_params)
+    success =
+      @signup.update(signup_params) &&
+      @signup.presenter.update(presenter_params)
+    
+    if success
+      flash[:success] = "Signup information updated"
+    else
+      flash[:error] = "Unable to update information. Please correct the problems below."
+    end
+
     edit
   end
 

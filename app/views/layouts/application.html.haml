@@ -76,10 +76,11 @@
             %li.social= social_link :facebook, "https://www.facebook.com/TheNewRuckus"
       .clr
 
-    - if notice
-      .flash.notice= notice
-    - if alert
-      .flash.alert= alert
+    - unless flash.empty?
+      .flashes
+        - flash.each do |kind, message|
+          .flash{class: kind}= message
+      - flash.clear
 
     = yield
     
