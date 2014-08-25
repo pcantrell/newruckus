@@ -50,7 +50,7 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
-  config.cache_store = :dalli_store, 'localhost', { namespace: 'ith', expires_in: 6.hour, compression: true }
+  config.cache_store = :dalli_store, 'localhost', { namespace: 'ith', expires_in: 6.hour, compress: true }
   
   if defined?(PhusionPassenger)
     PhusionPassenger.on_event(:starting_worker_process) do |forked|
