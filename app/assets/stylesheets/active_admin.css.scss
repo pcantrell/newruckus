@@ -153,4 +153,10 @@ form textarea {
       }
     }
   }
+  .expandable {
+    cursor: pointer;
+    &.expanded {
+      max-height: none !important;
+    }
+  }
 }

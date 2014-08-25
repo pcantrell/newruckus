@@ -36,7 +36,7 @@ ActiveAdmin.register_page "Dashboard" do
                 ].join(' ')
             end
             td class: 'notes' do
-              div signup.comments, class: 'presenter'
+              div signup.comments, class: 'presenter expandable'
               div signup.internal_notes, class: 'internal'
             end
           end

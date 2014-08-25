@@ -3,3 +3,6 @@
 
 $ ->
   $('textarea').autogrow()
+  $('.expandable').click (e) ->
+    $(e.target).toggleClass('expanded')
+    console.log e.target
