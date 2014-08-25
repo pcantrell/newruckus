@@ -110,6 +110,7 @@ form textarea {
           size: 95%;
           weight: bold;
         }
+        cursor: pointer;
       }
       @mixin status($status, $bg) {
         &.#{$status} {
@@ -124,6 +125,9 @@ form textarea {
           &.unscheduled {
             color: rgba(0, 0, 0, 0.6);
             background: rgba($bg, 0.3);
+          }
+          &:hover {
+            outline: 2px solid mix($bg, black);
           }
         }
       }

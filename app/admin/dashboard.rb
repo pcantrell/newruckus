@@ -23,11 +23,12 @@ ActiveAdmin.register_page "Dashboard" do
 
         queue.each do |signup|
           tr class: "presenter #{scheduled_status(signup.composer_night_id)}" do
-            th link_to(signup.presenter.name, edit_admin_signup_path(signup))
+            th link_to(signup.presenter.name, edit_admin_signup_path(signup)), class: 'presenter'
             upcoming.each do |event|
               scheduled_here = (signup.composer_night_id == event.id)
               status = signup.preference_for(event).status
               td (scheduled_here ? '✓' : status == 'unknown' ? ' ' : status[0].upcase),
+                'data-composer-night-id' => event.id,
                 class: [
                   'status',
                   status,

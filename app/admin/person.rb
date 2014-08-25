@@ -25,4 +25,7 @@ ActiveAdmin.register Person do
     f.actions
   end
 
+  controller do
+    include Admin::CustomRedirectOnSave
+  end
 end

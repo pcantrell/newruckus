@@ -34,4 +34,8 @@ ActiveAdmin.register ComposerNight do
     end
     f.actions
   end
+
+  controller do
+    include Admin::CustomRedirectOnSave
+  end
 end
