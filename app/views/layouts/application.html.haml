@@ -9,14 +9,14 @@
       - unless (title = yield(:title)).blank?
         –
         = title
-    %link(rel="canonical" href="http://newruckus.org/")
+    -# %link(rel="canonical" href="https://newruckus.org/")
     
     %meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
     %meta(name="viewport" content="width=device-width,initial-scale=1")
     
     %meta(property="og:site_name" content="The New Ruckus")
     %meta(property="og:title" content="The New Ruckus")
-    %meta(property="og:url" content="http://newruckus.org/")
+    %meta(property="og:url" content="https://newruckus.org/")
     %meta(property="og:type" content="website")
     %meta(property="og:description" content="A mutual support organization for the people who invent new music. We are composers, improvisers, sound artists and songwriters. Our mission is to help each other achieve a sense of purpose and satisfaction in our musical lives, by providing moral support and practical help in creating our work, getting it heard, and making personal connections through it.")
 
@@ -88,7 +88,7 @@
       .social
         = social_link :facebook, "https://www.facebook.com/TheNewRuckus"
         = social_link :twitter,  "https://twitter.com/NewRuckusMN"
-        -# .sharrre(data-text='The New Ruckus – A support organization for the people who invent new music' data-title='The New Ruckus' data-url='http://newruckus.org')
+        -# .sharrre(data-text='The New Ruckus – A support organization for the people who invent new music' data-title='The New Ruckus' data-url='https://newruckus.org')
 
       .block= render 'shared/mailing_list_signup', header: true
       .block

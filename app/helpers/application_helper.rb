@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def mailing_list_link(link_text, header: true, &block)
     popup_id = "mailing_list_popup_#{rand(10**10)}"
-    link_to(link_text, 'http://eepurl.com/OdGZb', 'data-show-popup' => popup_id) +
+    link_to(link_text, '//newruckus.us2.list-manage.com/subscribe?u=a9c460563163a39349a209835&id=0df09dc73b', 'data-show-popup' => popup_id) +
       content_tag(:aside, class: 'popup', id: popup_id) do
         render 'shared/mailing_list_signup', header: header
       end
