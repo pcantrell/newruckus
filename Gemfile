@@ -25,6 +25,7 @@ gem 'devise', '>= 3.2.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'delayed_job_active_record'
+gem 'daemons'
 gem 'mailchimp-api', require: 'mailchimp'
 
 group :development do
