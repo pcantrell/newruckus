@@ -12,21 +12,26 @@ ActiveAdmin.register_page "Dashboard" do
         tr class: 'dates' do
           th
           upcoming.each do |event|
-            th event.short_title
+            th link_to(event.short_title, admin_composer_night_path(event))
           end
           th 'Notes', width: '100%'
         end
 
+        def scheduled_status(bool)
+          bool ? 'scheduled' : 'unscheduled'
+        end
+
         queue.each do |signup|
-          tr class: 'presenter' do
+          tr class: "presenter #{scheduled_status(signup.composer_night_id)}" do
             th link_to(signup.presenter.name, edit_admin_signup_path(signup))
             upcoming.each do |event|
-              pref = signup.preference_for(event)
-              td pref.status[0].upcase,
+              scheduled_here = (signup.composer_night_id == event.id)
+              status = signup.preference_for(event).status
+              td (scheduled_here ? '✓' : status == 'unknown' ? ' ' : status[0].upcase),
                 class: [
                   'status',
-                  pref.status,
-                  (signup.composer_night_id == event.id ? 'scheduled' : 'unscheduled'),
+                  status,
+                  scheduled_status(scheduled_here),
                   ('full' if event.full?)
                 ].join(' ')
             end

@@ -12,6 +12,11 @@ body {
   }
 }
 
+a {
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+
 form input[type=text],
 form input[type=password],
 form input[type=email],
@@ -89,6 +94,10 @@ form textarea {
   .dates th {
     text-align: center;
   }
+  tr.scheduled {
+    color: #888;
+    background: #ddd !important;
+  }
   .presenter {
     th {
       text-align: right;
@@ -118,15 +127,15 @@ form textarea {
           }
         }
       }
-      @include status(unknown, #ccc);
-      @include status(maybe,   #ccc);
+      @include status(unknown, #eee);
+      @include status(maybe,   #eee);
       @include status(no,      #a6443d);
       @include status(yes,     #3da649);
       &.unscheduled.full {
         background: #ddd !important;
       }
-      &.unknown {
-        color: transparent !important;
+      &.scheduled.unknown {
+        background: #777;
       }
 
       &.notes {
