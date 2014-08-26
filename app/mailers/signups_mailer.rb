@@ -1,25 +1,10 @@
 class SignupsMailer < ActionMailer::Base
-  default from: "The New Ruckus <the@newruckus.org>"
+  default from: "The New Ruckus <the@newruckus.org>", bcc: "paul@innig.net"
 
-  def edit_link(signup)
+  def edit_info(signup, message_opts = {})
     @signup = signup
+    @message_opts = message_opts
     
-    required_info = {
-      'Name of the music’s composer / improviser / songwriter / sound artist / mastermind / inventor' => signup.presenter.name,
-      'Title(s)'       => signup.title,
-      'Performer(s)'   => signup.performers,
-      'Approx. length' => signup.approx_length,
-      'Special needs'  => signup.special_needs
-    }.to_a
-    optional_info = {
-      'Brief description of piece' => signup.description,
-      'Composer web site'          => signup.presenter.url,
-      'Composer bio'               => signup.presenter.bio
-    }.to_a
-    @required_info_missing = required_info.select { |k,v| v.blank? }
-    @optional_info_missing = optional_info.select { |k,v| v.blank? }
-    @info_provided = (required_info + optional_info).reject { |k,v| v.blank? }
-
     signup_mail signup, subject: "Your Composer Night signup info" do |format|
       format.html do
         if signup.scheduled?
@@ -28,6 +13,12 @@ class SignupsMailer < ActionMailer::Base
           render 'edit_unscheduled'
         end
       end
+    end
+  end
+
+  helper do
+    def info_attr_name(attr)
+      I18n.t attr, scope: 'signup.attrs'
     end
   end
 

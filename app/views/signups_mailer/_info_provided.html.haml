@@ -1,0 +1,8 @@
+- if @signup.info_provided.any?
+  %p
+    Here’s the performance info we have:
+  .signup-info.provided
+    - @signup.info_provided.each do |attr, value|
+      .attr
+        #{info_attr_name attr}:
+      .value<= value.strip

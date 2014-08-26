@@ -1,0 +1,23 @@
+- if @signup.required_info_missing.any?
+  - time_until = @signup.composer_night.start_time - Time.now
+  %p
+    %b
+      We
+      - if time_until < 10.days
+        still
+      need the following information:
+  .signup-info.missing
+    - @signup.required_info_missing.each do |attr, value|
+      .attr= info_attr_name attr
+  %p
+    Please
+    %b= link_to 'let us know', edit_signup_url(token: @signup.access_token)
+    - if time_until < 2.days
+      ASAP!
+    - else
+      - if time_until < 7.days
+        soon!
+      - else
+        at your convenience.
+    - if time_until > 3.days
+      (You can provide some info now, and add to or change it later.)

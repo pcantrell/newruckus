@@ -10,3 +10,14 @@ en:
   time:
     formats:
       long: "%Y–%m–%d %l:%M%P (%a)"
+
+  signup:
+    attrs:
+      presenter_name: 'Name of the music’s composer / improviser / songwriter / sound artist / mastermind / inventor'
+      presenter_url: 'Composer web site'
+      presenter_bio: 'Composer bio'
+      title: 'Title(s)'
+      performers: 'Performer(s)'
+      approx_length: 'Approx. length'
+      special_needs: 'Special needs'
+      description: 'Brief description of piece'

@@ -1,0 +1,19 @@
+- event = @signup.composer_night
+- location = event.location
+
+%p.callout
+  %b= event.start_time.strftime('%A, %B %d')
+  –
+  %b= event.start_time.strftime('%l:%M%P')
+%p.callout
+  = link_to_if location.url?, location.name, location.url
+  - location.address.split("\n").each do |line|
+    %br
+    = line
+
+%p
+  Please show up around
+  %b= (event.start_time - 15.minutes).strftime('%l:%M%P')
+  — or more like
+  %b= (event.start_time - 30.minutes).strftime('%l:%M%P')
+  if you have complex setup needs.

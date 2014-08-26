@@ -7,6 +7,8 @@ class Signup < ActiveRecord::Base
 
   validates :presenter, presence: true
 
+  attr_accessor :read_guidelines
+
   scope :active,      -> { where(active: true) }
   scope :upcoming,    -> { active.where(composer_night: ComposerNight.upcoming) }
   scope :unscheduled, -> { active.where(composer_night: nil).order(:created_at) }
@@ -36,7 +38,44 @@ class Signup < ActiveRecord::Base
     preferences.find_or_create_by!(composer_night: composer_night)
   end
 
-  attr_accessor :read_guidelines
+  def instance_variable_default(var)
+    result = instance_variable_get(var)
+    unless result
+      result = yield
+      instance_variable_set(var, result)
+    end
+    result
+  end
+
+  def required_info
+    @signup.required_info ||= {
+      presenter_name: presenter.name,
+      title:          title,
+      performers:     performers,
+      approx_length:  approx_length,
+      special_needs:  special_needs
+    }
+  end
+
+  def optional_info
+    @signup.optional_info = {
+      description:    description,
+      presenter_url:  presenter.url,
+      presenter_bio:  presenter.bio
+    }
+  end
+
+  def required_info_missing
+    @signup.required_info_missing ||= required_info.select { |k,v| v.blank? }
+  end
+
+  def optional_info_missing
+    @signup.optional_info_missing ||= optional_info.select { |k,v| v.blank? }
+  end
+
+  def info_provided
+    @signup.info_provided ||= required_info.merge(optional_info).reject { |k,v| v.blank? }
+  end
 
   def subscribe_presenter_to_mailing_list
     Delayed::Job.enqueue SubscribeToMailingList.new(presenter)
