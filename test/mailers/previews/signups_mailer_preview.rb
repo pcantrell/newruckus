@@ -8,7 +8,7 @@ class SignupsMailerPreview < ActionMailer::Preview
 
   # Preview this email at http://localhost:3000/rails/mailers/signups_mailer/edit_link
   def edit_link
-    SignupsMailer.edit_info
+    SignupsMailer.touch_base
   end
 
 end
