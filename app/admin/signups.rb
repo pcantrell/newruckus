@@ -2,6 +2,12 @@ ActiveAdmin.register Signup do
   editable_attrs = Signup.attribute_names - %w(id created_at updated_at)
   permit_params editable_attrs
 
+  scope :all
+  scope :active, default: true
+  scope :in_queue
+  scope :upcoming
+  scope :unscheduled
+
   menu label: 'Signups'
 
   index do
