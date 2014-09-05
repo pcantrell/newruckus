@@ -14,6 +14,9 @@
       %span Custom message
     %ol
       %li.input.stringish
+        = label_tag 'subject', 'Subject'
+        = text_area_tag 'subject'
+      %li.input.stringish
         = label_tag 'opening_message', 'Opening message'
         = text_area_tag 'opening_message'
       %li.input.stringish

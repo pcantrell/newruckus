@@ -4,8 +4,10 @@ class SignupsMailer < ActionMailer::Base
   def touch_base(signup, message_opts = {})
     @signup = signup
     @opts = message_opts
+
+    subject = @opts[:subject] || "Your Composer Night signup info"
     
-    signup_mail signup, subject: "Your Composer Night signup info" do |format|
+    signup_mail signup, subject: subject do |format|
       format.html do
         if signup.scheduled?
           render 'edit_upcoming'
