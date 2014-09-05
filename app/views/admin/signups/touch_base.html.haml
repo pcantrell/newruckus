@@ -1,0 +1,23 @@
+= form_tag action: :send_touch_base, method: :post do
+  - params[:collection_selection].each do |signup_id|
+    = hidden_field_tag 'signup_ids[]', signup_id
+
+  %fieldset.inputs
+    %legend
+      %span Recipients
+    %ul.summary
+      - Signup.find(params[:collection_selection]).each do |signup|
+        = render 'admin/signup_list_item', signup: signup, show_info: true
+
+  %fieldset.inputs
+    %legend
+      %span Custom message
+    %ol
+      %li.input.stringish
+        = label_tag 'opening_message', 'Opening message'
+        = text_area_tag 'opening_message'
+      %li.input.stringish
+        = label_tag 'closing_message', 'Closing message'
+        = text_area_tag 'closing_message'
+
+  = submit_tag "Send #{params[:collection_selection].size} Emails"

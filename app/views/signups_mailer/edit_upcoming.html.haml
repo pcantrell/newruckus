@@ -1,6 +1,4 @@
-%p
-  - @opts[:opening_message] || begin
-    You are scheduled to perform at a New Ruckus Composer Night:
+= make_paragraphs(@opts[:opening_message] || 'You are scheduled to perform at a New Ruckus Composer Night:')
 
 - missing_info_urgent = @signup.composer_night.start_time < 4.days.from_now
 
@@ -11,9 +9,8 @@
 = render 'info_provided' if missing_info_urgent
 = render 'edit_info'
 
-%p
-  - @opts[:closing_message] || begin
-    Looking forward to hearing your music!
+= make_paragraphs(@opts[:closing_message] || 'Looking forward to hearing your music!')
+
 %p
   Cheers,
 %p

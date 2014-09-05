@@ -20,6 +20,12 @@ class SignupsMailer < ActionMailer::Base
     def info_attr_name(attr)
       I18n.t attr, scope: 'signup.attrs'
     end
+
+    def make_paragraphs(text)
+      text.strip.split(/[\n\r]+/).map do |para|
+        "<p>#{para}</p>"  # NB: embedded HTML supported!
+      end.join.html_safe
+    end
   end
 
 private

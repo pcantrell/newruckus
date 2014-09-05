@@ -5,7 +5,13 @@
   .notes=          signup.comments
   .notes.internal= signup.internal_notes
   - if show_info
-    .info-checklist
-      - %w(title performers approx_length description special_needs).each do |attr|
-        .info{class: signup.send("#{attr}?") ? 'present' : 'absent'}
-          = attr.humanize
+    - if signup.scheduled?
+      .info-checklist
+        - %w(title performers approx_length description special_needs).each do |attr|
+          .info{class: signup.send("#{attr}?") ? 'present' : 'absent'}
+            = attr.humanize
+    - else
+      .info-checklist
+        - ComposerNight.upcoming.includes(:signups).each do |event|
+          - status = signup.preference_for(event).status
+          .info.status{class: status}= status

@@ -13,6 +13,22 @@ ActiveAdmin.register Signup do
     actions
   end
 
+  batch_action :touch_base_with do |selection|
+    @page_title = 'Touch Base'
+    render 'touch_base'
+  end
+
+  collection_action :send_touch_base, method: :post do
+    signups = Signup.find(params[:signup_ids])
+    signups.each do |signup|
+      SignupsMailer.delay.touch_base(
+        signup,
+        params.permit(:opening_message, :closing_message).reject { |k,v| v.blank? })
+    end
+    flash[:notice] = "#{signups.count} emails sent."
+    redirect_to admin_signups_path
+  end
+
   form do |f|
     f.inputs do
       f.input :presenter, as: :select, collection: Person.order(:name), hint: if f.object.presenter

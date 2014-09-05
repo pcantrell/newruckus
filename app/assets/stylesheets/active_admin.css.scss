@@ -44,7 +44,7 @@ form textarea {
   }
 }
 .signup {
-  margin: 0.4em 0;
+  margin: 0.8em 0;
   padding: 0;
   .notes {
     color: #888;
@@ -55,22 +55,31 @@ form textarea {
     }
 
   }
-  .info {
-    display: inline-block;
-    padding: 0.2em 0.6em;
-    text-transform: uppercase;
+  .info-checklist {
     font-size: 75%;
     font-weight: 600;
-    &.present {
+    margin-left: 1em;
+  }
+  .info {
+    display: inline-block;
+    padding: 0em 0.6em;
+    text-transform: uppercase;
+    &.present, &.yes, &.no {
       color: #595;
       &:before {
         content: '✓';
       }
     }
-    &.absent {
+    &.absent, &.unknown {
       color: #855;
       &:before {
         content: '✕';
+      }
+    }
+    &.maybe {
+      color: #995;
+      &:before {
+        content: '~';
       }
     }
   }
@@ -163,4 +172,8 @@ form textarea {
       max-height: none !important;
     }
   }
+}
+
+form ul.summary {
+  margin: 1ex 1em;
 }
