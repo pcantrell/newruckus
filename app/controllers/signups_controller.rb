@@ -71,6 +71,7 @@ class SignupsController < ApplicationController
     
     if success
       flash[:success] = "Signup information updated"
+      @signup_updated = true
     else
       flash[:error] = "Unable to update information. Please correct the problems below."
     end

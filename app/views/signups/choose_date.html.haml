@@ -44,6 +44,10 @@
             .status-message.yes   I’ll take it if it’s available!
             .status-message.maybe Give me some time to figure out if this date works.
             .status-message.no    Go ahead and offer this date to the others who are after me in line.
+            - if @signup_updated
+              .status-message.unknown
+                .inline-error What about this date?
+
   
     = f.input :comments, hint: 'Any special instructions? Questions or concerns?'
 
