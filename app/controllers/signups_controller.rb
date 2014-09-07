@@ -52,10 +52,6 @@ class SignupsController < ApplicationController
 
   def edit
     if @signup.unscheduled?
-      @signup_prefs = ComposerNight.upcoming.reject(&:full?).map do |event|
-        @signup.preference_for(event)
-      end
-
       render 'choose_date'
     elsif @signup.upcoming?
       render 'program_info'
@@ -71,6 +67,9 @@ class SignupsController < ApplicationController
     
     if success
       flash[:success] = "Signup information updated"
+      if @signup.unscheduled? && signup_prefs.any? { |p| p.status == 'unknown' }
+        flash[:warning] = "Please don’t forget to provide your availability for the other dates below."
+      end
       @signup_updated = true
     else
       flash[:error] = "Unable to update information. Please correct the problems below."
@@ -100,6 +99,13 @@ private
     end
   end
   helper_method :presenter_params
+
+  def signup_prefs
+    @signup_prefs ||= ComposerNight.upcoming.reject(&:full?).map do |event|
+      @signup.preference_for(event)
+    end
+  end
+  helper_method :signup_prefs
 
   def wrap_in_transaction(&block)
     Signup.transaction(&block)

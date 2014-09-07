@@ -191,12 +191,13 @@ nav.top
 .flashes
   text-align: center
   padding: 1em 1em 0 1em
+  white-space: pre-line
   .flash
     display: inline-block
-    text-align: left
+    text-align: center
     margin: 0.6em
+    max-width: 20em
     font-weight: $body-weight-heavy
-    max-width: 60%
     border-radius: 1ex
     color: white
     padding: 1em 1.6em
@@ -210,6 +211,10 @@ nav.top
       background: #3da649
       &:before
         content: '✓'
+    &.warning
+      background: #a6443d
+      &:before
+        content: '!'
     &.error
       background: #a6443d
       &:before

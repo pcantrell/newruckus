@@ -30,7 +30,7 @@
       Just one request: if there are dates below you’re pretty sure you won’t want, please mark them “no” now so that we can offer them to other people.
 
     .date-preferences
-      = f.semantic_fields_for :preferences, @signup_prefs do |pref|
+      = f.semantic_fields_for :preferences, signup_prefs do |pref|
         .date-preference
           .date= pref.object.composer_night.start_time.strftime('<b>%b</b> %d (%a)<br>%l:%M<span class="ampm">%P</span>').html_safe
           
@@ -46,7 +46,7 @@
             .status-message.no    Go ahead and offer this date to the others who are after me in line.
             - if @signup_updated
               .status-message.unknown
-                .inline-error What about this date?
+                .inline-error ← What about this date?
 
   
     = f.input :comments, hint: 'Any special instructions? Questions or concerns?'
