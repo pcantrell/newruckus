@@ -1,0 +1,13 @@
+- @mail_previews.each do |mail|
+  .mail-preview
+    %table.headers
+      %tr
+        %th From
+        %td= mail.from.join(", ")
+      %tr
+        %th To
+        %td= mail.to.join(", ")
+      %tr
+        %th Subject
+        %td= mail.subject
+    %iframe.body{srcdoc: mail.body.to_s.html_safe}

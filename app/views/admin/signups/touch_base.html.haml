@@ -1,13 +1,11 @@
 = form_tag action: :send_touch_base, method: :post do
   - params[:collection_selection].each do |signup_id|
-    = hidden_field_tag 'signup_ids[]', signup_id
+    = hidden_field_tag 'collection_selection[]', signup_id
 
-  %fieldset.inputs
-    %legend
-      %span Recipients
-    %ul.summary
-      - Signup.find(params[:collection_selection]).each do |signup|
-        = render 'admin/signup_list_item', signup: signup, show_info: true
+  - if @mail_previews
+    = render 'mail_previews'
+  - else
+    = render 'recipient_summary'
 
   %fieldset.inputs
     %legend
@@ -15,12 +13,15 @@
     %ol
       %li.input.stringish
         = label_tag 'subject', 'Subject'
-        = text_area_tag 'subject'
+        = text_area_tag 'subject', params[:subject]
       %li.input.stringish
         = label_tag 'opening_message', 'Opening message'
-        = text_area_tag 'opening_message'
+        = text_area_tag 'opening_message', params[:opening_message]
       %li.input.stringish
         = label_tag 'closing_message', 'Closing message'
-        = text_area_tag 'closing_message'
+        = text_area_tag 'closing_message', params[:closing_message]
 
-  = submit_tag "Send #{params[:collection_selection].size} Emails"
+  = submit_tag "Preview Emails", name: 'preview'
+  - if @mail_previews
+    = submit_tag "Send #{params[:collection_selection].size} Emails"
+

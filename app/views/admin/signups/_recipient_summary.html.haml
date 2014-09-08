@@ -1,0 +1,6 @@
+%fieldset.inputs
+  %legend
+    %span Recipients
+  %ul.summary
+    - Signup.find(params[:collection_selection]).each do |signup|
+      = render 'admin/signup_list_item', signup: signup, show_info: true

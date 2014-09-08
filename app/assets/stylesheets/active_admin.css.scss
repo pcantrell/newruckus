@@ -177,3 +177,22 @@ form textarea {
 form ul.summary {
   margin: 1ex 1em;
 }
+
+.mail-preview {
+  margin: 2em 0;
+  border: 1px solid #ddd;
+  border-radius: 0.5ex;
+  table {
+    background: #eee;
+    padding: 1em;
+    border-radius: 0.5ex;
+  }
+  td {
+    width: 100%;
+  }
+  .body {
+    margin: 0 1em;
+    width: 60%;
+    height: 20em;
+  }
+}

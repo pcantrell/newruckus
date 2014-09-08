@@ -25,14 +25,27 @@ ActiveAdmin.register Signup do
   end
 
   collection_action :send_touch_base, method: :post do
-    signups = Signup.find(params[:signup_ids])
-    signups.each do |signup|
-      SignupsMailer.delay.touch_base(
+    preview = params[:preview]
+    mailer = if preview
+      SignupsMailer
+    else
+      SignupsMailer.delay
+    end
+
+    signups = Signup.find(params[:collection_selection])
+    mails = signups.map do |signup|
+      mailer.touch_base(
         signup,
         params.permit(:subject, :opening_message, :closing_message).reject { |k,v| v.blank? })
     end
-    flash[:notice] = "#{signups.count} emails sent."
-    redirect_to admin_signups_path
+
+    if preview
+      @mail_previews = mails
+      render 'touch_base'
+    else
+      flash[:notice] = "#{mails.count} emails queued."
+      redirect_to admin_signups_path
+    end
   end
 
   form do |f|
