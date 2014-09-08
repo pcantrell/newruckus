@@ -11,3 +11,8 @@ $ ->
 
   $('.expandable').click (e) ->
     $(e.target).closest('.expandable').toggleClass('expanded')
+
+  $('.mail-preview iframe').load (e) ->
+    iframe = e.target
+    height = iframe.contentWindow.document.body.scrollHeight
+    $(iframe).css('height', "#{height}px")
