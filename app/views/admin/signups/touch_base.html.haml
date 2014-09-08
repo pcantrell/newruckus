@@ -2,7 +2,10 @@
   - params[:collection_selection].each do |signup_id|
     = hidden_field_tag 'collection_selection[]', signup_id
 
-  - if @mail_previews
+  - if @template_error
+    %ul.errors
+      %li.error= @template_error
+  - elsif @mail_previews
     = render 'mail_previews'
   - else
     = render 'recipient_summary'

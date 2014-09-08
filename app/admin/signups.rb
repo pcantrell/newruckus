@@ -33,13 +33,18 @@ ActiveAdmin.register Signup do
     end
 
     signups = Signup.find(params[:collection_selection])
-    mails = signups.map do |signup|
-      mailer.touch_base(
-        signup,
-        params.permit(:subject, :opening_message, :closing_message).reject { |k,v| v.blank? })
+    mails = begin
+      signups.map do |signup|
+        mailer.touch_base(
+          signup,
+          params.permit(:subject, :opening_message, :closing_message).reject { |k,v| v.blank? })
+      end
+    rescue SignupsMailerHelper::SubstitutionError => e
+      @template_error = e.message
+      nil
     end
 
-    if preview
+    if preview || @template_error
       @mail_previews = mails
       render 'touch_base'
     else

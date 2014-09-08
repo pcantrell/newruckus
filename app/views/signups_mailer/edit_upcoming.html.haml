@@ -1,4 +1,4 @@
-= make_paragraphs(@opts[:opening_message] || 'You are scheduled to perform at a New Ruckus Composer Night:')
+= format_message_fragment(@opts[:opening_message] || 'You are scheduled to perform at a New Ruckus Composer Night:')
 
 - missing_info_urgent = @signup.composer_night.start_time < 4.days.from_now
 
@@ -9,6 +9,6 @@
 = render 'info_provided' if missing_info_urgent
 = render 'edit_info'
 
-= make_paragraphs(@opts[:closing_message] || 'Looking forward to hearing your music!')
+= format_message_fragment(@opts[:closing_message] || 'Looking forward to hearing your music!')
 
 = render 'sig'

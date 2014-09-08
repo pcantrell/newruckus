@@ -6,8 +6,8 @@ class SignupsMailer < ActionMailer::Base
     @opts = message_opts
 
     subject = @opts[:subject] || "Your Composer Night signup info"
-    
-    signup_mail signup, subject: subject do |format|
+
+    signup_mail signup, subject: apply_substitutions(subject) do |format|
       format.html do
         if signup.scheduled?
           render 'edit_upcoming'
@@ -18,17 +18,8 @@ class SignupsMailer < ActionMailer::Base
     end
   end
 
-  helper do
-    def info_attr_name(attr)
-      I18n.t attr, scope: 'signup.attrs'
-    end
-
-    def make_paragraphs(text)
-      text.strip.split(/[\n\r]+/).map do |para|
-        "<p>#{para}</p>"  # NB: embedded HTML supported!
-      end.join.html_safe
-    end
-  end
+  include SignupsMailerHelper
+  helper  SignupsMailerHelper
 
 private
 
