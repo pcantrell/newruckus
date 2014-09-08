@@ -38,6 +38,12 @@ class Signup < ActiveRecord::Base
     preferences.find_or_create_by!(composer_night: composer_night)
   end
 
+  def preferences_for_upcoming
+    @preferences_for_upcoming ||= ComposerNight.upcoming.reject(&:full?).map do |event|
+      preference_for(event)
+    end
+  end
+
   def instance_variable_default(var)
     result = instance_variable_get(var)
     unless result

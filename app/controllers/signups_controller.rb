@@ -101,9 +101,7 @@ private
   helper_method :presenter_params
 
   def signup_prefs
-    @signup_prefs ||= ComposerNight.upcoming.reject(&:full?).map do |event|
-      @signup.preference_for(event)
-    end
+    @signup_prefs ||= @signup.preferences_for_upcoming
   end
   helper_method :signup_prefs
 

@@ -12,6 +12,5 @@
             = attr.humanize
     - else
       .info-checklist
-        - ComposerNight.upcoming.includes(:signups).each do |event|
-          - status = signup.preference_for(event).status
-          .info.status{class: status}= status
+        - signup.preferences_for_upcoming.each do |pref|
+          .info.status{class: pref.status}= pref.status
