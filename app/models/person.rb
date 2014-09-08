@@ -7,7 +7,11 @@ class Person < ActiveRecord::Base
 
   def name=(name)
     write_attribute :name, name
-    self.name_for_searching = name.strip.gsub(/[^a-z]+/i, ' ').downcase if name
+    self[:name_for_searching] = name.strip.gsub(/[^a-z]+/i, ' ').downcase
+  end
+
+  def first_name
+    self[:first_name] || name.strip.split(/\s+/).first
   end
 
 end
