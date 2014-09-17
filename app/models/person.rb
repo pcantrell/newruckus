@@ -11,7 +11,11 @@ class Person < ActiveRecord::Base
   end
 
   def first_name
-    self[:first_name] || name.strip.split(/\s+/).first
+    self[:first_name] || default_first_name
+  end
+
+  def default_first_name
+    name.strip.split(/\s+/).first
   end
 
 end

@@ -17,6 +17,7 @@ ActiveAdmin.register Person do
   form do |f|
     f.inputs do
       f.input :name
+      f.input :first_name, placeholder: f.object.default_first_name
       f.input :email
       f.input :phone
       f.input :url
