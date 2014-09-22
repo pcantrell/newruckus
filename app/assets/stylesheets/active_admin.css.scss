@@ -103,10 +103,31 @@ form textarea {
   .dates th {
     text-align: center;
   }
-  tr.scheduled {
-    color: #888;
-    background: #ddd !important;
+
+  tr.scheduled,
+  tr.scheduled td:not(.scheduled),
+  td.unscheduled.full,
+  td.no {
+    &.status {
+      color: #888;
+    }
+    background: #ccc !important;
   }
+
+  td.scheduled {
+    background: mix(#3da649, #444, 70%) !important;
+    color: white;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.4) !important;
+    position: relative;
+    z-index: 2;
+  }
+
+  td.unscheduled.yes {
+    background: #3da649;
+    color: white;
+  }
+
   .presenter {
     th {
       text-align: right;
@@ -121,34 +142,9 @@ form textarea {
         }
         cursor: pointer;
       }
-      @mixin status($status, $bg) {
-        &.#{$status} {
-          &.scheduled {
-            color: white;
-            background: $bg;
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(0, 0, 0, 0.4);
-            position: relative;
-            z-index: 2;
-          }
-          &.unscheduled {
-            color: rgba(0, 0, 0, 0.6);
-            background: rgba($bg, 0.3);
-          }
-          &:hover {
-            outline: 2px solid mix($bg, black);
-          }
-        }
-      }
-      @include status(unknown, #eee);
-      @include status(maybe,   #eee);
-      @include status(no,      #a6443d);
-      @include status(yes,     #3da649);
-      &.unscheduled.full {
-        background: #ddd !important;
-      }
-      &.scheduled.unknown {
-        background: #777;
+
+      &.status:hover {
+        outline: 2px solid rgba(0, 0, 0, 0.5);
       }
 
       &.notes {
