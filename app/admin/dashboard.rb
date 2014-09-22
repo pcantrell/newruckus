@@ -5,8 +5,18 @@ ActiveAdmin.register_page "Dashboard" do
   content title: 'Dashboard' do
     queue = Signup.in_queue.includes(:presenter)
     upcoming = ComposerNight.upcoming.includes(:signups)
+    order_queue_by_signup = (params[:order_queue_by_signup].to_i > 0)
 
     panel 'Scheduling' do
+
+      para do
+        if order_queue_by_signup
+          link_to 'Order by Composer Night', '?order_queue_by_signup=0'
+        else
+          link_to 'Order by position in queue', '?order_queue_by_signup=1'
+        end
+      end
+
       table class: 'schedule' do
 
         tr class: 'dates' do
@@ -21,7 +31,8 @@ ActiveAdmin.register_page "Dashboard" do
           bool ? 'scheduled' : 'unscheduled'
         end
 
-        queue.each do |signup|
+        queue_order = "#{'composer_nights.start_time nulls first, ' unless order_queue_by_signup} signups.created_at"
+        queue.includes(:composer_night).order(queue_order).each do |signup|
           tr class: "presenter #{scheduled_status(signup.composer_night_id)}" do
             th link_to(signup.presenter.name, edit_admin_signup_path(signup)), class: 'presenter'
             upcoming.each do |event|

@@ -9,8 +9,8 @@ class Signup < ActiveRecord::Base
 
   attr_accessor :read_guidelines
 
-  scope :active,      -> { where(active: true).order(:created_at) }
-  scope :upcoming,    -> { active.where(composer_night: ComposerNight.upcoming).order('composer_nights.start_time') }
+  scope :active,      -> { where(active: true) }
+  scope :upcoming,    -> { active.where(composer_night: ComposerNight.upcoming) }
   scope :unscheduled, -> { active.where(composer_night: nil) }
   scope :in_queue,    -> { active.where(composer_night: ComposerNight.upcoming + [nil]) }
 
