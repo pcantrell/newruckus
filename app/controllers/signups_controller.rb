@@ -32,7 +32,7 @@ class SignupsController < ApplicationController
     end
 
     if presenter.save && signup.save
-      AdminNotifications.delay.signup(signup, Hash[changed_attrs])
+      AdminNotifications.delay.signup(signup, true, Hash[changed_attrs])
       SignupsMailer.delay.touch_base(signup)
       flash[:success] = "Composer Night signup created"
       redirect_to edit_signup_path(token: signup.access_token, new: 1)
@@ -67,6 +67,7 @@ class SignupsController < ApplicationController
     
     if success
       flash[:success] = "Signup information updated"
+      AdminNotifications.delay.signup(@signup, false)
       if @signup.unscheduled? && signup_prefs.any? { |p| p.status == 'unknown' }
         flash[:warning] = "Please don’t forget to provide your availability for the other dates below."
       end

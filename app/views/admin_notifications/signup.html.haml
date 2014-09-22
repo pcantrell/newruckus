@@ -1,3 +1,5 @@
+%h2 Presenter
+
 %table
   - %w(name email phone).each do |attr|
     %tr
@@ -10,3 +12,24 @@
 
 %blockquote.comments{style: 'white-space: pre-line'}
   = @signup.comments
+
+%h2 Scheduling
+- if @signup.scheduled?
+  %p
+    Scheduled for
+    %b= @signup.composer_night.start_time.strftime('%b')
+- else
+  %table
+    - ComposerNight.upcoming.each do |event|
+      %tr
+        %th= event.start_time.strftime('%b')
+        %td= @signup.preference_for(event).status
+
+- %w(info_provided required_info_missing optional_info_missing).each do |info_set|
+  %h2= info_set.humanize
+
+  %table
+    - @signup.send(info_set).each do |attr, value|
+      %tr
+        %th= attr.to_s.humanize
+        %td.value<= value.strip

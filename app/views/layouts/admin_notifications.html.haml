@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
+    :sass
+      table, blockquote
+        margin: 1em 0 1em 2em
+      th, td
+        text-align: left
+        vertical-align: top
+      th
+        padding-right: 1ex
+      .value
+        white-space: pre-line
+
+  %body
+    = yield
