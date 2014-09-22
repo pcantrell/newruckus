@@ -1,10 +1,10 @@
-= format_message_fragment(@opts[:opening_message] || "Hooray! You’re in line to perform at a New Ruckus Composer Night! \n Please keep us up to date on when you’re available to present your music:")
+= format_message_fragment(@opts[:opening_message] || "Hooray! You’re in line to perform at a New Ruckus Composer Night! \n Please keep me up to date on when you’re available to present your music:")
 
 %p.callout
   %b= link_to 'Choose available dates', edit_signup_url(token: @signup.access_token)
 
 %p
-  (If you’re not ready to present anything, that’s just fine. Take as long as you need — but please let us know which dates you <i>don’t</i> want, so that we can offer them to others.)
+  (If you’re not ready to present anything, that’s just fine. Take as long as you need — but please let me know which dates you <i>don’t</i> want, so that I can offer them to other musicians.)
 
 = format_message_fragment(@opts[:closing_message] || 'Thanks for signing up!')
 

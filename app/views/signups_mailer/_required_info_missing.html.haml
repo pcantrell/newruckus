@@ -2,7 +2,7 @@
   - time_until = @signup.composer_night.start_time - Time.now
   %p
     %b
-      We
+      I
       - if time_until < 10.days
         still
       need the following information:
@@ -11,7 +11,7 @@
       .attr= info_attr_name attr
   %p
     Please
-    %b= link_to 'let us know', edit_signup_url(token: @signup.access_token)
+    %b= link_to 'let me know', edit_signup_url(token: @signup.access_token)
     - if time_until < 2.days
       ASAP!
     - else
