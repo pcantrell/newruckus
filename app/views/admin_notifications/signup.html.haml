@@ -28,8 +28,4 @@
 - %w(info_provided required_info_missing optional_info_missing).each do |info_set|
   %h2= info_set.humanize
 
-  %table
-    - @signup.send(info_set).each do |attr, value|
-      %tr
-        %th= attr.to_s.humanize
-        %td.value<= value.strip
+  = render 'shared/signup_info_summary', signup: @signup, info_set: info_set

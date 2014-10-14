@@ -24,6 +24,14 @@ ActiveAdmin.register ComposerNight do
         end
       end
     end
+
+    div class: 'attributes_table' do
+      composer_night.signups.includes(:presenter).each do |signup|
+        panel "#{signup.presenter.first_name}’s info" do
+          render 'shared/signup_info_summary', signup: signup
+        end
+      end
+    end
   end
 
   form do |f|

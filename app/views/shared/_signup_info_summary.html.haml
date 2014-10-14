@@ -1,0 +1,7 @@
+- info_set ||= 'info_provided'
+
+%table
+  - signup.send(info_set).each do |attr, value|
+    %tr
+      %th= attr.to_s.humanize
+      %td.value<= value.strip
