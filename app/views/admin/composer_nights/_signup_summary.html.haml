@@ -1,0 +1,7 @@
+= form_tag '/admin/signups/batch_action', method: :post do
+  %ul
+    - composer_night.signups.includes(:presenter).each do |signup|
+      = check_box_tag 'collection_selection[]', signup.id, true, style: 'float: left; margin-top: 0.5ex; margin-right: 1ex'
+      = render 'admin/signup_list_item', signup: signup, show_info: true
+  = hidden_field_tag 'batch_action', 'touch_base_with'
+  = submit_tag 'Touch Base'

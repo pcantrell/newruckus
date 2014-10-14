@@ -18,11 +18,7 @@ ActiveAdmin.register ComposerNight do
     default_main_content
 
     panel 'Signed up' do
-      ul do
-        composer_night.signups.includes(:presenter).each do |signup|
-          render 'admin/signup_list_item', signup: signup, show_info: true
-        end
-      end
+      render 'signup_summary', composer_night: composer_night
     end
 
     div class: 'attributes_table' do

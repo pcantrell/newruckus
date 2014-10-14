@@ -1,7 +1,13 @@
 - show_info ||= false
 
 %li.signup
-  = link_to signup.presenter.name, edit_admin_signup_path(signup)
+  %b= signup.presenter.name
+  (
+  = link_to 'public', edit_signup_path(token: signup.access_token)
+  |
+  = link_to 'admin', edit_admin_signup_path(signup)
+  )
+
   .notes=          signup.comments
   .notes.internal= signup.internal_notes
   - if show_info
