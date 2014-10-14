@@ -13,7 +13,7 @@ en:
 
   signup:
     attrs:
-      presenter_name: 'Name of the music’s composer / improviser / songwriter / sound artist / mastermind / inventor'
+      presenter_name: 'Composer name'
       presenter_url: 'Composer web site'
       presenter_bio: 'Composer bio'
       title: 'Title(s)'

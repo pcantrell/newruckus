@@ -1,11 +1,7 @@
 - if @signup.required_info_missing.any?
   - time_until = @signup.composer_night.start_time - Time.now
   %p
-    %b
-      I
-      - if time_until < 10.days
-        still
-      need the following information:
+    I need the following information:
   .signup-info.missing
     - @signup.required_info_missing.each do |attr, value|
       .attr= info_attr_name attr
