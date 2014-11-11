@@ -4,6 +4,6 @@ module SignupsHelper
   end
 
   def semantic_form_for_signup(&block)
-    semantic_form_for @signup, url: edit_signup_path(token: @signup.access_token), &block
+    semantic_form_for @signup, url: edit_signup_path(token: @signup.access_token), class: 'signup', &block
   end
 end

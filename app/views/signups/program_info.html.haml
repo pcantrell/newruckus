@@ -20,19 +20,21 @@
     %p
       Share as much as you have right now. You can always add and update it later.
 
-    = f.fields_for :presenter do |p|
-      = p.input :name, hint: 'As you would like it to appear on the program and in publicity materials'
-      = p.input :url, label: 'URL of your web site', required: false, placeholder: 'http://'
-      = p.input :bio, hint: 'Just a few sentences for our publicity materials'
-      = p.input :phone, required: false, as: :phone, label: 'Phone', hint: t('signup.attrs.presenter_phone_hint').html_safe
+    = f.inputs do
+      = f.fields_for :presenter do |p|
+        = p.input :name, hint: 'As you would like it to appear on the program and in publicity materials'
+        = p.input :url, label: 'URL of your web site', required: false, placeholder: 'http://'
+        = p.input :bio, hint: 'Just a few sentences for our publicity materials'
+        = p.input :phone, required: false, as: :phone, label: 'Phone', hint: t('signup.attrs.presenter_phone_hint').html_safe
 
     %h2 About your performance
 
-    = f.input :title, label: 'Title of your piece(s)'
-    = f.input :performers, label: 'Performers and instruments'
-    = f.input :approx_length, label: 'Approximate length'
-    = f.input :description, label: 'Description of the piece', hint: 'Just a sentence or two for our publicity materials'
-    = f.input :special_needs, hint: 'Piano? Sound system? Projector? Something else?'
-    = f.input :comments, hint: 'Anything else we should know?'
+    = f.inputs do
+      = f.input :title, label: 'Title of your piece(s)'
+      = f.input :performers, label: 'Performers and instruments'
+      = f.input :approx_length, label: 'Approximate length'
+      = f.input :description, label: 'Description of the piece', hint: 'Just a sentence or two for our publicity materials'
+      = f.input :special_needs, hint: 'Piano? Sound system? Projector? Something else?'
+      = f.input :comments, hint: 'Anything else we should know?'
 
     = f.submit 'Save Changes'
