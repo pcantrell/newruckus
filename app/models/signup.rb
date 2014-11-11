@@ -55,11 +55,12 @@ class Signup < ActiveRecord::Base
 
   def required_info
     @signup.required_info ||= {
-      presenter_name: presenter.name,
-      title:          title,
-      performers:     performers,
-      approx_length:  approx_length,
-      special_needs:  special_needs
+      presenter_name:  presenter.name,
+      presenter_phone: presenter.phone,
+      title:           title,
+      performers:      performers,
+      approx_length:   approx_length,
+      special_needs:   special_needs
     }
   end
 

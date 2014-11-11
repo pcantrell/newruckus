@@ -14,6 +14,7 @@ en:
   signup:
     attrs:
       presenter_name: 'Composer name'
+      presenter_phone_hint: 'In case of last-minute crisis. (Cell phone preferred.)<br>We rarely need this, but when we do, we <i>really</i> need it!<br>We <b>will not</b> share it outside The New Ruckus / Studio Z.'
       presenter_url: 'Composer web site'
       presenter_bio: 'Composer bio'
       title: 'Title(s)'

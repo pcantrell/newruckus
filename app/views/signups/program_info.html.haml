@@ -24,6 +24,7 @@
       = p.input :name, hint: 'As you would like it to appear on the program and in publicity materials'
       = p.input :url, label: 'URL of your web site', required: false, placeholder: 'http://'
       = p.input :bio, hint: 'Just a few sentences for our publicity materials'
+      = p.input :phone, required: false, as: :phone, label: 'Phone', hint: t('signup.attrs.presenter_phone_hint').html_safe
 
     %h2 About your performance
 
