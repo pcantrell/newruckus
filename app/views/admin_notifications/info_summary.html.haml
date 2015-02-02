@@ -1,0 +1,21 @@
+%p{style: 'white-space: pre-wrap'}
+  = @comments
+
+- @event.signups.each do |signup|
+  %hr
+
+  %table
+    - %w(name email phone).each do |attr|
+      %tr
+        %th= attr
+        %td
+          = signup.presenter.send(attr)
+          - if @changed_attrs[attr]
+            .changed{style: "color: #800; font-size: 80%"}
+              (changed from “#{@changed_attrs[attr]}”)
+
+  - unless signup.comments.blank?
+    %blockquote.comments{style: 'white-space: pre-line'}
+      = signup.comments
+
+  = render 'shared/signup_info_summary', signup: signup

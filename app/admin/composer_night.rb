@@ -22,10 +22,8 @@ ActiveAdmin.register ComposerNight do
     end
 
     div class: 'attributes_table' do
-      composer_night.signups.includes(:presenter).each do |signup|
-        panel "#{signup.presenter.first_name}’s info" do
-          render 'shared/signup_info_summary', signup: signup
-        end
+      panel "Presenter info" do
+        render 'info_summary', composer_night: composer_night
       end
     end
   end
@@ -37,6 +35,12 @@ ActiveAdmin.register ComposerNight do
       f.input :slots
     end
     f.actions
+  end
+
+  member_action :email_info_summary, method: :post do
+    AdminNotifications.delay.info_summary(resource, params[:comments])
+    flash[:notice] = "Info summary sent"
+    redirect_to admin_composer_night_path(resource)
   end
 
   controller do

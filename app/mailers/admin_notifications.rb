@@ -12,4 +12,11 @@ class AdminNotifications < ActionMailer::Base
          to: to,
          subject: "Composer Night #{new_signup ? 'new signup' : 'info changed'}: #{signup.presenter.name}"
   end
+
+  def info_summary(event, comments)
+    @event = event
+    @comments = comments
+    mail to: ["paul@innig.net", "heatherrbarringer@gmail.com"],
+         subject: "Composer Night info for #{event.start_time.strftime('%b')}"
+  end
 end

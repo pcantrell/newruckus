@@ -1,0 +1,9 @@
+%p
+  = form_tag email_info_summary_admin_composer_night_path(composer_night), method: :post do
+    %fieldset
+      = text_area_tag 'comments'
+    = submit_tag 'Email Info Summary to Admin'
+
+- composer_night.signups.includes(:presenter).each do |signup|
+  %h3= signup.presenter.first_name
+  = render 'shared/signup_info_summary', signup: signup
