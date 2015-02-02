@@ -7,6 +7,10 @@
 = render 'required_info_missing'
 = render 'optional_info_missing'
 = render 'info_provided' if missing_info_urgent
-= render 'edit_info'
+
+%p
+  To add to or change any of the above:
+
+= render 'edit_info_link'
 
 = format_message_fragment(@opts[:closing_message] || 'Looking forward to hearing your music!')

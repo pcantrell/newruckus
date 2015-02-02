@@ -9,7 +9,9 @@ class SignupsMailer < ActionMailer::Base
 
     signup_mail signup, subject: apply_substitutions(subject) do |format|
       format.html do
-        if signup.scheduled?
+        if @opts[:body]
+          format_message_fragment(@opts[:body])
+        elsif signup.scheduled?
           render 'edit_upcoming'
         else
           render 'edit_unscheduled'

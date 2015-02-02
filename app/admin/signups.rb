@@ -37,7 +37,7 @@ ActiveAdmin.register Signup do
       signups.map do |signup|
         mailer.touch_base(
           signup,
-          params.permit(:subject, :opening_message, :closing_message).reject { |k,v| v.blank? })
+          params.permit(:subject, :body).reject { |k,v| v.blank? })
       end
     rescue SignupsMailerHelper::SubstitutionError => e
       @template_error = e.message
