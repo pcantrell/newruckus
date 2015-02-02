@@ -1,2 +1,3 @@
 %p.callout
-  %b= link_to 'Edit your performance info', edit_signup_url(token: @signup.access_token)
+  - link_title = @signup.scheduled? ? 'Edit your performance info' :  'Update your scheduling preferences'
+  %b= link_to link_title, edit_signup_url(token: @signup.access_token)
