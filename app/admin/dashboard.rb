@@ -60,6 +60,8 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column min_width: '60%' do
         panel 'Composer Night Queue' do
+          render 'touch_base_unscheduled'
+
           ul class: 'signups-summary' do
             queue.unscheduled.each do |signup|
               render 'admin/signup_list_item', signup: signup

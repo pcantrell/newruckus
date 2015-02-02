@@ -1,0 +1,5 @@
+= form_tag '/admin/signups/batch_action', method: :post do
+  - Signup.unscheduled.includes(:presenter).each do |signup|
+    = hidden_field_tag 'collection_selection[]', signup.id
+  = hidden_field_tag 'batch_action', 'touch_base_with'
+  = submit_tag 'Touch Base with Unscheduled'
