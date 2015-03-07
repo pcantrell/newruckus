@@ -10,7 +10,7 @@ class SignupsMailer < ActionMailer::Base
     signup_mail signup, subject: apply_substitutions(subject) do |format|
       format.html do
         if @opts[:body]
-          format_message_fragment(@opts[:body])
+          render html: format_message_fragment(@opts[:body]), layout: 'signups_mailer'
         elsif signup.scheduled?
           render 'edit_upcoming'
         else
