@@ -38,7 +38,7 @@ ActiveAdmin.register ComposerNight do
   end
 
   member_action :email_info_summary, method: :post do
-    AdminNotifications.delay.info_summary(resource, params[:comments])
+    AdminNotifications.delay.info_summary(resource, params[:recipients], params[:comments])
     flash[:notice] = "Info summary sent"
     redirect_to admin_composer_night_path(resource)
   end

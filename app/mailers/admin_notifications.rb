@@ -5,18 +5,15 @@ class AdminNotifications < ActionMailer::Base
     @signup = signup
     @changed_attrs = changed_attrs
 
-    to = ["paul@innig.net"]
-    to << "katherine@katherinebergman.net" if signup.scheduled?
-
     mail from: signup.presenter.email,
-         to: to,
+         to: ["paul@innig.net"],
          subject: "Composer Night #{new_signup ? 'new signup' : 'info changed'}: #{signup.presenter.name}"
   end
 
-  def info_summary(event, comments)
+  def info_summary(event, recipient_ids, comments)
     @event = event
     @comments = comments
-    mail to: ["paul@innig.net", "heatherrbarringer@gmail.com"],
+    mail to: AdminUser.find(recipient_ids).map(&:email),
          subject: "Composer Night info for #{event.start_time.strftime('%b')}"
   end
 end

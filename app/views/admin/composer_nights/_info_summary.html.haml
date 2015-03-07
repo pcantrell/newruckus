@@ -1,7 +1,11 @@
 %p
   = form_tag email_info_summary_admin_composer_night_path(composer_night), method: :post do
     %fieldset
-      = text_area_tag 'comments'
+      - AdminUser.order('id').each do |user|
+        %p
+          = check_box_tag 'recipients[]', user.id, false, style: 'float: left; margin-top: 0.5ex; margin-right: 1ex'
+          = user.email
+      = text_area_tag 'comments', '', placeholder: 'Comments'
     = submit_tag 'Email Info Summary to Admin'
 
 - composer_night.signups.includes(:presenter).each do |signup|
