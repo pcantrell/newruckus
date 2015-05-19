@@ -27,7 +27,7 @@
     %p
       You don’t have to choose a date right away. Take as long as you want!
     %p
-      Just one request: if there are dates below you’re pretty sure you won’t want, please mark them “no” now so that we can offer them to other people.
+      If there are dates below you’re pretty sure you won’t want, please mark them “no” now so that we can offer them to other people.
 
     .date-preferences
       = f.semantic_fields_for :preferences, signup_prefs do |pref|
@@ -41,7 +41,7 @@
                 = status
           
           .status-messages
-            .status-message.yes   I’ll take it if it’s available!
+            .status-message.yes   I’ll take it if it’s available! Let me know.
             .status-message.maybe Give me some time to figure out if this date works.
             .status-message.no    Go ahead and offer this date to the others who are after me in line.
             - if @signup_updated
