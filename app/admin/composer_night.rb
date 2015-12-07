@@ -31,12 +31,61 @@ ActiveAdmin.register ComposerNight do
 
   form do |f|
     f.inputs do
-      f.input :visible
       f.input :location
       f.input :start_time, as: :datetime
       f.input :slots
+      f.input :visible
     end
     f.actions
+  end
+
+  action_item only: :index do
+    link_to "Mass Create Composer Nights", mass_create_admin_composer_nights_path
+  end
+
+  collection_action :mass_create, method: [:get, :post] do
+    return if request.method == 'GET'
+
+    @date_errors = []
+    @dates = params[:dates].split("\n").map(&:strip).reject(&:blank?).map do |raw_date|
+      expected_day_of_week = nil
+      if raw_date =~ /^(.*)\((.*)\) *(\d+:\d\d(am|pm))?$/
+        raw_date, expected_day_of_week = $1.strip, $2.strip
+      end
+
+      date = nil
+      begin
+        Time.parse(raw_date)  # for format checking
+        date = Time.parse("#{raw_date} #{params[:time_of_day]}")
+      rescue => e
+        @date_errors << "Unable to parse date #{raw_date}: #{e}"
+        next
+      end
+
+      date += 1.year while date.past?
+
+      actual_day_of_week = date.strftime("%a")
+      if expected_day_of_week && actual_day_of_week.strip != expected_day_of_week
+        @date_errors << "Mismatched day of week for #{raw_date}: expected #{expected_day_of_week}, got #{actual_day_of_week}"
+      end
+
+      date
+    end
+
+    return unless @date_errors.empty?
+
+    params[:dates] = @dates.sort.map { |d| d.strftime("%Y %b %d (%a) %l:%M%P") }.join("\n")
+
+    return if params[:preview] || @dates.empty?
+
+    location = Location.find(params[:location])
+    ComposerNight.transaction do
+      @dates.each do |date|
+        ComposerNight.create!(location: location, start_time: date, slots: params[:slots], visible: false)
+      end
+    end
+
+    redirect_to admin_composer_nights_path
   end
 
   member_action :email_info_summary, method: :post do

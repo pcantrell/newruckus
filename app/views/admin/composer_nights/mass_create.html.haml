@@ -1,0 +1,28 @@
+= form_tag action: :mass_create, method: :post do
+  - if @date_errors.any?
+    %ul.errors
+      - @date_errors.each do |error|
+        %li.error= error
+
+  %fieldset.inputs
+    %legend
+      %span New Dates
+    %ol
+      %li.input.stringish
+        = label_tag 'location', 'Location'
+        = select_tag 'location', options_from_collection_for_select(Location.all, "id", "name")
+      %li.input.stringish
+        = label_tag 'slots', 'Slots'
+        = number_field_tag 'slots', params[:slots] || 4
+      %li.input.stringish
+        = label_tag 'time_of_day', 'Time of Day'
+        = text_field_tag 'time_of_day', params[:time_of_day] || "7:00pm"
+      %li.input.stringish
+        = label_tag 'dates', 'Dates'
+        = text_area_tag 'dates', params[:dates]
+        %p.hint One per line, formatted like “June 23 (Thu)” or “Aug 28 (Sun)”
+
+  = submit_tag "Preview Dates", name: 'preview'
+  - if @dates.any? && @date_errors.empty?
+    = submit_tag "Create #{@dates.size} Composer Night(s)"
+
