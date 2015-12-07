@@ -39,6 +39,17 @@ ActiveAdmin.register ComposerNight do
     f.actions
   end
 
+  {make_visible: true, make_invisible: false}.each.with_index do |(name, visibility), index|
+    batch_action name, priority: index do |selection|
+      ComposerNight.transaction do
+        ComposerNight.find(selection).each do |cn|
+          cn.update! visible: visibility
+        end
+      end
+      redirect_to admin_composer_nights_path
+    end
+  end
+
   action_item only: :index do
     link_to "Mass Create Composer Nights", mass_create_admin_composer_nights_path
   end
