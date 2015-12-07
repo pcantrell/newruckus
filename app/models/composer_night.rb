@@ -19,7 +19,7 @@ class ComposerNight < ActiveRecord::Base
   end
 
   def short_title
-    start_time.strftime('%b')
+    start_time.strftime('%b %d')
   end
 
   def slots_open

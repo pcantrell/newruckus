@@ -22,7 +22,7 @@ ActiveAdmin.register_page "Dashboard" do
         tr class: 'dates' do
           th
           upcoming.each do |event|
-            th link_to(event.short_title, admin_composer_night_path(event))
+            th link_to(event.short_title.gsub(' ', '<br>').html_safe, admin_composer_night_path(event))
           end
           th 'Notes', width: '100%'
         end
