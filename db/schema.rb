@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908160502) do
+ActiveRecord::Schema.define(version: 20151207153602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140908160502) do
     t.integer  "slots"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "visible",     default: true
   end
 
   add_index "composer_nights", ["start_time"], name: "index_composer_nights_on_start_time", using: :btree

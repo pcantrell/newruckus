@@ -5,6 +5,7 @@ ActiveAdmin.register ComposerNight do
   index do
     selectable_column
     id_column
+    column :visible
     column :location
     column :start_time
     column :slots
@@ -30,6 +31,7 @@ ActiveAdmin.register ComposerNight do
 
   form do |f|
     f.inputs do
+      f.input :visible
       f.input :location
       f.input :start_time, as: :datetime
       f.input :slots
