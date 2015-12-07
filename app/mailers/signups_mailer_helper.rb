@@ -47,8 +47,6 @@ module SignupsMailerHelper
         strip.
         split(/[\n\r]+/).
         map do |para|
-          p para
-          puts
           "<p>#{para}</p>\n\n"  # NB: embedded HTML supported!
         end.
         join).
