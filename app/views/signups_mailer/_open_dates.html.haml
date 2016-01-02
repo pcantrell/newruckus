@@ -1,7 +1,7 @@
 %ul
   - ComposerNight.upcoming.includes(:signups).each do |event|
     %li
-      = event.start_time.strftime('%B %d (%a)')
+      = event.start_time.strftime('%B %-d (%a)')
       –
       = case event.slots_open
         - when 0 then 'FULL'

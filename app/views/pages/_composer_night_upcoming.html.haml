@@ -3,7 +3,7 @@
   .block
     %h2 Next event
     %p.date
-      = event.start_time.strftime('%A, %B %d')
+      = event.start_time.strftime('%A, %B %-d')
       %br
       = event.start_time.strftime('%l:%M')
       %span.ampm>= event.start_time.strftime('%P')
@@ -38,7 +38,7 @@
           - when 0 then 'FULL'
 
         %td.date{colspan: note ? 1 : 2, class: ('no-note' unless note)}
-          = future_event.start_time.strftime('%B %d (%a)')
+          = future_event.start_time.strftime('%B %-d (%a)')
         - if note
           %td.note= note
 

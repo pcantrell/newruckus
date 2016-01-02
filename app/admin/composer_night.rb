@@ -39,7 +39,7 @@ ActiveAdmin.register ComposerNight do
     f.actions
   end
 
-  {make_visible: true, make_invisible: false}.each.with_index do |(name, visibility), index|
+  {publish: true, unpublish: false}.each.with_index do |(name, visibility), index|
     batch_action name, priority: index do |selection|
       ComposerNight.transaction do
         ComposerNight.find(selection).each do |cn|
@@ -85,7 +85,7 @@ ActiveAdmin.register ComposerNight do
 
     return unless @date_errors.empty?
 
-    params[:dates] = @dates.sort.map { |d| d.strftime("%Y %b %d (%a) %l:%M%P") }.join("\n")
+    params[:dates] = @dates.sort.map { |d| d.strftime("%Y %b %-d (%a) %l:%M%P") }.join("\n")
 
     return if params[:preview] || @dates.empty?
 

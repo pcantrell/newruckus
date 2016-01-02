@@ -5,7 +5,7 @@
   %p
     #{random_greeting}, #{@signup.presenter.name}!
     You’re scheduled for the Composer Night on
-    <b>#{event_time '%A, %B %d'}</b>.
+    <b>#{event_time '%A, %B %-d'}</b>.
   %p
     The performance starts at
     <b>#{event_time '%l:%M'}<span class="ampm">#{event_time '%P'}</span></b>.
