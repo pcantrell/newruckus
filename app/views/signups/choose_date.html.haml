@@ -33,7 +33,7 @@
       .date-preferences
         = f.semantic_fields_for :preferences, signup_prefs do |pref|
           .date-preference
-            .date= pref.object.composer_night.start_time.strftime('<b>%b</b> %d (%a)<br>%l:%M<span class="ampm">%P</span>').html_safe
+            .date= pref.object.composer_night.start_time.strftime('<b>%b</b> %-d (%a)<br>%l:%M<span class="ampm">%P</span>').html_safe
             
             .statuses<>
               - SignupPreference::VISIBLE_STATUSES.each do |status|
