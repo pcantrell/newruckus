@@ -32,7 +32,7 @@ ActiveAdmin.register ComposerNight do
   form do |f|
     f.inputs do
       f.input :location
-      f.input :start_time, as: :datetime
+      f.input :start_time, as: :string
       f.input :slots
       f.input :visible
     end

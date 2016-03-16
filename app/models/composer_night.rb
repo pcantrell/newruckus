@@ -1,7 +1,7 @@
 class ComposerNight < ActiveRecord::Base
   belongs_to :location
-  has_many :signups, -> { order(:created_at) }, class: Signup
-  has_many :presenters, through: :signups, class: Person  # why is class needed?
+  has_many :signups, -> { order(:created_at) }, class_name: "Signup"
+  has_many :presenters, through: :signups, class_name: "Person"  # why is class needed?
 
   validates :start_time, presence: true
   validates :location, presence: true

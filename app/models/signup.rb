@@ -1,7 +1,7 @@
 class Signup < ActiveRecord::Base
-  belongs_to :presenter, class: Person
+  belongs_to :presenter, class_name: "Person"
   belongs_to :composer_night, touch: true
-  has_many :preferences, class: SignupPreference, dependent: :destroy, autosave: true
+  has_many :preferences, class_name: "SignupPreference", dependent: :destroy, autosave: true
 
   accepts_nested_attributes_for :presenter, :preferences
 
