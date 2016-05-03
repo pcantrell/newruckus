@@ -42,13 +42,18 @@
                   = status
             
             .status-messages
-              .status-message.yes   I’ll take it if it’s available! Let me know.
+              .status-message.yes   I’ll take it <b>if</b> it’s available! Let me know.
               .status-message.maybe Give me some time to figure out if this date works.
               .status-message.no    Go ahead and offer this date to the others who are after me in line.
               - if @signup_updated
                 .status-message.unknown
                   .inline-error ← What about this date?
   
+      %p
+        Please note that saying “yes” <b>does not guarantee</b> you a spot, because there may be other people ahead of you in line.
+      %p
+        If a date is yours, we will send you confirmation.
+
       = f.input :comments, hint: 'Any special instructions? Questions or concerns?'
 
       = f.submit 'Save Changes'
