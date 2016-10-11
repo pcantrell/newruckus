@@ -105,6 +105,10 @@ ActiveAdmin.register ComposerNight do
     redirect_to admin_composer_night_path(resource)
   end
 
+  member_action :announcement_template do
+    render 'announcement_template', layout: false, formats: [:text], locals: { event: resource }
+  end
+
   controller do
     include Admin::CustomRedirectOnSave
   end

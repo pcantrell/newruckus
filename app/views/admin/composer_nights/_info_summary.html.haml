@@ -8,6 +8,9 @@
       = text_area_tag 'comments', '', placeholder: 'Comments'
     = submit_tag 'Email Info Summary to Admin'
 
+%p
+  %b= link_to 'Announcement template', announcement_template_admin_composer_night_path
+
 - composer_night.signups.includes(:presenter).each do |signup|
   %h3= signup.presenter.first_name
   = render 'shared/signup_info_summary', signup: signup

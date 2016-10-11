@@ -1,0 +1,43 @@
+<h2>•••</h2><br />
+
+•••
+
+<br />
+<br />
+
+<% event.signups.includes(:presenter).each do |signup| %>
+
+<%= link_to_if signup.presenter.url?, signup.presenter.name, signup.presenter.url %>
+•••<%= signup.title %>
+•••<%= signup.performers %>
+•••<%= signup.comments %>
+•••
+<br />
+<br />
+
+<% end %>
+
+•••
+
+<blockquote>
+<h3>New Ruckus Composer Night</h3>
+<div><strong><%= event.start_time.strftime('%A') %></strong>, <%= event.start_time.strftime('%B %-d') %>&nbsp;&ndash;&nbsp;<%= event.start_time.strftime('%l:%M%P')%></div>
+<div>Studio Z,&nbsp;275 E 4th Street, St. Paul</div>
+<div><strong>Free!</strong></div>
+<div><a href="https://newruckus.org/composernights" target="_blank">More about&nbsp;Composer Nights</a></div>
+</blockquote>
+
+<h2>Upcoming Dates</h2>
+<br />
+••• Update your calendar now!
+<ul>
+<% ComposerNight.upcoming.includes(:signups).each do |future_event| %>
+    <li><strong><%= future_event.start_time.strftime('%B %-d') %></strong> (<%= future_event.start_time.strftime('%a') %>)</li>
+<% end %>
+</ul>
+
+Composer Night spots are first come, first served. When new dates open up, people who signed up first get first dibs. You don’t need to have any music ready to get in line. The moral? <a href="http://newruckus.org/composernights/signup" target="_blank"><strong>Sign&nbsp;up</strong></a> right now!<br />
+<br />
+Cheers,<br />
+<br />
+Paul Cantrell
