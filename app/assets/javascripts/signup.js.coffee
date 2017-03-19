@@ -9,7 +9,7 @@ $ ->
     $group.find(".status-message.#{status}").css('display', 'inline-block')
     $input.parents('.status').addClass('active')
 
-  $(document).on 'page:change', ->
+  $(document).on 'turbolinks:load', ->
     $('.status-message.unknown').css('display', 'inline-block')
     for input in $('.status input:checked')
       showDatePreference $(input)

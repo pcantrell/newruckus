@@ -40,4 +40,4 @@ $ ->
 
     applyHeroParallax()
     $window.scroll applyHeroParallax
-    $document.on 'page:change', applyHeroParallax
+    $document.on 'turbolinks:load', applyHeroParallax

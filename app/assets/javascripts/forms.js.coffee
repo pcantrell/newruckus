@@ -4,10 +4,11 @@ confirmUnload = (callback) ->
     callback 'You will lose your changes.'
   else
     undefined
-$(window).bind 'beforeunload',       -> confirmUnload((msg) -> msg)
-$(document).on 'page:before-change', -> confirmUnload((msg) -> confirm(msg))
+# Why isn't beforeunload working?
+$(window).on   'beforeunload',            -> confirmUnload((msg) -> msg)
+$(document).on 'turbolinks:before-visit', -> confirmUnload((msg) -> confirm(msg))
 
-$(document).on 'page:update', ->
+$(document).on 'turbolinks:load', ->
   bounce = ($elem) ->
     $elem.transition { scale: 1.1 }, 160, 'easeOutSine'
          .transition { scale: 1 },   240, 'easeInOutSine'
@@ -15,9 +16,9 @@ $(document).on 'page:update', ->
   bounce $('.flashes')
 
   dirty = false
-  $('input').change ->
+  $(document).on 'change, keydown', ':input', ->
     dirty = true
-  $('form').submit ->
+  $(document).on 'submit', 'form', ->
     dirty = false
     true
 
