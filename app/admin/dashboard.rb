@@ -6,14 +6,25 @@ ActiveAdmin.register_page "Dashboard" do
     queue = Signup.in_queue.includes(:presenter)
     upcoming = ComposerNight.upcoming.includes(:signups)
     order_queue_by_signup = (params[:order_queue_by_signup].to_i > 0)
+    hide_unavailable = (params[:hide_unavailable].to_i > 0)
 
     panel 'Scheduling' do
 
       para do
-        if order_queue_by_signup
-          link_to 'Order by Composer Night', '?order_queue_by_signup=0'
-        else
-          link_to 'Order by position in queue', '?order_queue_by_signup=1'
+        span do
+          if order_queue_by_signup
+            link_to 'Order by Composer Night', '?order_queue_by_signup=0', class: 'button'
+          else
+            link_to 'Order by position in queue', '?order_queue_by_signup=1', class: 'button'
+          end
+        end
+
+        span do
+          if hide_unavailable
+            link_to 'Show all signups', '?hide_unavailable=0', class: 'button'
+          else
+            link_to 'Show only rows with yes/maybe', '?hide_unavailable=1', class: 'button'
+          end
         end
       end
 
@@ -33,6 +44,11 @@ ActiveAdmin.register_page "Dashboard" do
 
         queue_order = "#{'composer_nights.start_time nulls first, ' unless order_queue_by_signup} signups.created_at"
         queue.includes(:composer_night).order(queue_order).each do |signup|
+          if hide_unavailable
+            statuses = upcoming.map { |event| signup.preference_for(event).status }
+            next if (statuses - %w(no unknown)).none?
+          end
+
           tr class: "presenter #{scheduled_status(signup.composer_night_id)}" do
             th link_to(signup.presenter.name, edit_admin_signup_path(signup)), class: 'presenter'
             upcoming.each do |event|
