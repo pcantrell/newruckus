@@ -50,7 +50,10 @@ ActiveAdmin.register_page "Dashboard" do
           end
 
           tr class: "presenter #{scheduled_status(signup.composer_night_id)}" do
-            th link_to(signup.presenter.name, edit_admin_signup_path(signup)), class: 'presenter'
+            th do
+              span mail_to(signup.presenter.email, signup.presenter.name)
+              span link_to('Edit', edit_admin_signup_path(signup), class: 'edit')
+            end
             upcoming.each do |event|
               scheduled_here = (signup.composer_night_id == event.id)
               status = signup.preference_for(event).status

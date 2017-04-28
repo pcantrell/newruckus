@@ -131,6 +131,12 @@ form textarea {
   .presenter {
     th {
       text-align: right;
+      .edit {
+        font-size: 75%;
+        font-weight: 400;
+        padding-left: 0.4em;
+        padding-top: 0.6em;
+      }
     }
     td {
       text-align: center;
