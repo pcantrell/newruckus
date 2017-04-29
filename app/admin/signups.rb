@@ -1,5 +1,5 @@
 ActiveAdmin.register Signup do
-  editable_attrs = Signup.attribute_names - %w(id created_at updated_at)
+  editable_attrs = Signup.attribute_names - %w(id created_at updated_at access_token)
   permit_params editable_attrs
 
   scope :all
@@ -17,6 +17,44 @@ ActiveAdmin.register Signup do
     column :composer_night
     column :created_at
     actions
+  end
+
+  show do
+    public_url = edit_signup_url(token: signup.access_token)
+
+    if signup.scheduled?
+      scheduled_date = signup.composer_night.start_time
+      panel 'Contact' do
+        mail_to signup.presenter.email,
+          'Contact Presenter',
+          class: 'button',
+          subject: "Composer Night on #{scheduled_date.strftime('%b %-d')}",
+          body: "
+            OK, I have you on the schedule for #{scheduled_date.strftime('%B %-d')}!
+
+            Here is your info form:
+
+                #{public_url}
+
+            You can keep reusing that link to add / edit info as much as you like, so just fill in whatever you have now, and you can update it as the date approaches.
+
+            Looking forward to hearing your music.
+
+            Cheers,
+
+            Paul".strip_multiline_string_indentation
+      end
+    end
+
+    attributes_table do
+      row 'Public URL' do
+        link_to public_url, public_url
+      end
+      editable_attrs.each do |attr|
+        row attr.sub(/_id$/, '')
+      end
+    end
+    active_admin_comments
   end
 
   batch_action :touch_base_with do |selection|
@@ -76,13 +114,5 @@ ActiveAdmin.register Signup do
       end
     end
     f.actions
-  end
-
-  controller do
-    include Admin::CustomRedirectOnSave
-
-    def save_redirect_url
-      admin_dashboard_url
-    end
   end
 end
