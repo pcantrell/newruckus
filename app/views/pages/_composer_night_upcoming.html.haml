@@ -29,26 +29,28 @@
 
 .block
   %h2 Future Composer Nights
+
   %table.upcoming
     - ComposerNight.upcoming.includes(:signups).each do |future_event|
       %tr
         - note = case future_event.slots_open
           - when 2 then '2 spots left'
           - when 1 then '1 spot left!'
-          - when 0 then 'FULL'
+          - when 0 then 'Full program'
 
         %td.date{colspan: note ? 1 : 2, class: ('no-note' unless note)}
           = future_event.start_time.strftime('%B %-d (%a)')
         - if note
           %td.note= note
 
-.block
-  - unless ComposerNight.upcoming.empty?
-    Want one of those dates?
+- unless ComposerNight.upcoming.empty?
+  .block
+    Want to share your music?
     = link_to 'Sign up!', signup_path
+
+  .block
+    Want to listen? Just show up! It’s free.
 
 .block
   = mailing_list_link 'Get on the mailing list', header: false
   to find out when more are scheduled!
-
-
