@@ -15,8 +15,6 @@
     doc.className += " wf-loading";
 
     var loadTypekit = function() {
-        <%= Rails.application.assets.find_asset('typekit-guts').source %>
-
         try {
             Typekit.load(config)
         } catch(e) {

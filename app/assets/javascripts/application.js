@@ -15,6 +15,7 @@
 //= require jquery.transit
 //= require jquery.autogrow-textarea
 //
+//= require typekit-guts
 //= require typekit
 //= require forms
 //= require parallax
