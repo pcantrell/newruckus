@@ -10,4 +10,4 @@
       %tr
         %th Subject
         %td= mail.subject
-    %iframe.body{srcdoc: mail.body.to_s}
+    %iframe.body{srcdoc: mail.body.to_s.gsub(/\s+/, ' '), sandbox: true}
