@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+git_source(:github) { |name| "https://github.com/#{name}.git" }
 
 gem 'rails', '~> 4.1'
 
@@ -40,6 +41,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'exception_notification', git: 'git://github.com/pcantrell/exception_notification'
+  gem 'exception_notification', github: 'pcantrell/exception_notification'
   gem 'therubyracer'
 end

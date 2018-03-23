@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/gregbell/active_admin.git
+  remote: https://github.com/gregbell/active_admin.git
   revision: 2cf85fb03ab382a85b84cc3185c7be542969009c
   specs:
     activeadmin (2.0.0.alpha)
@@ -16,7 +16,7 @@ GIT
       sprockets-es6 (>= 0.9.2)
 
 GIT
-  remote: git://github.com/pcantrell/exception_notification
+  remote: https://github.com/pcantrell/exception_notification.git
   revision: 7fe1a7f0e2316f1a426f1469c7bd7a27edc54bf7
   specs:
     exception_notification (2.5.2)
@@ -324,4 +324,4 @@ DEPENDENCIES
   valid_email
 
 BUNDLED WITH
-   1.14.6
+   1.16.1
