@@ -131,6 +131,11 @@ form textarea {
   .presenter {
     th {
       text-align: right;
+      .name {
+        max-width: 20em;
+        display: inline-block;
+        overflow: hidden;
+      }
       .edit {
         font-size: 75%;
         font-weight: 400;
