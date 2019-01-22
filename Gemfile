@@ -20,7 +20,7 @@ gem 'jquery-cdn', '~> 2.1'
 gem 'jquery-rails'
 gem 'turbolinks'
 
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin'
 gem 'devise', '>= 3.2.0'
 
 gem 'bcrypt', '~> 3.1'
