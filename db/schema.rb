@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207153602) do
+ActiveRecord::Schema.define(version: 20190410230002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_admin_comments", force: true do |t|
-    t.string   "namespace"
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace",     limit: 255
     t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
+    t.string   "resource_id",   limit: 255, null: false
+    t.string   "resource_type", limit: 255, null: false
     t.integer  "author_id"
-    t.string   "author_type"
+    t.string   "author_type",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,50 +31,51 @@ ActiveRecord::Schema.define(version: 20151207153602) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
-  create_table "admin_users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "admin_users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "composer_nights", force: true do |t|
+  create_table "composer_nights", force: :cascade do |t|
     t.datetime "start_time"
     t.integer  "location_id"
     t.integer  "slots"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "visible",     default: true
+    t.text     "message"
   end
 
   add_index "composer_nights", ["start_time"], name: "index_composer_nights_on_start_time", using: :btree
 
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",               default: 0, null: false
+    t.integer  "attempts",               default: 0, null: false
+    t.text     "handler",                            null: false
     t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
+    t.string   "locked_by",  limit: 255
+    t.string   "queue",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "locations", force: true do |t|
+  create_table "locations", force: :cascade do |t|
     t.text     "name"
     t.text     "url"
     t.text     "address"
@@ -84,7 +85,7 @@ ActiveRecord::Schema.define(version: 20151207153602) do
     t.datetime "updated_at"
   end
 
-  create_table "people", force: true do |t|
+  create_table "people", force: :cascade do |t|
     t.text     "name"
     t.text     "name_for_searching"
     t.text     "email"
@@ -100,10 +101,10 @@ ActiveRecord::Schema.define(version: 20151207153602) do
   add_index "people", ["email"], name: "index_people_on_email", using: :btree
   add_index "people", ["name_for_searching"], name: "index_people_on_name_for_searching", using: :btree
 
-  create_table "signup_preferences", force: true do |t|
-    t.integer  "signup_id",         null: false
-    t.integer  "composer_night_id", null: false
-    t.string   "status",            null: false
+  create_table "signup_preferences", force: :cascade do |t|
+    t.integer  "signup_id",                     null: false
+    t.integer  "composer_night_id",             null: false
+    t.string   "status",            limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,7 +114,7 @@ ActiveRecord::Schema.define(version: 20151207153602) do
   add_index "signup_preferences", ["signup_id", "composer_night_id"], name: "index_signup_preferences_on_signup_id_and_composer_night_id", unique: true, using: :btree
   add_index "signup_preferences", ["signup_id"], name: "index_signup_preferences_on_signup_id", using: :btree
 
-  create_table "signups", force: true do |t|
+  create_table "signups", force: :cascade do |t|
     t.boolean  "active",            default: true
     t.integer  "presenter_id"
     t.integer  "composer_night_id"

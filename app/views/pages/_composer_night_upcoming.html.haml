@@ -7,6 +7,9 @@
       %br
       = event.start_time.strftime('%l:%M')
       %span.ampm>= event.start_time.strftime('%P')
+
+    %p.message
+      = event.message
     
     - if event.presenters.any?
       Featuring the music of:

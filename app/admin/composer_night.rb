@@ -9,6 +9,7 @@ ActiveAdmin.register ComposerNight do
     column :location
     column :start_time
     column :slots
+    column :message
     column 'Slots filled' do |cn|
       cn.signups.count
     end
@@ -34,6 +35,7 @@ ActiveAdmin.register ComposerNight do
       f.input :location
       f.input :start_time, as: :string
       f.input :slots
+      f.input :message
       f.input :visible
     end
     f.actions
