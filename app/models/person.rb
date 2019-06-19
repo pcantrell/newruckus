@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   validates :email, email: true, uniqueness: true, unless: -> (p) { p.email.nil? }
   validates :url, url: true
 
-  has_many :signups, foreign_key: :presenter_id
+  has_many :signups, foreign_key: :presenter_id, dependent: :destroy
 
   def name=(name)
     write_attribute :name, name

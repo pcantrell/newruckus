@@ -5,14 +5,16 @@ ActiveAdmin.register Person do
     selectable_column
     id_column
     column :name
-    column :url
-    column :address
+    column :email
+    column :phone
+    column :bio do |person|
+      truncate(person.bio, omision: "...", length: 50)
+    end
     actions
   end
 
   filter :name
-  filter :url
-  filter :address
+  filter :email
 
   form do |f|
     f.inputs do
