@@ -17,8 +17,9 @@ class SignupsController < ApplicationController
       return
     end
 
-    presenter.name  = presenter_params[:name]  || presenter.name
-    presenter.phone = presenter_params[:phone] || presenter.phone
+    # Use existing name etc. if present; don't overwrite
+    presenter.assign_attributes(
+      presenter_params.reject { |k,v| v.blank? })
 
     @signup = signup = Signup.new(signup_params)
     signup.presenter = presenter
@@ -94,7 +95,7 @@ private
 
   def presenter_params
     @presenter_params ||= if params[:signup][:presenter_attributes]
-      params[:signup].require(:presenter_attributes).permit(:email, :name, :phone, :url, :bio)
+      params[:signup].require(:presenter_attributes).permit(:email, :name, :pronouns, :phone, :url, :bio)
     else
       {}
     end

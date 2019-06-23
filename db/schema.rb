@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190410230002) do
+ActiveRecord::Schema.define(version: 20190619173039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20190410230002) do
     t.datetime "updated_at"
     t.boolean  "mailing_list_subscription_offered", default: false, null: false
     t.text     "first_name"
+    t.text     "pronouns"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", using: :btree

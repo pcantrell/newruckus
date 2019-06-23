@@ -66,9 +66,10 @@ class Signup < ActiveRecord::Base
 
   def optional_info
     @signup.optional_info = {
-      description:    description,
-      presenter_url:  presenter.url,
-      presenter_bio:  presenter.bio
+      description:         description,
+      presenter_url:       presenter.url,
+      presenter_pronouns:  presenter.pronouns,
+      presenter_bio:       presenter.bio
     }
   end
 

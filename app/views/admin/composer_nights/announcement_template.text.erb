@@ -8,6 +8,7 @@
 <% event.signups.includes(:presenter).each do |signup| %>
 
 <%= link_to_if signup.presenter.url?, content_tag(:strong, signup.presenter.name), signup.presenter.url %>
+•••Pronouns: <%= signup.presenter.pronouns %>
 •••<%= signup.title %>
 •••<%= signup.performers %>
 •••<%= signup.description %>
