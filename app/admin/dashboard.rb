@@ -44,7 +44,7 @@ ActiveAdmin.register_page "Dashboard" do
 
         queue_order = "#{'composer_nights.start_time nulls first, ' unless order_queue_by_signup} signups.created_at"
         queue.includes(:composer_night).order(queue_order).each do |signup|
-          if hide_unavailable
+          if hide_unavailable && !signup.composer_night_id?
             statuses = upcoming.map { |event| signup.preference_for(event).status }
             next if (statuses - %w(no unknown)).none?
           end
