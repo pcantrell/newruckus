@@ -10,6 +10,13 @@ class AdminNotifications < ActionMailer::Base
          subject: "Composer Night #{new_signup ? 'new signup' : 'info changed'}: #{signup.presenter.name}"
   end
 
+  def spam_filtered(attributes)
+    @attrs = attributes
+
+    mail to: ["paul@innig.net"],
+         subject: "Composer Night spam filtered"
+  end
+
   def info_summary(event, recipient_ids, comments)
     @event = event
     @comments = comments

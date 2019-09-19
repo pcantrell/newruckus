@@ -17,6 +17,11 @@ class SignupsController < ApplicationController
       return
     end
 
+    if presenter.new_record? && presenter_params[:phone] =~ /^8\d{10}$/ && presenter.bio.blank?
+      AdminNotifications.delay.spam_filtered(presenter_params)
+      return redirect_to signup_path
+    end
+
     # Use existing name etc. if present; don't overwrite
     presenter.assign_attributes(
       presenter_params.reject { |k,v| v.blank? })
