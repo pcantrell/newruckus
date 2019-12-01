@@ -3,6 +3,8 @@ class SignupsController < ApplicationController
   before_action :find_signup_by_token, only: [:edit, :update]
   around_action :wrap_in_transaction
 
+  invisible_captcha only: [:create, :update], honeypot: :last_name
+
   def new
     @signup = Signup.new
     @signup.presenter = Person.new

@@ -128,6 +128,8 @@ GEM
       has_scope (~> 0.6)
       railties (>= 4.2, < 5.3)
       responders
+    invisible_captcha (1.0.0)
+      rails (>= 4.2)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jdbc-postgres (42.2.6)
@@ -286,6 +288,7 @@ DEPENDENCIES
   factory_girl_rails
   formtastic (>= 2.3)
   haml-rails
+  invisible_captcha
   jbuilder (~> 2.0)
   jquery-cdn (~> 2.1)
   jquery-rails

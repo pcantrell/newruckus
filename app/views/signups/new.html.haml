@@ -51,6 +51,7 @@
     = f.inputs class: 'featured' do
       = f.fields_for :presenter do |p|
         = p.input :name, required: false, as: :string
+        = invisible_captcha :last_name
         = p.input :email, required: false, as: :email, hint: 'Double check it!'
         = p.input :pronouns, required: false, as: :string, hint: 'What pronoun(s) should we use for you in our promotion materials? e.g. “she,” “he,” “they”'
       = f.input :comments, required: false, label: 'Comments or questions', as: :text

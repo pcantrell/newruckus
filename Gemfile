@@ -11,6 +11,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0'
 gem 'haml-rails'
 gem 'formtastic', ">= 2.3"
+gem 'invisible_captcha'
+
 gem 'mail'
 gem 'valid_email'
 gem 'dalli'
