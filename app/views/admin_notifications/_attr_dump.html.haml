@@ -1,0 +1,9 @@
+- indent ||= 0
+- attrs.each do |key, value|
+  %tr
+    %th{style: "padding-left: #{indent}em"}= key
+    %td
+      - if value.is_a? Hash
+        = render partial: 'attr_dump', locals: { attrs: value, indent: indent + 1 }
+      - else
+        = value.inspect

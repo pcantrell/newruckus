@@ -3,7 +3,7 @@ class SignupsController < ApplicationController
   before_action :find_signup_by_token, only: [:edit, :update]
   around_action :wrap_in_transaction
 
-  invisible_captcha only: [:create, :update], honeypot: :last_name
+  invisible_captcha only: [:create, :update], honeypot: :last_name, on_spam: :spam_filtered
 
   def new
     @signup = Signup.new
@@ -17,11 +17,6 @@ class SignupsController < ApplicationController
     if existing
       render 'already_in_queue'
       return
-    end
-
-    if presenter.new_record? && presenter_params[:phone] =~ /^8\d{10}$/ && presenter.bio.blank?
-      AdminNotifications.delay.spam_filtered(presenter_params)
-      return redirect_to signup_path
     end
 
     # Use existing name etc. if present; don't overwrite
@@ -116,6 +111,12 @@ private
 
   def wrap_in_transaction(&block)
     Signup.transaction(&block)
+  end
+
+  def spam_filtered
+    AdminNotifications.delay.spam_filtered(params)
+    flash[:info] = "The system thinks you are a bot. If you are a human, please check the directions on each field carefully."
+    return redirect_to signup_path
   end
 
 end

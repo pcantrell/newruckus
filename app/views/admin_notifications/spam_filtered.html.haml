@@ -1,7 +1,4 @@
 %h2 Spam filtered
 
 %table
-  - @attrs.each do |key, value|
-    %tr
-      %th= key
-      %td= value.inspect
+  = render partial: 'attr_dump', locals: { attrs: @attrs }

@@ -14,7 +14,8 @@ class AdminNotifications < ActionMailer::Base
     @attrs = attributes
 
     mail to: ["paul@innig.net"],
-         subject: "Composer Night spam filtered"
+         subject: "Composer Night spam filtered",
+         references: "<spamfilter@newruckus>"
   end
 
   def info_summary(event, recipient_ids, comments)
