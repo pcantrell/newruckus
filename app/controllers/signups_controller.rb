@@ -117,7 +117,7 @@ private
   end
 
   def spam_filtered
-    AdminNotifications.delay.spam_filtered(params)
+    # AdminNotifications.delay.spam_filtered(params)
     flash[:info] = "The system thinks you are a bot. If you are a human, please check the directions on each field carefully."
     return redirect_to signup_path
   end
